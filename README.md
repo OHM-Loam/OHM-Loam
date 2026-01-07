@@ -1,16 +1,19 @@
-## Hi there 👋
+# OHM Loam
 
-<!--
-**OHM-Loam/OHM-Loam** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+Photography and visual practice by Chris Webster.  
 
-Here are some ideas to get you started:
+OHM Loam explores light, stillness, and the subtle details of the world, capturing moments that reveal quiet presence and intentional observation. This repository serves as the central hub for projects, archives, and experiments related to the practice.  
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+## Projects
+
+- Print and digital photography
+- Personal studies and experiments
+- Selected collaborations
+
+## Philosophy
+
+The work embraces minimalism, patience, and the pursuit of subtle connection. Every image is a study in observation, light, and restraint.
+
+---
+
+> OHM Loam is a reflection of time, practice, and the quiet pursuit of perfection that cannot be taught, only experienced.
