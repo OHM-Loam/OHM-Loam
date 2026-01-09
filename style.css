@@ -44,38 +44,42 @@ a:hover {
    Header / Navigation
    ========================= */
 
+/* Header container */
 .header-container {
   display: flex;
-  justify-content: space-between; /* Site title left, nav right */
   align-items: center;
+  justify-content: flex-start; /* everything aligned left */
+  gap: 2rem; /* space between nav and header */
   padding: 1rem 0;
-  max-width: 64rem;  /* Align with main content */
+  max-width: 64rem;
   margin: 0 auto;
 }
 
+/* Site title */
 .site-title {
-  font-weight: 500;
-  font-size: 1.5rem;
+  font-size: 1.2rem; /* slightly larger than nav links */
+  margin: 0;
+  font-weight: 600;
   color: #111;
-  text-decoration: none; /* removes underline */
-  letter-spacing: 0.02em;
 }
 
-nav a {
+.site-title .ohm {
+  text-transform: uppercase; /* OHM capitalized */
+}
+
+/* Navigation links */
+.main-nav a {
   text-decoration: none;
   color: #111;
-  margin-left: 2rem;
+  margin-right: 1.5rem;
   border-bottom: 2px solid transparent;
   padding-bottom: 0.25rem;
   font-weight: 400;
   transition: border-color 0.3s;
 }
 
-nav a.active {
-  border-bottom-color: #111;
-}
-
-nav a:hover {
+.main-nav a.active,
+.main-nav a:hover {
   border-bottom-color: #111;
 }
 
