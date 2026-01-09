@@ -63,13 +63,13 @@ nav a.active {
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1rem; /* `grid-gap` is deprecated in favor of `gap` */
+  gap: 2rem; /* `grid-gap` is deprecated in favor of `gap` */
 }
 
 .gallery img {
   width: 100%;
   height: auto;
-  object-fit: cover;
+  Display: block;
 }
 
 img {
