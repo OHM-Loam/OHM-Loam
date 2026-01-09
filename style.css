@@ -57,17 +57,18 @@ a:hover {
 }
 
 /* Site title */
+
 .site-title {
-  font-size: 1.6rem; /* slightly larger than nav links */
-  margin: 0;
-  font-weight: 200;
+  text-decoration: none;
   color: #111;
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
 }
 
-.site-title .ohm {
-  text-transform: uppercase; /* OHM capitalized */
+.site-title:hover {
+  text-decoration: none;
 }
-
 /* Navigation links */
 .main-nav a {
   text-decoration: none;
