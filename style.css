@@ -57,9 +57,9 @@ a:hover {
 
 /* Site title */
 .site-title {
-  font-size: 1.2rem; /* slightly larger than nav links */
+  font-size: 1.4rem; /* slightly larger than nav links */
   margin: 0;
-  font-weight: 600;
+  font-weight: 800;
   color: #111;
 }
 
@@ -80,7 +80,7 @@ a:hover {
 
 .main-nav a.active,
 .main-nav a:hover {
-  border-bottom-color: #111;
+  border-bottom-color: #112;
 }
 
 /* =========================
