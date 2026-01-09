@@ -29,3 +29,35 @@ a {
 a:hover {
   border-bottom-color: #111;
 }
+nav a {
+  text-decoration: none;
+  padding-bottom: 0.25rem;
+  margin-right: 2rem;
+  color: #111;
+  border-bottom: 2px solid transparent;
+}
+nav a.active {
+  border-bottom-color: #111;
+}
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+  grid-gap: 1rem;
+}
+.gallery img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+img {
+  width: 100%;
+  height: auto;
+  display: block;
+main {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+
+
