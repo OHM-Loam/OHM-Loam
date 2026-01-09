@@ -58,9 +58,9 @@ a:hover {
 
 /* Site title */
 .site-title {
-  font-size: 1.4rem; /* slightly larger than nav links */
+  font-size: 1.6rem; /* slightly larger than nav links */
   margin: 0;
-  font-weight: 800;
+  font-weight: 200;
   color: #111;
 }
 
@@ -75,13 +75,13 @@ a:hover {
   margin-right: 1.5rem;
   border-bottom: 2px solid transparent;
   padding-bottom: 0.25rem;
-  font-weight: 400;
+  font-weight: 200;
   transition: border-color 0.3s;
 }
 
 .main-nav a.active,
 .main-nav a:hover {
-  border-bottom-color: #112;
+  border-bottom-color: #120;
 }
 
 /* =========================
@@ -90,8 +90,8 @@ a:hover {
 
 .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 2rem; /* Increased spacing between images */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem; /* Increased spacing between images */
 }
 
 .gallery img {
