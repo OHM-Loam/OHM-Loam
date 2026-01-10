@@ -65,41 +65,35 @@
 
 <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
 <script>
-  // This initializes the gallery - keep this exactly as it was
+  // 1. Initialize the Lightbox
   const lightbox = GLightbox({
     selector: '.lightbox-trigger',
     loop: false,
     zoomable: false,
     draggable: true
   });
-</script>
 
-<script>
+  // 2. About Panel Logic
   const aboutToggle = document.getElementById('about-toggle');
   const aboutPanel = document.getElementById('about-panel');
 
-  // We check if the button exists before adding the 'click' listener
-  if (aboutToggle) {
+  if (aboutToggle && aboutPanel) {
     aboutToggle.addEventListener('click', (e) => {
       e.preventDefault();
       aboutPanel.classList.toggle('open');
       aboutToggle.classList.toggle('dimmed');
     });
   }
-</script>
 
-<script>
+  // 3. Layout Switcher Logic
   const layoutBtn = document.getElementById('layout-toggle');
   const galleryContainer = document.querySelector('.gallery');
 
   if (layoutBtn && galleryContainer) {
     layoutBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      
-      // We are toggling 'list-mode' to match your CSS exactly
       galleryContainer.classList.toggle('list-mode');
       
-      // Simple if/else logic to update the button text
       if (galleryContainer.classList.contains('list-mode')) {
         layoutBtn.textContent = 'View: Grid';
       } else {
@@ -107,13 +101,15 @@
       }
     });
   }
+
+  // 4. Landing Page Logic
   const landingPage = document.getElementById('landing-page');
 
-if (landingPage) {
-  landingPage.addEventListener('click', () => {
-    landingPage.classList.add('fade-out');
-  });
-}
+  if (landingPage) {
+    landingPage.addEventListener('click', () => {
+      landingPage.classList.add('fade-out');
+    });
+  }
 </script>
 </body>
 </html>
