@@ -128,42 +128,51 @@ main {
 }
 
 /* =========================
-   GLightbox: Dynamic Mat Style
+   GLightbox: Small White Print Border
    ========================= */
 
-/* 1. The Background */
+/* 1. The Dimmed Background */
 body .goverlay {
-  background: var(--color-overlay);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
+  background: rgba(240, 240, 240, 0.9) !important; 
+  backdrop-filter: blur(10px);
 }
 
-/* 2. The Matting: Now wraps TIGHTLY around the image */
+/* 2. The Small Border (The "Print") */
 body .gslide-image {
-  background-color: var(--color-base);
-  padding: 30px; /* This is now a TRULY uniform border on all sides */
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+  background-color: #ffffff !important;
+  /* Reduced padding to 15px creates that 'small white border' look */
+  padding: 15px !important; 
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   
-  /* Remove fixed width/height so it shrinks to the photo */
+  /* Shrink the frame to hug the image exactly */
   width: auto !important;
   height: auto !important;
   
-  /* This ensures the 'hugged' frame doesn't get too close to the screen edges */
-  max-width: 85vw !important; 
-  max-height: 85vh !important;
+  /* SAFETY: Prevents the image from being 'huge' on your screen */
+  max-width: 75vw !important; 
+  max-height: 75vh !important;
   
-  display: inline-flex; /* Changed from flex to inline-flex to hug content */
+  display: inline-flex;
   align-items: center;
   justify-content: center;
 }
 
-/* 3. The Photo: Drives the size of the mat */
+/* 3. The Image */
 body .gslide-image img {
-  /* Increased size: The photo now takes up as much room as the max-widths allow */
   display: block;
+  /* Ensures the image fills the space within the 15px padding */
   max-width: 100% !important;
   max-height: 100% !important;
   object-fit: contain;
+  /* Optional: a tiny 1px stroke to define the photo edge against the white */
+  outline: 1px solid rgba(0,0,0,0.05); 
+}
+
+/* 4. Description Placement */
+.gslide-description {
+  margin-top: 20px;
+  color: #444;
+  text-align: center;
 }
 
 /* Responsive adjustments */
