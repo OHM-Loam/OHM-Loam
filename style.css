@@ -144,33 +144,48 @@ main {
 }
 
 /* =========================
-   GLightbox Overlay Adjustments
+   GLightbox Custom "Ram" Style
    ========================= */
-.glightbox-container img {
-  max-width: 65vw;
-  max-height: 65vh;
+
+/* 1. The Background: Blur and Depth */
+/* Note: Use .goverlay, not .glightbox-overlay */
+.goverlay {
+    background: rgba(0, 0, 0, 0.6) !important;
+    backdrop-filter: blur(15px) !important;
+    -webkit-backdrop-filter: blur(15px);
 }
 
-.glightbox-overlay {
-  background: rgba(10,10,10,0.95);
-  backdrop-filter: blur(8px);
+/* 2. The Framing: Controls the image size and "Lift" */
+.gslide-image img {
+    /* Adjust these percentages to control how much "frame" you see */
+    max-height: 80vh !important; 
+    max-width: 80vw !important;
+    
+    /* This shadow creates the depth perception/separation from the blur */
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+    
+    /* Ensures the image doesn't stretch weirdly */
+    object-fit: contain;
 }
 
-.glightbox-zoom-button {
-  display: none !important;
-}
-
+/* 3. Captions: Minimalist and transparent */
 .gslide-description {
     background: transparent !important;
     color: #eee !important;
     text-align: center;
+    font-family: sans-serif; /* Optional: Match the clean look */
 }
 
-.gslide-image img {
-    max-height: 80vh !important;
-    max-width: 85vw !important;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-    border-radius: 4px;
+/* 4. UI Elements: Remove clutter */
+.glightbox-zoom-button {
+    display: none !important;
+}
+
+/* 5. Clean up: Remove the default container limits that might conflict */
+.glightbox-container img {
+    max-width: 100%;
+    max-height: 100%;
 }
 
 /* =========================
