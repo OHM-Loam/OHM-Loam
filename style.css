@@ -133,7 +133,7 @@ main {
 
 .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 0.75rem; /* reduced to < half of original */
 }
 
@@ -181,9 +181,5 @@ main {
 
   .gallery {
     gap: 0.5rem;
-  }
-
-  .gallery a:nth-child(odd) img {
-    margin-top: 1.5rem;
   }
 }
