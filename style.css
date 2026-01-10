@@ -102,20 +102,25 @@ main {
   padding: 1.5rem 1.5rem 4rem; 
 }
 
-gallery {
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 1200px; /* Adjust this number to 'squeeze' the columns into the center */
+.gallery {
+  /* 1. Keep your column count */
+  column-count: 4; 
+  column-gap: 1.5rem;
+
+  /* 2. The Fix: Don't force 100% width */
+  display: block; 
+  width: max-content; /* This tells the gallery: "Only be as wide as your content" */
+  max-width: 90vw;    /* Safety for smaller screens */
+  
+  /* 3. Center the whole 'huddle' */
+  margin: 2rem auto; 
 }
 
-/* Simon Phipps style spacing */
 .gallery a {
   display: inline-block;
   margin-bottom: 1.5rem;
-  width: 100%;
-  break-inside: avoid;
-  /* Add this for a softer look */
-  padding: 0 10px; 
+  /* 4. Set a fixed maximum width for the thumbnails themselves */
+  width: 250px; /* Adjust this number to find your perfect thumbnail size */
 }
 
 .gallery img {
