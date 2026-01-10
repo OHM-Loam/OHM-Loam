@@ -150,7 +150,7 @@ main {
 
 .gallery.list-mode a {
   width: 100%;       /* Make images fill the 600px list width */
-  margin-bottom: 4rem;
+  margin-bottom: 5rem !important;
 }
 /* =========================
    GLightbox: Direct Image Border
