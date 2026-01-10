@@ -1,19 +1,25 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>OHM-LOAM</title>
+  <title>OHM-Loam</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Global stylesheet -->
   <link rel="stylesheet" href="style.css">
 
-  <!-- Optional Lightbox CSS/JS for magnifying effect -->
+  <!-- GLightbox CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
 </head>
+
 <body>
 
 <header>
   <div class="header-center">
-    <h1 class="site-brand"><span class="ohm">OHM</span>-Loam</h1>
+    <h1 class="site-brand">
+      <span class="ohm">OHM</span>-Loam
+    </h1>
+
     <nav class="main-nav">
       <a href="projects.html">Projects</a>
       <a href="about.html">About</a>
@@ -21,39 +27,40 @@
   </div>
 </header>
 
-
-
 <main>
   <section class="gallery">
-    <a href="IMG_2555.JPG" class="glightbox">
-      <img src="IMG_2555.JPG" alt="Minimalist portrait 1">
+
+    <a href="IMG_2555.jpg" class="glightbox">
+      <img src="IMG_2555.jpg" alt="">
     </a>
-    <a href="IMG_2556.JPG" class="glightbox">
-      <img src="IMG_2556.JPG" alt="Minimalist portrait 2">
+
+    <a href="IMG_2556.jpg" class="glightbox">
+      <img src="IMG_2556.jpg" alt="">
     </a>
-    <a href="IMG_2562.JPG" class="glightbox">
-      <img src="IMG_2562.JPG" alt="Minimalist portrait 3">
+
+    <a href="IMG_2562.jpg" class="glightbox">
+      <img src="IMG_2562.jpg" alt="">
     </a>
-    <a href="IMG_2563.JPG" class="glightbox">
-      <img src="IMG_2563.JPG" alt="Minimalist portrait 4">
+
+    <a href="IMG_2563.jpg" class="glightbox">
+      <img src="IMG_2563.jpg" alt="">
     </a>
-    <a href="climbing.jpg" class="glightbox">
-      <img src="climbing.jpg" alt="Minimalist portrait 4">
-    </a>
+
   </section>
 </main>
 
+<!-- GLightbox JS -->
+<script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
 <script>
   const lightbox = GLightbox({
-    width: '25vw',
-    height: '25vh',
-    overlayOpacity: 0.4,
-    zoomable: false
+    width: '70vw',
+    height: '70vh',
+    zoomable: false,
+    draggable: false,
+    closeOnOutsideClick: true,
+    overlayOpacity: 0.45
   });
 </script>
-
-
-
 
 </body>
 </html>
