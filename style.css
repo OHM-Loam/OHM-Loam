@@ -46,14 +46,30 @@ a:hover {
    ========================= */
 
 /* Header container */
-.header-container {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start; /* everything aligned left */
-  gap: 2rem; /* space between nav and header */
-  padding: 1rem 0;
-  max-width: 64rem;
-  margin: 0 auto;
+header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.header-center .site-brand {
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin: 0;
+  padding-bottom: 0.5rem;
+}
+
+.header-center .main-nav a {
+  margin: 0 1.75rem;
+  text-decoration: none;
+  color: #111;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 0.25rem;
+  font-size: 1rem;
+}
+
+.header-center .main-nav a:hover,
+.header-center .main-nav a.active {
+  border-bottom-color: #111;
 }
 
 /* Site title */
