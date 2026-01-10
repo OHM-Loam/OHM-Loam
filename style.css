@@ -118,6 +118,9 @@ main {
   border-radius: 4px;
   break-inside: avoid; 
 }
+.gallery a:hover img {
+  transform: scale(1.08); /* Grows the image by 8% */
+}
 
 .gallery img {
   width: 100%;
