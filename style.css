@@ -94,63 +94,51 @@ body {
 }
 
 /* =========================
-   Masonry Gallery & Main
+   The "Ohm" Flex Gallery
    ========================= */
-main {
-  max-width: 72rem;
-  margin: 0 auto;
-  padding: 1.5rem 1.5rem 4rem; 
-}
-
 .gallery {
-  display: block;
-  column-count: 4;
-  column-gap: 2rem;
-  width: fit-content; /* Shrink-wraps the grid */
-  max-width: 100%;    /* Prevents it from going off-screen */
-  margin: 2rem auto;  /* Centers the shrink-wrapped grid */
-  transition: all 0.3s ease;
-}
-  
-  /* 3. Center the whole 'huddle' */
-  margin: 2rem auto; 
+  display: flex;
+  flex-wrap: wrap;      /* Allows wrapping to next row */
+  justify-content: center; /* Centers the whole group */
+  gap: 2.5rem;          /* Generous Simon Phipps spacing */
+  max-width: 1300px;
+  margin: 4rem auto;
+  padding: 0 2rem;
 }
 
 .gallery a {
-  display: inline-block;
-  margin-bottom: 2rem;
-  width: 250px; /* This keeps your thumbnails small */
-  break-inside: avoid;
+  flex: 0 1 320px;      /* Images stay around 320px wide (no more "Huge" photos) */
+  position: relative;
+  overflow: hidden;     /* Keeps the zoom INSIDE the box */
+  border-radius: 2px;
+  text-decoration: none;
 }
 
 .gallery img {
   width: 100%;
-  height: auto; 
+  height: auto;         /* Maintains natural photo proportions */
   display: block;
-  cursor: zoom-in;
-  /* This transition makes the scale-up smooth */
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1); /* Smoother zoom */
 }
 
-/* Mouse-over Zoom */
+/* Your Mouse-over Zoom */
 .gallery a:hover img {
-  transform: scale(1.05); /* Slightly increased to 5% for better visibility */
+  transform: scale(1.05); 
 }
 
 /* =========================
-   List Mode (The Layout Switcher)
+   List Mode Fix
    ========================= */
 .gallery.list-mode {
-  display: block;    /* Standard block for vertical stacking */
-  column-count: 1;   /* Force one column */
-  width: 100%;       /* Expand to full width to center the list */
-  max-width: 600px;  /* Keep the list skinny and elegant */
-  margin: 0 auto;    /* Center the list */
+  flex-direction: column;
+  align-items: center;
 }
 
 .gallery.list-mode a {
-  width: 100%;       /* Make images fill the 600px list width */
-  margin-bottom: 5rem !important;
+  flex: 0 1 auto;
+  width: 100%;
+  max-width: 700px;
+  margin-bottom: 6rem; /* Large gap for that editorial feel */
 }
 /* =========================
    GLightbox: Direct Image Border
