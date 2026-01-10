@@ -14,28 +14,44 @@ body {
 }
 
 #about-panel {
-  position: relative;
-  max-height: 0;
-  overflow: hidden;
-  background: #f7f7f7;
-  transition: max-height 0.6s ease;
-}
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
 
-/* When targeted by anchor */
-#about-panel:target {
-  max-height: 500px; /* enough to show content */
-}
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 
-.about-inner {
-  padding: 4rem 1.5rem;
+  transform: translateY(-100%);
+  transition: transform 0.6s ease;
+
+  z-index: 900;
+}
+.about-content {
   max-width: 48rem;
-  margin: 0 auto;
+  margin: 6rem auto;
+  padding: 0 1.5rem;
 }
 
-html {
-  scroll-behavior: smooth;
+.about-content h2 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
 }
 
+.about-content p {
+  line-height: 1.7;
+  font-size: 1rem;
+}
+
+#about-panel.open {
+  transform: translateY(0);
+}
+.main-nav a.dimmed {
+  color: #888;
+  border-bottom-color: transparent;
+}
 
 /* =========================
    Site Header — Sticky Top
