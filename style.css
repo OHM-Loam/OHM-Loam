@@ -148,8 +148,10 @@ main {
    Lightbox (GLightbox Overrides)
    ========================= */
 
-.glightbox-clean .gslide-media {
-  background: transparent;
+.glightbox-clean img {
+  width: 100%;
+  height: auto;
+  max-height: 100%;
 }
 
 .glightbox-container {
@@ -158,17 +160,29 @@ main {
 }
 
 .glightbox-overlay {
-  background: rgba(0, 0, 0, 0.45);
+  background: rgba(0, 0, 0, 0.35);
 }
 
 .glightbox-container img {
-  max-width: 90vw;
-  max-height: 90vh;
+  max-width: 45vw;
+  max-height: 45vh;
+  margin: auto;
 }
 
 .glightbox-zoom-button {
   display: none !important;
 }
+
+.gslide-inner-content {
+  padding: 4vh 0;
+}
+@media (min-width: 1024px) {
+  .glightbox-clean .gslide-media {
+    max-width: 55vw;
+    max-height: 60vh;
+  }
+}
+
 
 /* =========================
    Responsive Adjustments
