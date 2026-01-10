@@ -152,12 +152,18 @@ main {
 }
 
 .glightbox-overlay {
-  background: rgba(0,0,0,0.45);
+  background: rgba(10,10,10,10.95);
   backdrop-filter: blur(8px);
 }
 
 .glightbox-zoom-button {
   display: none !important;
+}
+
+.gslide-description {
+    background: transparent !important;
+    color: #eee !important;
+    text-align: center;
 }
 
 /* =========================
