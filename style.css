@@ -134,7 +134,7 @@ main {
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 0.75rem; /* reduced to < half of original */
+  gap: 0.65rem; /* reduced to < half of original */
 }
 
 .gallery img {
@@ -164,8 +164,8 @@ main {
 }
 
 .glightbox-container img {
-  max-width: 45vw;
-  max-height: 45vh;
+  max-width: 15vw;
+  max-height: 15vh;
   margin: auto;
 }
 
