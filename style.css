@@ -147,12 +147,12 @@ main {
    GLightbox Overlay Adjustments
    ========================= */
 .glightbox-container img {
-  max-width: 60vw;
-  max-height: 60vh;
+  max-width: 65vw;
+  max-height: 65vh;
 }
 
 .glightbox-overlay {
-  background: rgba(10,10,10,10.95);
+  background: rgba(0,0,0,0.95);
   backdrop-filter: blur(8px);
 }
 
@@ -164,6 +164,13 @@ main {
     background: transparent !important;
     color: #eee !important;
     text-align: center;
+}
+
+.gslide-image img {
+    max-height: 80vh !important;
+    max-width: 85vw !important;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    border-radius: 4px;
 }
 
 /* =========================
