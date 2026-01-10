@@ -25,7 +25,7 @@ body {
   right: 0;
   background: #fff;
   z-index: 1000;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 10px solid rgba(0, 0, 0, 0.08);
   padding: 1rem 0;
 }
 
@@ -41,15 +41,15 @@ body {
 /* Brand */
 .site-title {
   font-size: 1.35rem; /* slightly larger */
-  font-weight: 500;
+  font-weight: 200;
   margin: 0;
-  color: #111;
+  color: #112;
   text-decoration: none;
   letter-spacing: 0.02em;
 }
 
 .site-title .ohm {
-  font-weight: 700; /* OHM heavier than -Loam */
+  font-weight: 600; /* OHM heavier than -Loam */
   text-transform: uppercase;
 }
 
