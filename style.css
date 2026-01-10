@@ -115,15 +115,15 @@ main {
 
 /* Lightbox image sizing */
 .glightbox-container img {
-  max-width: 85vw;
-  max-height: 85vh;
+  max-width: 25vw;
+  max-height: 25vh;
   width: auto;
   height: auto;
 }
 /* Blur background behind lightbox */
 .glightbox-container {
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 .glightbox-overlay {
   background: rgba(0, 0, 0, 0.45);
@@ -144,10 +144,10 @@ main {
   }
 
   .gallery {
-    gap: 1.5rem;
+    gap: 0.5rem;
   }
   .gallery a:nth-child(odd) img {
-  margin-top: 2rem;
+  margin-top: 1.5rem;
 }
 
 }
