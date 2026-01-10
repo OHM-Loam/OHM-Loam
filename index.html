@@ -110,14 +110,20 @@
     });
   }
 
-  // 4. Landing Page Logic
-  const landingPage = document.getElementById('landing-page');
+// 4. Landing Page Logic
+const landingPage = document.getElementById('landing-page');
 
-  if (landingPage) {
-    landingPage.addEventListener('click', () => {
-      landingPage.classList.add('fade-out');
-    });
-  }
+if (landingPage) {
+  // Option A: Manual click to enter
+  landingPage.addEventListener('click', () => {
+    landingPage.classList.add('fade-out');
+  });
+
+  // Option B: Auto-enter after 4 seconds (4000 milliseconds)
+  setTimeout(() => {
+    landingPage.classList.add('fade-out');
+  }, 4000); 
+}
 </script>
 </body>
 </html>
