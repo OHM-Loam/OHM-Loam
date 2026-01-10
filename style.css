@@ -119,28 +119,32 @@ body {
 main {
   max-width: 72rem;
   margin: 0 auto;
-  padding: 0 1.5rem 4rem;
+  /* Changed the first 0 to 1.5rem to match the sides */
+  padding: 1.5rem 1.5rem 4rem; 
 }
 
 /* =========================
    Masonry Gallery Grid (Joao Franco Style)
    ========================= */
 .gallery {
-  /* This creates vertical columns that photos flow into */
   column-count: 3; 
-  column-gap: 0.3rem; /* Adjust gap to match your style */
+  /* This controls horizontal space between columns */
+  column-gap: 0.3rem; 
   width: 100%;
   max-width: 1400px;
-  margin: 0 auto;
+  /* Added 0.3rem top margin to match your gap */
+  margin: 0.3rem auto 0; 
 }
 
 .gallery a {
-  /* Essential: ensures the image link acts as a single block that won't split between columns */
   display: inline-block; 
-  margin-bottom: 1rem;
+  /* This controls vertical space between images - set to match column-gap */
+  margin-bottom: 0.3rem; 
   width: 100%;
   overflow: hidden;
   border-radius: 4px;
+  /* Fixes a common masonry bug where images split between columns */
+  break-inside: avoid; 
 }
 
 .gallery img {
