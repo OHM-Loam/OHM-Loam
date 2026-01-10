@@ -92,4 +92,8 @@ main {
   .gallery {
     gap: 1.5rem;
   }
+  .gallery a:nth-child(odd) img {
+  margin-top: 2rem;
+}
+
 }
