@@ -7,108 +7,107 @@
 
   <!-- Global stylesheet -->
   <link rel="stylesheet" href="style.css">
-
-  <!-- GLightbox CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
 </head>
 
 <body>
 
-<header class="site-header">
-  <div class="header-inner">
-    <h1 class="site-title"><span class="ohm">OHM</span>-Loam</h1>
-    <nav class="main-nav">
-    <a href="#" id="about-toggle">About Me</a>
-    </nav>
-  </div>
-</header>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <h1 class="site-title">
+        <span class="ohm">OHM</span>-Loam
+      </h1>
+      <nav class="main-nav">
+        <a href="#" id="about-toggle">About Me</a>
+      </nav>
+    </div>
+  </header>
 
+  <!-- About Panel -->
   <div id="about-panel" aria-hidden="true">
-  <div class="about-content">
-    <h2>About</h2>
-    <p>
-      Static Vacuum is a minimalist photography project by Chris Webster.
-      It focuses on restraint, perception, and quiet tension developed
-      through lived experience.
-    </p>
+    <div class="about-content">
+      <h2>About</h2>
+      <p>
+        Static Vacuum is a minimalist photography project by Chris Webster.
+        It focuses on restraint, perception, and quiet tension developed
+        through lived experience.
+      </p>
+    </div>
   </div>
-</div>
-  
-<main>
-  <section class="gallery">
 
-    <a href="IMG_2555.JPG" class="lightbox-trigger">
-      <img src="IMG_2555.JPG" alt="">
-    </a>
+  <!-- Main Gallery -->
+  <main>
+    <section class="gallery">
+      <a href="IMG_2555.JPG" class="lightbox-trigger">
+        <img src="IMG_2555.JPG" alt="Minimalist landscape 1">
+      </a>
+      <a href="IMG_2556.JPG" class="lightbox-trigger">
+        <img src="IMG_2556.JPG" alt="Minimalist landscape 2">
+      </a>
+      <a href="climbing.jpg" class="lightbox-trigger">
+        <img src="climbing.jpg" alt="Climbing scene">
+      </a>
+      <a href="IMG_2562.JPG" class="lightbox-trigger">
+        <img src="IMG_2562.JPG" alt="Minimalist landscape 3">
+      </a>
+      <a href="IMG_2563.JPG" class="lightbox-trigger">
+        <img src="IMG_2563.JPG" alt="Minimalist landscape 4">
+      </a>
+    </section>
+  </main>
 
-    <a href="IMG_2556.JPG" class="lightbox-trigger">
-      <img src="IMG_2556.JPG" alt="">
-    </a>
-    
-     <a href="climbing.jpg" class="lightbox-trigger">
-      <img src="climbing.jpg" alt="">
-    </a>
+  <!-- Custom Lightbox Overlay -->
+  <div id="lightbox-overlay">
+    <div class="lightbox-panel">
+      <img id="lightbox-img" src="" alt="">
+    </div>
+    <div class="lightbox-close">×</div>
+  </div>
 
-    <a href="IMG_2562.JPG" class="lightbox-trigger">
-      <img src="IMG_2562.JPG" alt="">
-    </a>
-
-    <a href="IMG_2563.JPG" class="lightbox-trigger">
-      <img src="IMG_2563.JPG" alt="">
-    </a>  
-    
-  </section>
-</main>
-  
-<!-- Pixel Perfect JS -->
-<script>
-  const triggers = document.querySelectorAll('.lightbox-trigger');
-
-  // Create overlay
-  const overlay = document.createElement('div');
-  overlay.classList.add('lightbox-overlay');
-  const overlayImg = document.createElement('img');
-  overlay.appendChild(overlayImg);
-
-  // Optional close button
-  const closeBtn = document.createElement('div');
-  closeBtn.classList.add('lightbox-close');
-  closeBtn.textContent = '×';
-  overlay.appendChild(closeBtn);
-
-  document.body.appendChild(overlay);
-
-  // Open overlay
-  triggers.forEach(trigger => {
-    trigger.addEventListener('click', e => {
-      e.preventDefault();
-      overlayImg.src = trigger.getAttribute('href');
-      overlay.classList.add('open');
-    });
-  });
-
-  // Close overlay
-  overlay.addEventListener('click', e => {
-    if (e.target === overlay || e.target === closeBtn) {
-      overlay.classList.remove('open');
-    }
-  });
-
-  // Optional: close with ESC key
-  document.addEventListener('keydown', e => {
-    if(e.key === "Escape") overlay.classList.remove('open');
-  });
-</script>
-
+  <!-- JavaScript -->
   <script>
-  const aboutToggle = document.getElementById('about-toggle');
-  const aboutPanel = document.getElementById('about-panel');
+    // Lightbox behavior
+    const triggers = document.querySelectorAll('.lightbox-trigger');
+    const overlay = document.getElementById('lightbox-overlay');
+    const overlayImg = document.getElementById('lightbox-img');
+    const closeBtn = overlay.querySelector('.lightbox-close');
 
-  aboutToggle.addEventListener('click', (e) => {
-    e.preventDefault();
-    aboutPanel.classList.toggle('open');
-    aboutToggle.classList.toggle('dimmed');
-  });
-</script>
+    triggers.forEach(trigger => {
+      trigger.addEventListener('click', e => {
+        e.preventDefault();
+        overlayImg.src = trigger.getAttribute('href');
+        overlay.classList.add('open');
+      });
+    });
+
+    // Close overlay by clicking outside image or on X
+    overlay.addEventListener('click', e => {
+      if (e.target === overlay || e.target === closeBtn) {
+        overlay.classList.remove('open');
+      }
+    });
+
+    // Prevent overlay closing when clicking directly on the image
+    overlayImg.addEventListener('click', e => {
+      e.stopPropagation();
+    });
+
+    // Close overlay with ESC key
+    document.addEventListener('keydown', e => {
+      if (e.key === "Escape") overlay.classList.remove('open');
+    });
+
+    // About panel toggle
+    const aboutToggle = document.getElementById('about-toggle');
+    const aboutPanel = document.getElementById('about-panel');
+
+    aboutToggle.addEventListener('click', e => {
+      e.preventDefault();
+      aboutPanel.classList.toggle('open');
+      aboutToggle.classList.toggle('dimmed');
+      aboutPanel.setAttribute('aria-hidden', !aboutPanel.classList.contains('open'));
+    });
+  </script>
+
 </body>
 </html>
