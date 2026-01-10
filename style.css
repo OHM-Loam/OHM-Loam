@@ -128,7 +128,7 @@ main {
 .gallery {
   /* This creates vertical columns that photos flow into */
   column-count: 3; 
-  column-gap: 0.5rem; /* Adjust gap to match your style */
+  column-gap: 0.3rem; /* Adjust gap to match your style */
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
