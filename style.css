@@ -13,26 +13,23 @@ body {
   line-height: 1.6;
 }
 
-/* About panel */
 #about-panel {
-  margin-top: 6rem;
-  padding: 4rem 1.5rem;
+  position: relative;
+  max-height: 0;
+  overflow: hidden;
   background: #f7f7f7;
+  transition: max-height 0.6s ease;
+}
+
+/* When targeted by anchor */
+#about-panel:target {
+  max-height: 500px; /* enough to show content */
 }
 
 .about-inner {
+  padding: 4rem 1.5rem;
   max-width: 48rem;
   margin: 0 auto;
-}
-
-#about-panel h2 {
-  font-size: 1.25rem;
-  margin-bottom: 1rem;
-}
-
-#about-panel p {
-  font-size: 1rem;
-  line-height: 1.7;
 }
 
 html {
