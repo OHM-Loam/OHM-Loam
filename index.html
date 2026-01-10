@@ -107,6 +107,13 @@
       }
     });
   }
+  const landingPage = document.getElementById('landing-page');
+
+if (landingPage) {
+  landingPage.addEventListener('click', () => {
+    landingPage.classList.add('fade-out');
+  });
+}
 </script>
 </body>
 </html>
