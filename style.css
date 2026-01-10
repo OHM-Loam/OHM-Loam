@@ -130,6 +130,12 @@ main {
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* When the gallery has the '.list-view' class, it switches to 1 column */
+.gallery.list-view {
+  column-count: 1;
+  max-width: 800px; /* Makes it look more like a curated list */
+}
+
 /* =========================
    GLightbox: Direct Image Border
    ========================= */
