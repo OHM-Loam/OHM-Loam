@@ -113,6 +113,26 @@ main {
   background: transparent;
 }
 
+/* Lightbox image sizing */
+.glightbox-container img {
+  max-width: 85vw;
+  max-height: 85vh;
+  width: auto;
+  height: auto;
+}
+/* Blur background behind lightbox */
+.glightbox-container {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.glightbox-overlay {
+  background: rgba(0, 0, 0, 0.45);
+}
+.glightbox-zoom-button {
+  display: none !important;
+}
+
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   header {
