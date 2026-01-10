@@ -102,24 +102,23 @@ main {
   padding: 1.5rem 1.5rem 4rem; 
 }
 
+/* Default Grid State */
 .gallery {
-  column-count: 4; 
-  column-gap: 0.4rem; 
+  column-count: 4;
+  column-gap: 0.3rem;
+  /* Ensures images fill columns top-to-bottom correctly */
+  column-fill: balance; 
   width: 100%;
-  max-width: 1400px;
-  margin: 0.4rem auto 0; 
+  transition: all 0.5s ease;
 }
 
 .gallery a {
   display: inline-block; 
   margin-bottom: 0.4rem; 
   width: 100%;
-  overflow: hidden;
+  overflow: hidden; /* Essential for the zoom effect to stay inside the box */
   border-radius: 4px;
   break-inside: avoid; 
-}
-.gallery a:hover img {
-  transform: scale(1.02); /* Grows the image by 2% */
 }
 
 .gallery img {
@@ -127,15 +126,27 @@ main {
   height: auto; 
   display: block;
   cursor: zoom-in;
+  /* This transition makes the scale-up smooth */
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* When the gallery has the '.list-view' class, it switches to 1 column */
-.gallery.list-view {
-  column-count: 1;
-  max-width: 800px; /* Makes it look more like a curated list */
+/* Mouse-over Zoom */
+.gallery a:hover img {
+  transform: scale(1.05); /* Slightly increased to 5% for better visibility */
 }
 
+/* =========================
+   List Mode (The Layout Switcher)
+   ========================= */
+.gallery.list-mode {
+  column-count: 1; 
+  max-width: 700px; 
+  margin: 2rem auto;
+}
+
+.gallery.list-mode a {
+  margin-bottom: 3rem; /* Generous breathing room in list view */
+}
 /* =========================
    GLightbox: Direct Image Border
    ========================= */
