@@ -191,10 +191,29 @@ main {
     font-family: sans-serif;
     margin-top: 15px;
 }
+/* Ensure the description doesn't break the mat layout */
+.gslide-description.description-bottom {
+    width: 100%;
+    padding: 0 !important;
+}
 
 /* 5. Hide Zoom */
 .glightbox-zoom-button {
     display: none !important;
+}
+/* Prevent the mat from collapsing on narrow images */
+.gslide-inner-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+/* Make the loading spinner dark to match the theme */
+.gloader {
+    border-top: 2px solid rgba(0,0,0,0.2) !important;
+    border-right: 2px solid rgba(0,0,0,0.2) !important;
+    border-bottom: 2px solid rgba(0,0,0,0.2) !important;
+    border-left: 2px solid #333 !important; /* The spinning part */
 }
 
 /* =========================
