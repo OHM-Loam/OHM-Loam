@@ -63,46 +63,42 @@
   </section>
 </main>
 
-<!-- GLightbox JS -->
-<script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
 <script>
+  // 1. Initialize Lightbox
   const lightbox = GLightbox({
     selector: '.lightbox-trigger',
     loop: false,
     zoomable: false,
-    draggable: true, // Allows users to swipe through photos on mobile
-    // We remove width/height here so the CSS .gslide-image rules work correctly
+    draggable: true
   });
-</script>
 
-<!-- About Panel JS -->
-<script>
+  // 2. About Panel Logic
   const aboutToggle = document.getElementById('about-toggle');
   const aboutPanel = document.getElementById('about-panel');
 
-  aboutToggle.addEventListener('click', (e) => {
-    e.preventDefault();
-    aboutPanel.classList.toggle('open');
-    aboutToggle.classList.toggle('dimmed');
-  });
-</script>
-  <Scrpt>
+  if(aboutToggle) {
+    aboutToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      aboutPanel.classList.toggle('open');
+      aboutToggle.classList.toggle('dimmed');
+    });
+  }
+
+  // 3. Layout Switcher Logic
   const layoutBtn = document.getElementById('layout-toggle');
   const galleryContainer = document.querySelector('.gallery');
 
- layoutBtn.addEventListener('click', (e) => {
-  e.preventDefault(); // Prevents the page from jumping to the top
-  
-  // This 'toggles' the class on and off
-  galleryContainer.classList.toggle('list-mode');
-  
-  // Optional: Change the button text based on the mode
-  if (galleryContainer.classList.contains('list-mode')) {
-    layoutBtn.textContent = 'View: Grid';
-  } else {
-    layoutBtn.textContent = 'View: List';
+  if(layoutBtn) {
+    layoutBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      galleryContainer.classList.toggle('list-mode');
+      
+      // Update text based on the current mode
+      layoutBtn.textContent = galleryContainer.classList.contains('list-mode') 
+        ? 'View: Grid' 
+        : 'View: List';
+    });
   }
-});
-    </Script>
+</script>
 </body>
 </html>
