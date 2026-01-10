@@ -185,6 +185,45 @@ body .gslide-image img {
   filter: invert(1);
 }
 
+/* =========================
+   Landing Page 
+   ========================= */
+#landing-page {
+  position: fixed;
+  inset: 0;
+  background: #ffffff;
+  z-index: 9999; /* Makes it sit on top of everything */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: opacity 0.8s ease, visibility 0.8s;
+}
+
+.landing-content {
+  text-align: center;
+}
+
+.landing-content h1 {
+  font-size: 3rem;
+  font-weight: 200;
+  letter-spacing: 0.5rem;
+  margin: 0;
+}
+
+.landing-content p {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+  color: #888;
+  margin-top: 2rem;
+}
+
+/* Class to hide the landing page */
+#landing-page.fade-out {
+  opacity: 0;
+  visibility: hidden;
+}
 /* Responsive adjustments */
 @media (max-width: 1200px) { .gallery { column-count: 3; } }
 @media (max-width: 768px) { .gallery { column-count: 2; } }
