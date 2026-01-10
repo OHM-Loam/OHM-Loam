@@ -1,27 +1,5 @@
 /* =========================
-   1. Design Tokens (Variables)
-   ========================= */
-:root {
-  /* Colors */
-  --color-base: #ffffff;
-  --color-text: #111111;
-  --color-text-dim: #888888;
-  --color-border: rgba(0, 0, 0, 0.07);
-  --color-overlay: rgba(240, 240, 240, 0.85);
-
-  /* Spacing & Sizing */
-  --max-width-main: 72rem;
-  --max-width-gallery: 1400px;
-  --gap-gallery: 0.3rem;
-  --mat-padding: 50px;
-  
-  /* Animations */
-  --transition-standard: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-fast: 0.2s ease;
-}
-
-/* =========================
-   2. Base Reset & Typography
+   1. Base Reset
    ========================= */
 * {
   box-sizing: border-box;
@@ -31,21 +9,21 @@ body {
   margin: 0;
   padding: 0;
   font-family: system-ui, -apple-system, sans-serif;
-  color: var(--color-text);
-  background-color: var(--color-base);
+  color: #111;
+  background-color: #fff;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
 
 /* =========================
-   3. Layout Components
+   2. Sticky Site Header
    ========================= */
 .site-header {
   position: sticky;
   top: 0;
-  background: var(--color-base);
+  background: #fff;
   z-index: 1000;
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid rgba(0,0,0,0.07);
   padding: 1rem 0;
 }
 
@@ -53,60 +31,69 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: var(--max-width-main);
+  max-width: 72rem;
   margin: 0 auto;
   padding: 0 1.5rem;
 }
 
+.site-title {
+  font-size: 1.35rem;
+  font-weight: 200;
+  margin: 0;
+  color: #112;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+
+.site-title .ohm {
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
 .main-nav {
   display: flex;
-  gap: 2rem; /* Best practice: spacing handled by parent gap */
+  gap: 2rem;
 }
 
 .main-nav a {
   text-decoration: none;
-  color: var(--color-text);
+  color: #111;
   font-size: 0.95rem;
   padding-bottom: 0.25rem;
   border-bottom: 2px solid transparent;
-  transition: border-color var(--transition-fast), color var(--transition-fast);
+  transition: all 0.2s ease;
 }
 
-.main-nav a:hover,
-.main-nav a.active {
-  border-bottom-color: var(--color-text);
-}
-
-.main-nav a.dimmed {
-  color: var(--color-text-dim);
+.main-nav a:hover, .main-nav a.active {
+  border-bottom-color: #111;
 }
 
 /* =========================
-   4. Masonry Gallery
+   3. Masonry Gallery Grid
    ========================= */
 .gallery {
-  column-count: 4;
-  column-gap: var(--gap-gallery);
+  column-count: 4; 
+  column-gap: 0.3rem; 
   width: 100%;
-  max-width: var(--max-width-gallery);
-  margin: var(--gap-gallery) auto 0;
+  max-width: 1400px;
+  margin: 1.5rem auto 0; 
 }
 
 .gallery a {
-  display: inline-block;
-  margin-bottom: var(--gap-gallery);
+  display: inline-block; 
+  margin-bottom: 0.3rem; 
   width: 100%;
   overflow: hidden;
   border-radius: 4px;
-  break-inside: avoid;
+  break-inside: avoid; 
 }
 
 .gallery img {
   width: 100%;
-  height: auto;
+  height: auto; 
   display: block;
   cursor: zoom-in;
-  transition: transform var(--transition-standard);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .gallery a:hover img {
@@ -114,57 +101,50 @@ body {
 }
 
 /* =========================
-   GLightbox: Dynamic Mat Style
+   4. Main Content Container
    ========================= */
+main {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 1.5rem 1.5rem 4rem; 
+}
 
-/* 1. The Background */
+/* =========================
+   5. GLightbox: Dynamic Mat (Hugging Border)
+   ========================= */
 body .goverlay {
-  background: var(--color-overlay);
+  background: rgba(240, 240, 240, 0.85);
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
 }
 
-/* 2. The Matting: Now wraps TIGHTLY around the image */
+/* This container now shrinks to fit the image exactly */
 body .gslide-image {
-  background-color: var(--color-base);
-  padding: 30px; /* This is now a TRULY uniform border on all sides */
+  background-color: #fff;
+  padding: 40px; /* Uniform border on all sides */
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
   
-  /* Remove fixed width/height so it shrinks to the photo */
+  /* These allow the frame to be larger but still dynamic */
   width: auto !important;
   height: auto !important;
-  
-  /* This ensures the 'hugged' frame doesn't get too close to the screen edges */
-  max-width: 85vw !important; 
-  max-height: 85vh !important;
-  
-  display: inline-flex; /* Changed from flex to inline-flex to hug content */
-  align-items: center;
-  justify-content: center;
+  max-width: 90vw !important;
+  max-height: 90vh !important;
 }
 
-/* 3. The Photo: Drives the size of the mat */
 body .gslide-image img {
-  /* Increased size: The photo now takes up as much room as the max-widths allow */
   display: block;
   max-width: 100% !important;
   max-height: 100% !important;
   object-fit: contain;
 }
 
+/* UI Adjustments */
+.gnext, .gprev, .gclose { filter: invert(1); }
+.glightbox-zoom-button { display: none !important; }
+
 /* =========================
-   6. Responsive Design
+   6. Responsive Adjustments
    ========================= */
-@media (max-width: 1200px) {
-  .gallery { column-count: 3; }
-}
-
-@media (max-width: 768px) {
-  :root { --gap-gallery: 0.35rem; } /* Update spacing globally for mobile */
-  .gallery { column-count: 2; }
-  .main-nav { gap: 1rem; }
-}
-
-@media (max-width: 480px) {
-  .gallery { column-count: 1; }
-}
+@media (max-width: 1200px) { .gallery { column-count: 3; } }
+@media (max-width: 768px) { .gallery { column-count: 2; } }
+@media (max-width: 480px) { .gallery { column-count: 1; } }
