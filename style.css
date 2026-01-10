@@ -133,14 +133,14 @@ main {
 
 .gallery img {
   width: 100%;
-  aspect-ratio: 3 / 2;
+  height: Auto;
   display: block;
   cursor: zoom-in;
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .gallery img:hover {
-  transform: scale(1.03);
+  transform: scale(1.02);
 }
 
 /* =========================
