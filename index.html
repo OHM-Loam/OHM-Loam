@@ -68,10 +68,9 @@
   const lightbox = GLightbox({
     selector: '.lightbox-trigger',
     loop: false,
-    zoomable: false,           // no magnifying glass
-    width: '60vw',
-    height: '60vh',
-    overlayOpacity: 0.45
+    zoomable: false,
+    draggable: true, // Allows users to swipe through photos on mobile
+    // We remove width/height here so the CSS .gslide-image rules work correctly
   });
 </script>
 
