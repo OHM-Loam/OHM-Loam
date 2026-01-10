@@ -133,14 +133,14 @@ main {
 
 .gallery img {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
   cursor: zoom-in;
   transition: transform 0.3s ease;
 }
 
 .gallery img:hover {
-  transform: scale(1.02);
+  transform: scale(1.05);
 }
 
 /* =========================
