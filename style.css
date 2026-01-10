@@ -103,14 +103,14 @@ main {
 }
 
 .gallery {
-  /* 1. Keep your column count */
-  column-count: 4; 
-  column-gap: 1.5rem;
-
-  /* 2. The Fix: Don't force 100% width */
-  display: block; 
-  width: max-content; /* This tells the gallery: "Only be as wide as your content" */
-  max-width: 90vw;    /* Safety for smaller screens */
+  display: block;
+  column-count: 4;
+  column-gap: 2rem;
+  width: fit-content; /* Shrink-wraps the grid */
+  max-width: 100%;    /* Prevents it from going off-screen */
+  margin: 2rem auto;  /* Centers the shrink-wrapped grid */
+  transition: all 0.3s ease;
+}
   
   /* 3. Center the whole 'huddle' */
   margin: 2rem auto; 
@@ -118,9 +118,9 @@ main {
 
 .gallery a {
   display: inline-block;
-  margin-bottom: 1.5rem;
-  /* 4. Set a fixed maximum width for the thumbnails themselves */
-  width: 250px; /* Adjust this number to find your perfect thumbnail size */
+  margin-bottom: 2rem;
+  width: 250px; /* This keeps your thumbnails small */
+  break-inside: avoid;
 }
 
 .gallery img {
@@ -141,13 +141,16 @@ main {
    List Mode (The Layout Switcher)
    ========================= */
 .gallery.list-mode {
-  column-count: 1; 
-  max-width: 700px; 
-  margin: 2rem auto;
+  display: block;    /* Standard block for vertical stacking */
+  column-count: 1;   /* Force one column */
+  width: 100%;       /* Expand to full width to center the list */
+  max-width: 600px;  /* Keep the list skinny and elegant */
+  margin: 0 auto;    /* Center the list */
 }
 
 .gallery.list-mode a {
-  margin-bottom: 3rem; /* Generous breathing room in list view */
+  width: 100%;       /* Make images fill the 600px list width */
+  margin-bottom: 4rem;
 }
 /* =========================
    GLightbox: Direct Image Border
@@ -193,15 +196,20 @@ body .gslide-image img {
    Landing Page 
    ========================= */
 #landing-page {
-  position: fixed;
-  inset: 0;
-  background: #ffffff;
-  z-index: 9999; /* Makes it sit on top of everything */
-  display: flex;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background-color: #ffffff !important;
+  z-index: 999999 !important; /* Extremely high to stay on top */
+  display: flex !important;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: opacity 0.8s ease, visibility 0.8s;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .landing-content {
@@ -225,9 +233,11 @@ body .gslide-image img {
 
 /* Class to hide the landing page */
 #landing-page.fade-out {
-  opacity: 0;
-  visibility: hidden;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none;
 }
+
 /* Responsive adjustments */
 @media (max-width: 1200px) { .gallery { column-count: 3; } }
 @media (max-width: 768px) { .gallery { column-count: 2; } }
