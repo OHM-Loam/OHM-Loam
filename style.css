@@ -124,32 +124,29 @@ main {
 }
 
 /* =========================
-   Masonry Gallery Grid (Joao Franco Style)
+   Masonry Gallery Grid
    ========================= */
 .gallery {
-  column-count: 3; 
-  /* This controls horizontal space between columns */
+  /* Increased to 4 to make individual images smaller on desktop */
+  column-count: 4; 
   column-gap: 0.3rem; 
   width: 100%;
   max-width: 1400px;
-  /* Added 0.3rem top margin to match your gap */
   margin: 0.3rem auto 0; 
 }
 
 .gallery a {
   display: inline-block; 
-  /* This controls vertical space between images - set to match column-gap */
   margin-bottom: 0.3rem; 
   width: 100%;
   overflow: hidden;
   border-radius: 4px;
-  /* Fixes a common masonry bug where images split between columns */
   break-inside: avoid; 
 }
 
 .gallery img {
   width: 100%;
-  height: auto; /* This respects the photo's original proportions */
+  height: auto; 
   display: block;
   cursor: zoom-in;
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -159,9 +156,24 @@ main {
   transform: scale(1.03);
 }
 
-/* Responsive adjustments */
-@media (max-width: 1024px) { .gallery { column-count: 2; } }
-@media (max-width: 600px) { .gallery { column-count: 1; } }
+/* =========================
+   Responsive Adjustments
+   ========================= */
+
+/* Tablets (3 columns) */
+@media (max-width: 1200px) { 
+  .gallery { column-count: 3; } 
+}
+
+/* Large Phones / Small Tablets (2 columns) */
+@media (max-width: 768px) { 
+  .gallery { column-count: 2; } 
+}
+
+/* Small Phones (1 column) */
+@media (max-width: 480px) { 
+  .gallery { column-count: 1; } 
+}
 
 /* =========================
    GLightbox: The "Gallery Mat" Style
