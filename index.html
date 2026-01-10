@@ -7,107 +7,84 @@
 
   <!-- Global stylesheet -->
   <link rel="stylesheet" href="style.css">
-</head>
 
+  <!-- GLightbox CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
+</head>
 <body>
 
-  <!-- Header -->
-  <header class="site-header">
-    <div class="header-inner">
-      <h1 class="site-title">
-        <span class="ohm">OHM</span>-Loam
-      </h1>
-      <nav class="main-nav">
-        <a href="#" id="about-toggle">About Me</a>
-      </nav>
-    </div>
-  </header>
-
-  <!-- About Panel -->
-  <div id="about-panel" aria-hidden="true">
-    <div class="about-content">
-      <h2>About</h2>
-      <p>
-        Static Vacuum is a minimalist photography project by Chris Webster.
-        It focuses on restraint, perception, and quiet tension developed
-        through lived experience.
-      </p>
-    </div>
+<!-- Sticky Header -->
+<header class="site-header">
+  <div class="header-inner">
+    <h1 class="site-title"><span class="ohm">OHM</span>-Loam</h1>
+    <nav class="main-nav">
+      <a href="#" id="about-toggle">About Me</a>
+    </nav>
   </div>
+</header>
 
-  <!-- Main Gallery -->
-  <main>
-    <section class="gallery">
-      <a href="IMG_2555.JPG" class="lightbox-trigger">
-        <img src="IMG_2555.JPG" alt="Minimalist landscape 1">
-      </a>
-      <a href="IMG_2556.JPG" class="lightbox-trigger">
-        <img src="IMG_2556.JPG" alt="Minimalist landscape 2">
-      </a>
-      <a href="climbing.jpg" class="lightbox-trigger">
-        <img src="climbing.jpg" alt="Climbing scene">
-      </a>
-      <a href="IMG_2562.JPG" class="lightbox-trigger">
-        <img src="IMG_2562.JPG" alt="Minimalist landscape 3">
-      </a>
-      <a href="IMG_2563.JPG" class="lightbox-trigger">
-        <img src="IMG_2563.JPG" alt="Minimalist landscape 4">
-      </a>
-    </section>
-  </main>
-
-  <!-- Custom Lightbox Overlay -->
-  <div id="lightbox-overlay">
-    <div class="lightbox-panel">
-      <img id="lightbox-img" src="" alt="">
-    </div>
-    <div class="lightbox-close">×</div>
+<!-- About Panel -->
+<div id="about-panel" aria-hidden="true">
+  <div class="about-content">
+    <h2>About</h2>
+    <p>
+      Static Vacuum is a minimalist photography project by Chris Webster.
+      It focuses on restraint, perception, and quiet tension developed
+      through lived experience.
+    </p>
   </div>
+</div>
 
-  <!-- JavaScript -->
-  <script>
-    // Lightbox behavior
-    const triggers = document.querySelectorAll('.lightbox-trigger');
-    const overlay = document.getElementById('lightbox-overlay');
-    const overlayImg = document.getElementById('lightbox-img');
-    const closeBtn = overlay.querySelector('.lightbox-close');
+<!-- Main Gallery -->
+<main>
+  <section class="gallery">
 
-    triggers.forEach(trigger => {
-      trigger.addEventListener('click', e => {
-        e.preventDefault();
-        overlayImg.src = trigger.getAttribute('href');
-        overlay.classList.add('open');
-      });
-    });
+    <a href="IMG_2555.JPG" class="lightbox-trigger">
+      <img src="IMG_2555.JPG" alt="">
+    </a>
 
-    // Close overlay by clicking outside image or on X
-    overlay.addEventListener('click', e => {
-      if (e.target === overlay || e.target === closeBtn) {
-        overlay.classList.remove('open');
-      }
-    });
+    <a href="IMG_2556.JPG" class="lightbox-trigger">
+      <img src="IMG_2556.JPG" alt="">
+    </a>
+    
+    <a href="climbing.jpg" class="lightbox-trigger">
+      <img src="climbing.jpg" alt="">
+    </a>
 
-    // Prevent overlay closing when clicking directly on the image
-    overlayImg.addEventListener('click', e => {
-      e.stopPropagation();
-    });
+    <a href="IMG_2562.JPG" class="lightbox-trigger">
+      <img src="IMG_2562.JPG" alt="">
+    </a>
 
-    // Close overlay with ESC key
-    document.addEventListener('keydown', e => {
-      if (e.key === "Escape") overlay.classList.remove('open');
-    });
+    <a href="IMG_2563.JPG" class="lightbox-trigger">
+      <img src="IMG_2563.JPG" alt="">
+    </a>  
 
-    // About panel toggle
-    const aboutToggle = document.getElementById('about-toggle');
-    const aboutPanel = document.getElementById('about-panel');
+  </section>
+</main>
 
-    aboutToggle.addEventListener('click', e => {
-      e.preventDefault();
-      aboutPanel.classList.toggle('open');
-      aboutToggle.classList.toggle('dimmed');
-      aboutPanel.setAttribute('aria-hidden', !aboutPanel.classList.contains('open'));
-    });
-  </script>
+<!-- GLightbox JS -->
+<script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+<script>
+  const lightbox = GLightbox({
+    selector: '.lightbox-trigger',
+    loop: false,
+    zoomable: false,           // no magnifying glass
+    width: '60vw',
+    height: '60vh',
+    overlayOpacity: 0.45
+  });
+</script>
 
+<!-- About Panel JS -->
+<script>
+  const aboutToggle = document.getElementById('about-toggle');
+  const aboutPanel = document.getElementById('about-panel');
+
+  aboutToggle.addEventListener('click', (e) => {
+    e.preventDefault();
+    aboutPanel.classList.toggle('open');
+    aboutToggle.classList.toggle('dimmed');
+  });
+</script>
 </body>
 </html>
