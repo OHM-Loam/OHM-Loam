@@ -53,14 +53,18 @@
 <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
 <script>
   const lightbox = GLightbox({
-    width: '70vw',
-    height: '70vh',
+    touchNavigation: true,
+    loop: false,
     zoomable: false,
     draggable: false,
+    autoplayVideos: false,
     closeOnOutsideClick: true,
-    overlayOpacity: 0.45
+    slideEffect: 'fade',
+    openEffect: 'fade',
+    closeEffect: 'fade'
   });
 </script>
+
 
 </body>
 </html>
