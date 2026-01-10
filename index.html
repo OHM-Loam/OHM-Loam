@@ -19,6 +19,7 @@
     <h1 class="site-title"><span class="ohm">OHM</span>-Loam</h1>
     <nav class="main-nav">
       <a href="#" id="about-toggle">About Me</a>
+      <a href="#" id="layout-toggle" style="margin-left: 2rem; cursor: pointer;">View: List</a>
     </nav>
   </div>
 </header>
@@ -85,5 +86,23 @@
     aboutToggle.classList.toggle('dimmed');
   });
 </script>
+  <Scrpt>
+  const layoutBtn = document.getElementById('layout-toggle');
+  const galleryContainer = document.querySelector('.gallery');
+
+ layoutBtn.addEventListener('click', (e) => {
+  e.preventDefault(); // Prevents the page from jumping to the top
+  
+  // This 'toggles' the class on and off
+  galleryContainer.classList.toggle('list-mode');
+  
+  // Optional: Change the button text based on the mode
+  if (galleryContainer.classList.contains('list-mode')) {
+    layoutBtn.textContent = 'View: Grid';
+  } else {
+    layoutBtn.textContent = 'View: List';
+  }
+});
+    </Scrpt>
 </body>
 </html>
