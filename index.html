@@ -60,21 +60,46 @@
   </section>
 </main>
   
-<!-- GLightbox JS -->
-<script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+<!-- Pixel Perfect JS -->
 <script>
-  const lightbox = GLightbox({
-    touchNavigation: true,
-    loop: false,
-    zoomable: false,
-    draggable: false,
-    autoplayVideos: false,
-    closeOnOutsideClick: true,
-    slideEffect: 'fade',
-    openEffect: 'fade',
-    closeEffect: 'fade'
+  const triggers = document.querySelectorAll('.lightbox-trigger');
+
+  // Create overlay
+  const overlay = document.createElement('div');
+  overlay.classList.add('lightbox-overlay');
+  const overlayImg = document.createElement('img');
+  overlay.appendChild(overlayImg);
+
+  // Optional close button
+  const closeBtn = document.createElement('div');
+  closeBtn.classList.add('lightbox-close');
+  closeBtn.textContent = '×';
+  overlay.appendChild(closeBtn);
+
+  document.body.appendChild(overlay);
+
+  // Open overlay
+  triggers.forEach(trigger => {
+    trigger.addEventListener('click', e => {
+      e.preventDefault();
+      overlayImg.src = trigger.getAttribute('href');
+      overlay.classList.add('open');
+    });
+  });
+
+  // Close overlay
+  overlay.addEventListener('click', e => {
+    if (e.target === overlay || e.target === closeBtn) {
+      overlay.classList.remove('open');
+    }
+  });
+
+  // Optional: close with ESC key
+  document.addEventListener('keydown', e => {
+    if(e.key === "Escape") overlay.classList.remove('open');
   });
 </script>
+
   <script>
   const aboutToggle = document.getElementById('about-toggle');
   const aboutPanel = document.getElementById('about-panel');
