@@ -114,9 +114,11 @@ main {
 /* Simon Phipps style spacing */
 .gallery a {
   display: inline-block;
-  margin-bottom: 1.5rem; /* Matching the vertical gap to the horizontal gap */
+  margin-bottom: 1.5rem;
   width: 100%;
   break-inside: avoid;
+  /* Add this for a softer look */
+  padding: 0 10px; 
 }
 
 .gallery img {
