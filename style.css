@@ -145,44 +145,48 @@ main {
 }
 
 /* =========================
-   Lightbox (GLightbox Overrides)
+   Lightbox OverLay
    ========================= */
-
-.glightbox-clean img {
-  width: 100%;
-  height: auto;
-  max-height: 100%;
-}
-
-.glightbox-container {
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 2000;
 }
 
-.glightbox-overlay {
-  background: rgba(0, 0, 0, 0.35);
+/* Open state */
+.lightbox-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
 }
 
-.glightbox-container img {
-  max-width: 15vw;
-  max-height: 15vh;
-  margin: auto;
+/* Image inside overlay */
+.lightbox-overlay img {
+  max-width: 60vw;  /* smaller than before */
+  max-height: 70vh;
+  width: auto;
+  height: auto;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  border-radius: 2px;
 }
 
-.glightbox-zoom-button {
-  display: none !important;
+/* Optional close hint (small X) */
+.lightbox-close {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  font-size: 1.5rem;
+  color: #fff;
+  cursor: pointer;
 }
-
-.gslide-inner-content {
-  padding: 4vh 0;
-}
-@media (min-width: 1024px) {
-  .glightbox-clean .gslide-media {
-    max-width: 55vw;
-    max-height: 60vh;
-  }
-}
-
 
 /* =========================
    Responsive Adjustments
