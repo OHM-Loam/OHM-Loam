@@ -63,40 +63,48 @@
   </section>
 </main>
 
+<script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
 <script>
-  // 1. Initialize Lightbox
+  // This initializes the gallery - keep this exactly as it was
   const lightbox = GLightbox({
     selector: '.lightbox-trigger',
     loop: false,
     zoomable: false,
     draggable: true
   });
+</script>
 
-  // 2. About Panel Logic
+<script>
   const aboutToggle = document.getElementById('about-toggle');
   const aboutPanel = document.getElementById('about-panel');
 
-  if(aboutToggle) {
+  // We check if the button exists before adding the 'click' listener
+  if (aboutToggle) {
     aboutToggle.addEventListener('click', (e) => {
       e.preventDefault();
       aboutPanel.classList.toggle('open');
       aboutToggle.classList.toggle('dimmed');
     });
   }
+</script>
 
-  // 3. Layout Switcher Logic
+<script>
   const layoutBtn = document.getElementById('layout-toggle');
   const galleryContainer = document.querySelector('.gallery');
 
-  if(layoutBtn) {
+  if (layoutBtn && galleryContainer) {
     layoutBtn.addEventListener('click', (e) => {
       e.preventDefault();
+      
+      // We are toggling 'list-mode' to match your CSS exactly
       galleryContainer.classList.toggle('list-mode');
       
-      // Update text based on the current mode
-      layoutBtn.textContent = galleryContainer.classList.contains('list-mode') 
-        ? 'View: Grid' 
-        : 'View: List';
+      // Simple if/else logic to update the button text
+      if (galleryContainer.classList.contains('list-mode')) {
+        layoutBtn.textContent = 'View: Grid';
+      } else {
+        layoutBtn.textContent = 'View: List';
+      }
     });
   }
 </script>
