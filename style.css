@@ -1,10 +1,24 @@
 /* =========================
-   Base Reset
+   1. Design Tokens (Variables)
    ========================= */
-* {
-  box-sizing: border-box;
-}
+:root {
+  /* Colors */
+  --color-base: #ffffff;
+  --color-text: #111111;
+  --color-text-dim: #888888;
+  --color-border: rgba(0, 0, 0, 0.07);
+  --color-overlay: rgba(240, 240, 240, 0.85);
 
+  /* Spacing & Sizing */
+  --max-width-main: 72rem;
+  --max-width-gallery: 1400px;
+  --gap-gallery: 0.3rem;
+  --mat-padding: 50px;
+  
+  /* Animations */
+  --transition-standard: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: 0.2s ease;
+}
 /* =========================
    Typography & Body
    ========================= */
@@ -56,27 +70,13 @@ body {
 }
 
 /* Navigation */
+.main-nav {
+  display: flex;
+  gap: 2rem; /* Handles spacing between items automatically */
+}
 .main-nav a {
-  text-decoration: none;
-  color: #111;
-  margin-left: 2rem;
-  font-size: 0.95rem;
-  font-weight: 400;
-  padding-bottom: 0.25rem;
-  border-bottom: 2px solid transparent;
-  transition: border-color 0.2s ease, color 0.2s ease;
+  margin-left: 0; /* Remove the old margin */
 }
-
-.main-nav a:hover,
-.main-nav a.active {
-  border-bottom-color: #111;
-}
-
-.main-nav a.dimmed {
-  color: #888;
-  border-bottom-color: transparent;
-}
-
 /* =========================
    About Overlay Panel
    ========================= */
@@ -166,8 +166,13 @@ main {
 }
 
 /* Large Phones / Small Tablets (2 columns) */
-@media (max-width: 768px) { 
-  .gallery { column-count: 2; } 
+@media (max-width: 768px) {
+  .gallery {
+    column-gap: 0.35rem; 
+  }
+  .gallery a {
+    margin-bottom: 0.35rem; /* Keep vertical and horizontal spacing synced */
+  }
 }
 
 /* Small Phones (1 column) */
