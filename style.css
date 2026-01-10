@@ -127,8 +127,8 @@ body .gslide-image {
   background-color: var(--color-base);
   padding: var(--mat-padding);
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
-  width: 60vw;
-  height: 60vh;
+  width: 75vw;
+  height: 75vh;
   display: flex;
   align-items: center;
   justify-content: center;
