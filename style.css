@@ -154,29 +154,35 @@ main {
     backdrop-filter: blur(15px) !important;
     -webkit-backdrop-filter: blur(15px);
 }
-
-/* 2. The Matting: This creates the "Frame" around the photo */
+/* 2. The Matting: Creating a consistent frame container */
 .gslide-image {
-    background-color: #ffffff !important; /* The white "mat" */
-    padding: 40px !important; /* Adjust this for mat thickness */
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1); /* Soft shadow for the frame */
+    background-color: #ffffff !important;
+    padding: 50px !important; /* This is your uniform mat thickness */
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
     
-    /* Forces the magnified image area to stay small on screen */
-    max-width: 70vw !important; 
-    max-height: 70vh !important;
+    /* We set a fixed size for the 'Frame' itself */
+    width: 60vw !important;  
+    height: 60vh !important;
+    
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
 
-/* 3. The Photo: Sits inside the mat */
+/* 3. The Photo: Fitting perfectly inside the mat */
 .gslide-image img {
-    /* These must be 100% so the photo fills the mat area properly */
-    max-height: 100% !important; 
-    max-width: 100% !important;
-    border-radius: 2px; /* Slight edge for the photo itself */
-    object-fit: contain;
+    /* These force the image to stay inside the padded area */
+    width: 100% !important;
+    height: 100% !important;
+    
+    /* This is the magic: it keeps the photo's original shape 
+       without ever touching the edges of the mat */
+    object-fit: contain !important; 
+    
+    border: 1px solid rgba(0,0,0,0.03); /* Subtle 'print' edge */
 }
+
 
 /* 4. UI: Contrast adjustments */
 /* Since the background is now light, we need dark icons */
