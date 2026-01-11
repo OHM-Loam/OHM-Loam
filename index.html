@@ -2,132 +2,99 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>OHM-Loam</title>
+  <title>OHM-Loam | Photography</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- Global stylesheet -->
   <link rel="stylesheet" href="style.css">
-
-  <!-- GLightbox CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
 </head>
 <body>
   
- <!-- Landing Page -->
-<div id="landing-page">
+  <div id="landing-page">
     <div class="landing-content">
        <h1 class="site-title"><span class="ohm">Ohm</span></h1>
        <p>Click to enter</p>
     </div>
   </div>
   
-<!-- Sticky Header -->
-<header class="site-header">
-  <div class="header-inner">
-    <h1 class="site-title"><span class="ohm">OHM</span>-Loam</h1>
-    <nav class="main-nav">
-      <a href="#" id="about-toggle">About Me</a>
-      <a href="#" id="layout-toggle" style="margin-left: 2rem; cursor: pointer;">View: List</a>
-    </nav>
+  <header class="site-header">
+    <div class="header-inner">
+      <h1 class="site-title"><span class="ohm">OHM</span>-Loam</h1>
+      <nav class="main-nav">
+        <a href="#" id="about-toggle">About Me</a>
+      </nav>
+    </div>
+  </header>
+
+  <div id="about-panel" aria-hidden="true">
+    <div class="about-content">
+      <h2>About</h2>
+      <p>
+        OHM-Loam is a minimalist photography project by Chris Webster.
+        It focuses on restraint, perception, and quiet tension developed
+        through lived experience.
+      </p>
+    </div>
   </div>
-</header>
 
-<!-- About Panel -->
-<div id="about-panel" aria-hidden="true">
-  <div class="about-content">
-    <h2>About</h2>
-    <p>
-      OHM-Loam is a minimalist photography project by Chris Webster.
-      It focuses on restraint, perception, and quiet tension developed
-      through lived experience.
-    </p>
-  </div>
-</div>
+  <main>
+    <section class="project-hub">
+      <a href="projects.html" class="glightbox gallery-item">
+        <img src="IMG_2555.JPG" alt="Photography">
+      </a>
 
-<!-- Main Gallery -->
-<main>
-  <section class="project-hub">
+      <a href="projects.html" class="glightbox gallery-item featured">
+        <img src="IMG_2556.JPG" alt="Photography">
+      </a>
 
-    <a href="projects.html" class="gallery-item">
-      <img src="IMG_2555.JPG" alt="">
-    </a>
+      <a href="projects.html" class="glightbox gallery-item wide">
+        <img src="images/marktwins.jpg" alt="Photography">
+      </a>
 
-    <a href="projects.html" class="gallery-item featured">
-      <img src="IMG_2556.JPG" alt="">
-    </a>
+      <a href="projects.html" class="glightbox gallery-item">
+        <img src="IMG_2563.JPG" alt="Photography">
+      </a>  
 
-    <a href="projects.html" class="gallery-item wide">
-      <img src="images/10590655_10154537121640088_1832706945196585128_n.jpg" alt="">
-    </a>
+       <a href="projects.html" class="glightbox gallery-item">
+        <img src="images/rabbit.jpg" alt="Photography">
+      </a> 
 
-    <a href="projects.html" class="gallery-item">
-      <img src="IMG_2563.JPG" alt="">
-    </a>  
-
-     <a href="projects.html" class="gallery-item">
-      <img src="images/rabbit.jpg" alt="">
-    </a> 
-
-     <a href="projects.html" class="gallery-item featured">
-      <img src="images/marktwins.jpg" alt="">
-    </a> 
-
-  </section>
-</main>
-
-<script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
-<script>
-  // 1. Initialize the Lightbox
-  const lightbox = GLightbox({
-    selector: '.lightbox-trigger',
-    loop: false,
-    zoomable: false,
-    draggable: true
-  });
-
-  // 2. About Panel Logic
-  const aboutToggle = document.getElementById('about-toggle');
-  const aboutPanel = document.getElementById('about-panel');
-
-  if (aboutToggle && aboutPanel) {
-    aboutToggle.addEventListener('click', (e) => {
-      e.preventDefault();
-      aboutPanel.classList.toggle('open');
-      aboutToggle.classList.toggle('dimmed');
-    });
-  }
-
-  // 3. Layout Switcher Logic
-  const layoutBtn = document.getElementById('layout-toggle');
-  const galleryContainer = document.querySelector('.gallery');
-
-  if (layoutBtn && galleryContainer) {
-    layoutBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      galleryContainer.classList.toggle('list-mode');
+       <a href="projects.html" class="glightbox gallery-item featured">
+        <img src="images/markwins.jpg" alt="Photography">
+      </a> 
       
-      if (galleryContainer.classList.contains('list-mode')) {
-        layoutBtn.textContent = 'View: Grid';
-      } else {
-        layoutBtn.textContent = 'View: List';
-      }
+      <a href="projects.html" class="glightbox gallery-item wide">
+        <img src="images/markwins.jpg" alt="Photography">
+      </a> 
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+  <script>
+    // Initialize Lightbox
+    const lightbox = GLightbox({
+      selector: '.glightbox',
+      loop: true,
+      zoomable: false,
+      draggable: true
     });
-  }
 
-// 4. Landing Page Logic
-const landingPage = document.getElementById('landing-page');
+    // About Panel Toggle
+    const aboutToggle = document.getElementById('about-toggle');
+    const aboutPanel = document.getElementById('about-panel');
+    if (aboutToggle && aboutPanel) {
+      aboutToggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        aboutPanel.classList.toggle('open');
+      });
+    }
 
-if (landingPage) {
-  // Option A: Manual click to enter
-  landingPage.addEventListener('click', () => {
-    landingPage.classList.add('fade-out');
-  });
-
-  // Option B: Auto-enter after 4 seconds (4000 milliseconds)
-  setTimeout(() => {
-    landingPage.classList.add('fade-out');
-  }, 4000); 
-}
-</script>
+    // Landing Page Logic (Manual + 4s Auto)
+    const landingPage = document.getElementById('landing-page');
+    if (landingPage) {
+      const enterSite = () => landingPage.classList.add('fade-out');
+      landingPage.addEventListener('click', enterSite);
+      setTimeout(enterSite, 4000); 
+    }
+  </script>
 </body>
 </html>
