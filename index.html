@@ -79,12 +79,21 @@
     });
 
     // About Panel Toggle
+  // About Panel Toggle (Enhanced)
     const aboutToggle = document.getElementById('about-toggle');
     const aboutPanel = document.getElementById('about-panel');
+    
     if (aboutToggle && aboutPanel) {
       aboutToggle.addEventListener('click', (e) => {
         e.preventDefault();
         aboutPanel.classList.toggle('open');
+        
+        // Change the link text so you know how to get back
+        if (aboutPanel.classList.contains('open')) {
+            aboutToggle.textContent = 'Close';
+        } else {
+            aboutToggle.textContent = 'About Me';
+        }
       });
     }
 
