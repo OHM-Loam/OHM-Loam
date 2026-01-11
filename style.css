@@ -115,6 +115,7 @@ body {
   height: 100%;
   overflow: hidden;
   position: relative;
+  border-radius: 12px;
 }
 
 .project-hub img {
