@@ -238,3 +238,24 @@ body .gslide-image img {
 
   .landing-content h1 { font-size: 2rem; }
 }
+/* =========================
+   9. Art Direction Utilities (The Nudges)
+   ========================= */
+
+/* Use these to shift which part of the photo shows in the thumbnail */
+.focus-top img {
+  object-position: 50% 15%; /* Shows more of the top */
+}
+
+.focus-bottom img {
+  object-position: 50% 85%; /* Shows more of the bottom */
+}
+
+/* Use these to shift the entire 'box' for a deliberate, staggered look */
+.nudge-down {
+  margin-top: 60px;
+}
+
+.nudge-up {
+  margin-top: -40px;
+}
