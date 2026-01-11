@@ -67,7 +67,30 @@ body {
 }
 
 /* =========================
-   3. The Lasse Fløde Grid (Project Hub)
+  3. About Me
+   ========================= */
+
+.about-content {
+  max-width: 42rem;      /* Keeps the lines of text from getting too long/hard to read */
+  margin: 6rem auto;    /* Pushes it down from the top and centers it horizontally */
+  padding: 0 2rem;
+  text-align: left;     /* Keeps that clean, editorial look */
+}
+
+.about-content h2 {
+  font-weight: 200;
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+  margin-bottom: 2rem;
+}
+
+.about-content p {
+  font-size: 1.1rem;
+  line-height: 1.8;      /* Give the words some 'Ohm' breathing room */
+  color: #444;
+}
+/* =========================
+   4. The Lasse Fløde Grid (Project Hub)
    ========================= */
 .project-hub {
   display: grid;
@@ -104,7 +127,7 @@ body {
 .project-hub a.wide { grid-column: span 2; }
 
 /* =========================
-   4. Landing Page
+   5. Landing Page
    ========================= */
 #landing-page {
   position: fixed;
@@ -143,7 +166,7 @@ body {
 }
 
 /* =========================
-   5. GLightbox: The Art Mat
+   6. GLightbox: The Art Mat
    ========================= */
 body .goverlay {
   background: rgba(230, 230, 230, 0.8) !important; 
@@ -167,7 +190,7 @@ body .gslide-image img {
 .gnext, .gprev, .gclose { filter: invert(1); }
 
 /* =========================
-   6. Project Pagination (The Loop)
+   7. Project Pagination (The Loop)
    ========================= */
 .project-pagination {
   display: flex;
@@ -188,7 +211,7 @@ body .gslide-image img {
 }
 
 /* =========================
-   7. Mobile Responsiveness
+   8. Mobile Responsiveness
    ========================= */
 @media (max-width: 768px) {
   .project-hub {
