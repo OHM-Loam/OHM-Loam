@@ -78,24 +78,24 @@
       draggable: true
     });
 
-    // About Panel Toggle
-  // About Panel Toggle (Enhanced)
-    const aboutToggle = document.getElementById('about-toggle');
-    const aboutPanel = document.getElementById('about-panel');
-    
-    if (aboutToggle && aboutPanel) {
-      aboutToggle.addEventListener('click', (e) => {
-        e.preventDefault();
-        aboutPanel.classList.toggle('open');
-        
-        // Change the link text so you know how to get back
-        if (aboutPanel.classList.contains('open')) {
-            aboutToggle.textContent = 'Close';
-        } else {
-            aboutToggle.textContent = 'About Me';
-        }
-      });
-    }
+ // 2. About Panel Logic (Restored to your working version)
+  const aboutToggle = document.getElementById('about-toggle');
+  const aboutPanel = document.getElementById('about-panel');
+
+  if (aboutToggle && aboutPanel) {
+    aboutToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      aboutPanel.classList.toggle('open');
+      aboutToggle.classList.toggle('dimmed');
+      
+      // Bonus: Logic to change text if you want it to say "Close"
+      if (aboutPanel.classList.contains('open')) {
+          aboutToggle.textContent = 'Close';
+      } else {
+          aboutToggle.textContent = 'About Me';
+      }
+    });
+  }
 
     // Landing Page Logic (Manual + 4s Auto)
     const landingPage = document.getElementById('landing-page');
