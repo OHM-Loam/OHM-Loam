@@ -101,11 +101,11 @@ body {
    ========================= */
 .project-hub {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  grid-auto-rows: 300px; 
-  gap: 4rem; /* Generous whitespace */
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-auto-rows: 200px; 
+  gap: 8rem; /* Generous whitespace */
   padding: 4rem;
-  max-width: 1600px;
+  max-width: 1400px;
   margin: 0 auto;
 }
 
