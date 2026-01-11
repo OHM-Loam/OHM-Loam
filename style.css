@@ -180,6 +180,49 @@ body .gslide-image img {
   filter: invert(1);
 }
 
+/* --- 1. Project Navigation (The Loop) --- */
+.project-pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6rem 2rem; /* Large vertical space like Lasse's */
+  margin-top: 4rem;
+  border-top: 1px solid rgba(0,0,0,0.05); /* Very subtle line */
+  font-family: inherit;
+  text-transform: uppercase;
+  letter-spacing: 0.15rem;
+  font-size: 0.75rem;
+}
+
+.project-pagination a {
+  text-decoration: none;
+  color: #333;
+  transition: opacity 0.3s;
+}
+
+.project-pagination a:hover {
+  opacity: 0.4;
+}
+
+/* --- 2. The "Random" Grid Logic --- */
+/* We use Grid instead of Flex for the main project hub to allow spanning */
+.project-hub {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-auto-rows: 250px;
+  gap: 3rem;
+  padding: 2rem;
+}
+
+/* Lasse Fløde Style Spanning: Make some items take up more 'space' */
+.project-hub .featured {
+  grid-row: span 2; /* Taller */
+}
+
+.project-hub .wide {
+  grid-column: span 2; /* Wider */
+}
+
 /* =========================
    Landing Page 
    ========================= */
