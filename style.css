@@ -163,8 +163,8 @@ body {
   }
 }
 .social-icon {
-  width: 16px;       /* Set a specific tiny size */
-  height: 16px;
+  width: 24px;     
+  height: 24px;
   vertical-align: middle; /* Aligns the icon to the center of the text line */
   margin-right: 8px;      /* Adds a little 'air' between the icon and the word */
   opacity: 0.7;           /* Makes it slightly subtle, not pure black */
