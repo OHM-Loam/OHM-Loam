@@ -1,23 +1,22 @@
 /* =========================
-   Base Reset
+   1. Base Reset & Colors
    ========================= */
-* {
-  box-sizing: border-box;
+* { 
+  box-sizing: border-box; 
 }
 
 body {
   margin: 0;
   padding: 0;
-  /* Restored your specific font stack */
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   color: #333;
-  background-color: #f2efeb;
+  background-color: #f2efeb; /* Your warm stone/sand color */
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
 
 /* =========================
-   Sticky Site Header (Restored)
+   2. Sticky Site Header
    ========================= */
 .site-header {
   position: sticky;
@@ -39,7 +38,7 @@ body {
 
 .site-title {
   font-size: 1.35rem;
-  font-weight: 200; /* Your thin weight */
+  font-weight: 200;
   margin: 0;
   color: #112;
   text-decoration: none;
@@ -47,7 +46,7 @@ body {
 }
 
 .site-title .ohm {
-  font-weight: 600; /* Your bold weight */
+  font-weight: 600;
   text-transform: uppercase;
 }
 
@@ -59,7 +58,7 @@ body {
   font-weight: 400;
   padding-bottom: 0.25rem;
   border-bottom: 2px solid transparent;
-  transition: border-color 0.2s ease, color 0.2s ease;
+  transition: border-color 0.2s ease;
 }
 
 .main-nav a:hover,
@@ -68,158 +67,13 @@ body {
 }
 
 /* =========================
-   About Overlay Panel (Restored)
+   3. The Lasse Fløde Grid (Project Hub)
    ========================= */
-#about-panel {
-  position: fixed;
-  inset: 0;
-  height: 100vh;
-  background: rgba(255,255,255,0.8);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  transform: translateY(-100%);
-  transition: transform 0.6s ease;
-  z-index: 900;
-  overflow-y: auto;
-}
-
-#about-panel.open {
-  transform: translateY(0);
-}
-
-.about-content {
-  max-width: 48rem;
-  margin: 6rem auto;
-  padding: 0 1.5rem;
-}
-
-/* =========================
-   The "Ohm" Flex Gallery
-   ========================= */
-.gallery {
-  display: flex;
-  flex-wrap: wrap;      /* Allows wrapping to next row */
-  justify-content: center; /* Centers the whole group */
-  gap: 2.5rem;          /* Generous Simon Phipps spacing */
-  max-width: 1300px;
-  margin: 4rem auto;
-  padding: 0 2rem;
-}
-
-.gallery a {
-  flex: 0 1 320px;      /* Images stay around 320px wide (no more "Huge" photos) */
-  position: relative;
-  overflow: hidden;     /* Keeps the zoom INSIDE the box */
-  border-radius: 2px;
-  text-decoration: none;
-}
-
-.gallery img {
-  width: 100%;
-  height: auto;         /* Maintains natural photo proportions */
-  display: block;
-  transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1); /* Smoother zoom */
-}
-
-/* Your Mouse-over Zoom */
-.gallery a:hover img {
-  transform: scale(1.02); 
-}
-.gallery-item.featured {
-  grid-row: span 2;
-}
-
-.gallery-item.wide {
-  grid-column: span 2;
-}
-
-/* =========================
-   List Mode Fix
-   ========================= */
-.gallery.list-mode {
-  flex-direction: column;
-  align-items: center;
-}
-
-.gallery.list-mode a {
-  flex: 0 1 auto;
-  width: 100%;
-  max-width: 700px;
-  margin-bottom: 6rem; /* Large gap for that editorial feel */
-}
-/* =========================
-   GLightbox: Direct Image Border
-   ========================= */
-
-/* 1. The Overlay: Make the background very light and blurred */
-body .goverlay {
-  background: rgba(230, 230, 230, 0.8) !important; 
-  backdrop-filter: blur(10px);
-}
-
-/* 2. The Container: We "disable" this so it doesn't create a huge box */
-body .gslide-image {
-  background: none !important;  /* Remove any background color */
-  box-shadow: none !important;  /* Remove any shadows from the container */
-  padding: 0 !important;       /* Remove any inner spacing */
-  width: auto !important;       /* Let it shrink to the image size */
-  height: auto !important;      /* Let it shrink to the image size */
-}
-
-/* 3. The Actual Image: This is where we put the border */
-body .gslide-image img {
-  /* This creates the 30px white border you asked for */
-  border: 30px solid #e8e6e1 !important; 
-  
-  /* This adds a shadow to the white border, making it pop */
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  
-  /* This controls how big the image gets on your screen */
-  max-width: 80vw !important; 
-  max-height: 80vh !important;
-  
-  /* Keeps the photo from distorting */
-  object-fit: contain; 
-}
-
-/* 4. Navigation Buttons: Make them dark so you can see them on the light background */
-.gnext, .gprev, .gclose {
-  filter: invert(1);
-}
-
-/* --- 1. Project Navigation (The Loop) --- */
-.project-pagination {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 6rem 2rem; /* Large vertical space like Lasse's */
-  margin-top: 4rem;
-  border-top: 1px solid rgba(0,0,0,0.05); /* Very subtle line */
-  font-family: inherit;
-  text-transform: uppercase;
-  letter-spacing: 0.15rem;
-  font-size: 0.75rem;
-}
-
-.project-pagination a {
-  text-decoration: none;
-  color: #333;
-  transition: opacity 0.3s;
-}
-
-.project-pagination a:hover {
-  opacity: 0.4;
-}
-
-/* --- The 'Lasse' Grid Fix --- */
 .project-hub {
   display: grid;
-  /* 1. Define fixed-width columns that don't stretch */
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  /* 2. Give the 'rows' a specific height so items have a base to stand on */
   grid-auto-rows: 300px; 
-  /* 3. Add significant 'Air' (Whitespace) */
-  gap: 4rem; 
+  gap: 4rem; /* Generous whitespace */
   padding: 4rem;
   max-width: 1600px;
   margin: 0 auto;
@@ -230,49 +84,42 @@ body .gslide-image img {
   width: 100%;
   height: 100%;
   overflow: hidden;
+  position: relative;
 }
 
 .project-hub img {
   width: 100%;
   height: 100%;
-  /* 4. This is crucial: it keeps the images from squishing */
-  object-fit: cover; 
-  transition: transform 0.8s ease;
+  object-fit: cover; /* Prevents squishing */
+  display: block;
+  transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-/* --- Adding the 'Rhythm' --- */
-/* This creates the 'random but not' feel by letting some items break the grid */
-.project-hub a.featured {
-  grid-row: span 2; /* Takes up two vertical 'slots' */
+.project-hub a:hover img {
+  transform: scale(1.03); /* Subtle, premium zoom */
 }
 
-.project-hub a.wide {
-  grid-column: span 2; /* Takes up two horizontal 'slots' */
-}
+/* Grid Rhythm Modifiers */
+.project-hub a.featured { grid-row: span 2; }
+.project-hub a.wide { grid-column: span 2; }
 
 /* =========================
-   Landing Page 
+   4. Landing Page
    ========================= */
 #landing-page {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color:#f2efeb;
+  inset: 0; /* Modern shortcut for top/left/right/bottom: 0 */
+  background-color: #f2efeb;
   z-index: 9999; 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  /* Smooth transition for the 'Passive Entrance' */
   transition: opacity 1.5s ease-in-out, visibility 1.5s;
 }
 
-.landing-content {
-  text-align: center;
-}
+.landing-content { text-align: center; }
 
 .landing-content h1 {
   font-size: 3rem;
@@ -295,7 +142,67 @@ body .gslide-image img {
   pointer-events: none;
 }
 
-/* Responsive adjustments */
-@media (max-width: 1200px) { .gallery { column-count: 3; } }
-@media (max-width: 768px) { .gallery { column-count: 2; } }
-@media (max-width: 480px) { .gallery { column-count: 1; } }
+/* =========================
+   5. GLightbox: The Art Mat
+   ========================= */
+body .goverlay {
+  background: rgba(230, 230, 230, 0.8) !important; 
+  backdrop-filter: blur(10px);
+}
+
+body .gslide-image {
+  background: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+body .gslide-image img {
+  border: 30px solid #e8e6e1 !important; /* The 30px physical mat */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  max-width: 80vw !important; 
+  max-height: 80vh !important;
+  object-fit: contain; 
+}
+
+.gnext, .gprev, .gclose { filter: invert(1); }
+
+/* =========================
+   6. Project Pagination (The Loop)
+   ========================= */
+.project-pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6rem 2rem;
+  margin-top: 4rem;
+  border-top: 1px solid rgba(0,0,0,0.05);
+  text-transform: uppercase;
+  letter-spacing: 0.15rem;
+  font-size: 0.75rem;
+}
+
+.project-pagination a {
+  text-decoration: none;
+  color: #333;
+  transition: opacity 0.3s;
+}
+
+/* =========================
+   7. Mobile Responsiveness
+   ========================= */
+@media (max-width: 768px) {
+  .project-hub {
+    grid-template-columns: 1fr; /* Single column stack */
+    grid-auto-rows: auto;      /* Let photos breathe */
+    gap: 2rem;
+    padding: 1.5rem;
+  }
+
+  .project-hub a.featured, 
+  .project-hub a.wide {
+    grid-row: span 1; 
+    grid-column: span 1;
+  }
+
+  .landing-content h1 { font-size: 2rem; }
+}
