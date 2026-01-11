@@ -125,6 +125,13 @@ body {
 .gallery a:hover img {
   transform: scale(1.02); 
 }
+.gallery-item.featured {
+  grid-row: span 2;
+}
+
+.gallery-item.wide {
+  grid-column: span 2;
+}
 
 /* =========================
    List Mode Fix
