@@ -139,6 +139,18 @@
       landingPage.addEventListener('click', enterSite);
       setTimeout(enterSite, 4000); 
     }
+
+   // Lightbox Video
+    const lightbox = GLightbox({
+    selector: '.glightbox',
+    plyr: {
+        config: {
+            muted: true, // Start muted so it's not jarring
+            hideControls: true, // Keep the "Ohm" minimal look
+            youtube: { noCookie: true }
+        }
+    }
+});
   </script>
 </body>
 </html>
