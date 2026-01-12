@@ -275,6 +275,13 @@ body .gslide-image img {
 
 .gnext, .gprev, .gclose { filter: invert(1); }
 
+.video-preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* This ensures it fills the grid box without stretching */
+  display: block;
+}
+
 /* =========================
    7. Project Pagination (The Loop)
    ========================= */
