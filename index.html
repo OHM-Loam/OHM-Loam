@@ -160,30 +160,45 @@
       }
     });
 
-   // The "Force Loop" Logic (Native Element Check)
+  <script>
+  // 1. Landing Page Logic
+  const landingPage = document.getElementById('landing-page');
+  if (landingPage) {
+    const enterSite = () => landingPage.classList.add('fade-out');
+    landingPage.addEventListener('click', enterSite);
+    setTimeout(enterSite, 4000); 
+  }
+
+  // 2. GLightbox Initialization
+  if (typeof GLightbox !== 'undefined') {
+    const lightbox = GLightbox({
+      selector: '.glightbox',
+      loop: true,
+      plyr: {
+        config: {
+          muted: true,
+          hideControls: true,
+          youtube: { noCookie: true }
+        }
+      }
+    });
+
+    // 3. The Loop Fix
     lightbox.on('open', () => {
-      const checkVideo = setInterval(() => {
-        // Look for the actual video tag inside the GLightbox container
-        const videoElement = document.querySelector('.gcontainer video');
-        
-        if (videoElement) {
-          // 1. Set the native loop attribute
-          videoElement.loop = true;
-          
-          // 2. Ensure it stays muted (required for many browsers to loop/autoplay)
-          videoElement.muted = true;
-
-          // 3. If it stopped, kickstart it again
-          videoElement.play();
-
-          // 4. Clean up: Stop looking once we've applied the fix
-          clearInterval(checkVideo);
+      const checkPlayer = setInterval(() => {
+        const player = lightbox.getIPlyr();
+        if (player) {
+          player.on('ended', () => {
+            player.restart();
+          });
+          clearInterval(checkPlayer);
         }
       }, 100);
 
-      // Safety: Stop checking after 3 seconds
-      setTimeout(() => clearInterval(checkVideo), 3000);
+      setTimeout(() => clearInterval(checkPlayer), 3000);
     });
+  } 
+</script>
   </script>
 </body>
 </html>
