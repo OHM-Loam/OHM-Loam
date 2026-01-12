@@ -145,31 +145,40 @@
     setTimeout(enterSite, 4000); 
   }
 
-  // 2. GLightbox Initialization
-  // We wrap this in a check to ensure GLightbox is actually loaded first
+ // 2. GLightbox Initialization
   if (typeof GLightbox !== 'undefined') {
     const lightbox = GLightbox({
       selector: '.glightbox',
-      loop: true, // This is for navigating between gallery items
+      loop: true, 
       plyr: {
         config: {
           muted: true,
           hideControls: true,
-          loop: { active: true }, // Standard loop attempt
+          loop: { active: true }, 
           youtube: { noCookie: true }
         }
       }
     });
 
-    // The "Force Loop" Logic
-    // We listen for the 'open' event, then find the video player
+    // The "Force Loop" Logic with a Ready-Check
     lightbox.on('open', () => {
-      const player = lightbox.getIPlyr(); // Gets the current video player
-      if (player) {
-        player.on('ended', () => {
-          player.restart(); // Forces the video to start over immediately
-        });
-      }
+      // Check every 100ms for the player until it's found
+      const checkPlayer = setInterval(() => {
+        const player = lightbox.getIPlyr();
+        
+        if (player) {
+          // Once found, attach the loop listener
+          player.on('ended', () => {
+            player.restart();
+          });
+          // Stop checking once we've successfully attached the listener
+          clearInterval(checkPlayer);
+        }
+      }, 100);
+
+      // Safety: Stop checking after 3 seconds so it doesn't run forever 
+      // if it's just a static image being viewed.
+      setTimeout(() => clearInterval(checkPlayer), 3000);
     });
   }
   </script>
