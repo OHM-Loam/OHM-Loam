@@ -131,25 +131,35 @@
     });
   }
 
-    // Landing Page Logic (Manual + 4s Auto)
-    const landingPage = document.getElementById('landing-page');
-    if (landingPage) {
-      const enterSite = () => landingPage.classList.add('fade-out');
-      landingPage.addEventListener('click', enterSite);
-      setTimeout(enterSite, 4000); 
-    }
+    // 1. Landing Page Logic
+  const landingPage = document.getElementById('landing-page');
+  
+  if (landingPage) {
+    const enterSite = () => {
+      landingPage.classList.add('fade-out');
+      // Optional: remove from DOM after fade to keep things "Clean"
+      setTimeout(() => landingPage.style.display = 'none', 1000);
+    };
 
-   // Lightbox Video
+    landingPage.addEventListener('click', enterSite);
+    setTimeout(enterSite, 4000); 
+  }
+
+  // 2. GLightbox Initialization
+  // We wrap this in a check to ensure GLightbox is actually loaded first
+  if (typeof GLightbox !== 'undefined') {
     const lightbox = GLightbox({
-    selector: '.glightbox',
-    plyr: {
+      selector: '.glightbox',
+      loop: true,
+      plyr: {
         config: {
-            muted: true, // Start muted so it's not jarring
-            hideControls: true, // Keep the "Ohm" minimal look
-            youtube: { noCookie: true }
+          muted: true,
+          hideControls: true,
+          youtube: { noCookie: true }
         }
-    }
-});
+      }
+    });
+  }
   </script>
 </body>
 </html>
