@@ -160,11 +160,15 @@
       }
     });
 
-  <script>
+ <script>
   // 1. Landing Page Logic
   const landingPage = document.getElementById('landing-page');
   if (landingPage) {
-    const enterSite = () => landingPage.classList.add('fade-out');
+    const enterSite = () => {
+      landingPage.classList.add('fade-out');
+      // Hide completely after transition to keep the DOM clean
+      setTimeout(() => { landingPage.style.display = 'none'; }, 1000);
+    };
     landingPage.addEventListener('click', enterSite);
     setTimeout(enterSite, 4000); 
   }
@@ -183,18 +187,25 @@
       }
     });
 
-    // 3. The Loop Fix
-    lightbox.on('open', () => {
+    // 3. The Loop Fix (Triggered when the slide is ready)
+    lightbox.on('slide_after_load', () => {
       const checkPlayer = setInterval(() => {
         const player = lightbox.getIPlyr();
         if (player) {
+          // Force Plyr to restart on end
           player.on('ended', () => {
             player.restart();
           });
+          
+          // Also try the native HTML5 attribute as a backup
+          const videoTag = document.querySelector('.gslide-active video');
+          if (videoTag) videoTag.loop = true;
+
           clearInterval(checkPlayer);
         }
       }, 100);
 
+      // Stop checking after 3 seconds
       setTimeout(() => clearInterval(checkPlayer), 3000);
     });
   } 
