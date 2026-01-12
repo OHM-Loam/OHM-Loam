@@ -102,17 +102,11 @@
     </section>
   </main>
 
-  <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
-  <script>
-    // Initialize Lightbox
-    const lightbox = GLightbox({
-      selector: '.glightbox',
-      loop: true,
-      zoomable: false,
-      draggable: true
-    });
 
- // 2. About Panel Logic (Restored to your working version)
+  <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+
+  <script>
+  // 1. About Panel Logic
   const aboutToggle = document.getElementById('about-toggle');
   const aboutPanel = document.getElementById('about-panel');
 
@@ -122,7 +116,6 @@
       aboutPanel.classList.toggle('open');
       aboutToggle.classList.toggle('dimmed');
       
-      // Bonus: Logic to change text if you want it to say "Close"
       if (aboutPanel.classList.contains('open')) {
           aboutToggle.textContent = 'Close';
       } else {
@@ -131,69 +124,38 @@
     });
   }
 
-    // 1. Landing Page Logic
+  // 2. Landing Page Logic
   const landingPage = document.getElementById('landing-page');
   
   if (landingPage) {
     const enterSite = () => {
       landingPage.classList.add('fade-out');
-      // Optional: remove from DOM after fade to keep things "Clean"
-      setTimeout(() => landingPage.style.display = 'none', 1000);
+      // Hide it after transition so it doesn't block clicks
+      setTimeout(() => {
+        landingPage.style.display = 'none';
+      }, 1000);
     };
 
     landingPage.addEventListener('click', enterSite);
     setTimeout(enterSite, 4000); 
   }
 
- // 2. GLightbox Initialization
+  // 3. GLightbox Initialization (One single instance)
   if (typeof GLightbox !== 'undefined') {
     const lightbox = GLightbox({
       selector: '.glightbox',
-      loop: true, 
+      loop: true,
+      zoomable: false,
+      draggable: true,
       plyr: {
         config: {
           muted: true,
           hideControls: true,
-          loop: { active: true }, 
           youtube: { noCookie: true }
         }
       }
     });
-
-<script>
-  // 1. FORCED LANDING PAGE REMOVAL
-  // This version is written to be extra robust
-  function dismissLandingPage() {
-    const lp = document.getElementById('landing-page');
-    if (lp) {
-      lp.classList.add('fade-out');
-      // After the CSS fade animation, remove it from the view
-      setTimeout(function() {
-        lp.style.display = 'none';
-      }, 1000);
-    }
   }
-
-  // Trigger on click
-  document.addEventListener('click', function(e) {
-    if (document.getElementById('landing-page')) {
-      dismissLandingPage();
-    }
-  });
-
-  // Trigger automatically after 4 seconds
-  setTimeout(dismissLandingPage, 4000);
-
-  // 2. SIMPLE LIGHTBOX INITIALIZATION
-  // No complex video configs, just the basics to get it running
-  window.onload = function() {
-    if (typeof GLightbox !== 'undefined') {
-      const lightbox = GLightbox({
-        selector: '.glightbox',
-        loop: true
-      });
-    }
-  };
 </script>
 </body>
 </html>
