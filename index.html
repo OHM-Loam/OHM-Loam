@@ -160,20 +160,26 @@
       }
     });
 
- <script>
-  // 1. Landing Page Logic
+<script>
+  // 1. Landing Page Logic (The priority)
   const landingPage = document.getElementById('landing-page');
+  
   if (landingPage) {
     const enterSite = () => {
+      console.log("Entering site..."); // Helpful for debugging
       landingPage.classList.add('fade-out');
-      // Hide completely after transition to keep the DOM clean
-      setTimeout(() => { landingPage.style.display = 'none'; }, 1000);
+      // Completely remove it after 1s so it doesn't block clicks
+      setTimeout(() => { 
+        landingPage.style.display = 'none'; 
+      }, 1000);
     };
+
     landingPage.addEventListener('click', enterSite);
+    // Auto-enter after 4 seconds
     setTimeout(enterSite, 4000); 
   }
 
-  // 2. GLightbox Initialization
+  // 2. GLightbox Initialization (Standard)
   if (typeof GLightbox !== 'undefined') {
     const lightbox = GLightbox({
       selector: '.glightbox',
@@ -181,34 +187,11 @@
       plyr: {
         config: {
           muted: true,
-          hideControls: true,
-          youtube: { noCookie: true }
+          hideControls: true
         }
       }
     });
-
-    // 3. The Loop Fix (Triggered when the slide is ready)
-    lightbox.on('slide_after_load', () => {
-      const checkPlayer = setInterval(() => {
-        const player = lightbox.getIPlyr();
-        if (player) {
-          // Force Plyr to restart on end
-          player.on('ended', () => {
-            player.restart();
-          });
-          
-          // Also try the native HTML5 attribute as a backup
-          const videoTag = document.querySelector('.gslide-active video');
-          if (videoTag) videoTag.loop = true;
-
-          clearInterval(checkPlayer);
-        }
-      }, 100);
-
-      // Stop checking after 3 seconds
-      setTimeout(() => clearInterval(checkPlayer), 3000);
-    });
-  } 
+  }
 </script>
 </body>
 </html>
