@@ -160,27 +160,30 @@
       }
     });
 
-    // The "Force Loop" Logic with a Ready-Check
+   // The "Force Loop" Logic (Native Element Check)
     lightbox.on('open', () => {
-      // Check every 100ms for the player until it's found
-      const checkPlayer = setInterval(() => {
-        const player = lightbox.getIPlyr();
+      const checkVideo = setInterval(() => {
+        // Look for the actual video tag inside the GLightbox container
+        const videoElement = document.querySelector('.gcontainer video');
         
-        if (player) {
-          // Once found, attach the loop listener
-          player.on('ended', () => {
-            player.restart();
-          });
-          // Stop checking once we've successfully attached the listener
-          clearInterval(checkPlayer);
+        if (videoElement) {
+          // 1. Set the native loop attribute
+          videoElement.loop = true;
+          
+          // 2. Ensure it stays muted (required for many browsers to loop/autoplay)
+          videoElement.muted = true;
+
+          // 3. If it stopped, kickstart it again
+          videoElement.play();
+
+          // 4. Clean up: Stop looking once we've applied the fix
+          clearInterval(checkVideo);
         }
       }, 100);
 
-      // Safety: Stop checking after 3 seconds so it doesn't run forever 
-      // if it's just a static image being viewed.
-      setTimeout(() => clearInterval(checkPlayer), 3000);
+      // Safety: Stop checking after 3 seconds
+      setTimeout(() => clearInterval(checkVideo), 3000);
     });
-  }
   </script>
 </body>
 </html>
