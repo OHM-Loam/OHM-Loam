@@ -150,14 +150,25 @@
   if (typeof GLightbox !== 'undefined') {
     const lightbox = GLightbox({
       selector: '.glightbox',
-      loop: true,
+      loop: true, // This is for navigating between gallery items
       plyr: {
         config: {
           muted: true,
           hideControls: true,
-          loop: { active: true },
+          loop: { active: true }, // Standard loop attempt
           youtube: { noCookie: true }
         }
+      }
+    });
+
+    // The "Force Loop" Logic
+    // We listen for the 'open' event, then find the video player
+    lightbox.on('open', () => {
+      const player = lightbox.getIPlyr(); // Gets the current video player
+      if (player) {
+        player.on('ended', () => {
+          player.restart(); // Forces the video to start over immediately
+        });
       }
     });
   }
