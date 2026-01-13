@@ -107,7 +107,9 @@
 
   <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
 
-  <script>
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+
   // 1. About Panel Logic
   const aboutToggle = document.getElementById('about-toggle');
   const aboutPanel = document.getElementById('about-panel');
@@ -118,31 +120,22 @@
       aboutPanel.classList.toggle('open');
       aboutToggle.classList.toggle('dimmed');
       
-      if (aboutPanel.classList.contains('open')) {
-          aboutToggle.textContent = 'Close';
-      } else {
-          aboutToggle.textContent = 'About';
-      }
+      aboutToggle.textContent = aboutPanel.classList.contains('open') ? 'Close' : 'About';
     });
   }
 
   // 2. Landing Page Logic
   const landingPage = document.getElementById('landing-page');
-  
   if (landingPage) {
     const enterSite = () => {
       landingPage.classList.add('fade-out');
-      // Hide it after transition so it doesn't block clicks
-      setTimeout(() => {
-        landingPage.style.display = 'none';
-      }, 1000);
+      setTimeout(() => { landingPage.style.display = 'none'; }, 1000);
     };
-
     landingPage.addEventListener('click', enterSite);
     setTimeout(enterSite, 4000); 
   }
 
-  // 3. GLightbox Initialization (One single instance)
+  // 3. GLightbox Initialization
   if (typeof GLightbox !== 'undefined') {
     const lightbox = GLightbox({
       selector: '.glightbox',
@@ -158,39 +151,39 @@
       }
     });
   }
- // Symbol Spinner Logic
-(function() {
-  let symbolInterval;
-  let symbolIndex = 0;
-  const symbols = ['-', '+', 'Ω', '·', '×'];
 
-  // 1. Listen for the mouse entering the title
-  document.addEventListener('mouseover', function(e) {
-    const title = e.target.closest('.site-title');
-    const spinner = title ? title.querySelector('.symbol-spinner') : null;
+  // 4. Symbol Spinner Logic (Scoped inside)
+  (function() {
+    let symbolInterval;
+    let symbolIndex = 0;
+    const symbols = ['-', '+', 'Ω', '·', '×'];
 
-    if (spinner && !symbolInterval) {
-      symbolInterval = setInterval(() => {
-        symbolIndex = (symbolIndex + 1) % symbols.length;
-        spinner.textContent = symbols[symbolIndex];
-      }, 120);
-    }
-  });
-
-  // 2. Listen for the mouse leaving the title
-  document.addEventListener('mouseout', function(e) {
-    const title = e.target.closest('.site-title');
-    if (title && !e.relatedTarget || (e.relatedTarget && !title.contains(e.relatedTarget))) {
-      const spinner = title.querySelector('.symbol-spinner');
-      if (spinner) {
-        clearInterval(symbolInterval);
-        symbolInterval = null;
-        spinner.textContent = '-';
-        symbolIndex = 0;
+    document.addEventListener('mouseover', function(e) {
+      const title = e.target.closest('.site-title');
+      const spinner = title ? title.querySelector('.symbol-spinner') : null;
+      if (spinner && !symbolInterval) {
+        symbolInterval = setInterval(() => {
+          symbolIndex = (symbolIndex + 1) % symbols.length;
+          spinner.textContent = symbols[symbolIndex];
+        }, 120);
       }
-    }
-  });
-})();
+    });
+
+    document.addEventListener('mouseout', function(e) {
+      const title = e.target.closest('.site-title');
+      if (title && (!e.relatedTarget || !title.contains(e.relatedTarget))) {
+        const spinner = title.querySelector('.symbol-spinner');
+        if (spinner) {
+          clearInterval(symbolInterval);
+          symbolInterval = null;
+          spinner.textContent = '-';
+          symbolIndex = 0;
+        }
+      }
+    });
+  })();
+
+});
 </script>
 </body>
 </html>
