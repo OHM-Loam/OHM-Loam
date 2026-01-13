@@ -66,6 +66,17 @@ body {
   border-bottom-color: #111;
 }
 
+.symbol-spinner {
+  display: inline-block;
+  min-width: 1ch; /* Ensures the space stays the same regardless of the symbol */
+  text-align: center;
+  transition: color 0.3s ease;
+}
+
+.site-title:hover .symbol-spinner {
+  color: #888; /* Optional: dims the symbol slightly while it spins */
+}
+
 /* =========================
    About Overlay Panel (Restored)
    ========================= */
