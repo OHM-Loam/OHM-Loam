@@ -156,6 +156,13 @@ window.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+  
+  // 5. Video Autoplay Jumpstart
+  document.querySelectorAll('video').forEach(vid => {
+    vid.play().catch(error => {
+      console.log("Autoplay was prevented, waiting for interaction.");
+    });
+  });
 
   // 4. Symbol Spinner Logic (Scoped inside)
   (function() {
