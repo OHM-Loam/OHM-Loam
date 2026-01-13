@@ -137,20 +137,15 @@ window.addEventListener('DOMContentLoaded', () => {
     setTimeout(enterSite, 4000); 
   }
 
-  // 3. GLightbox Initialization
+ // 3. GLightbox Initialization
   if (typeof GLightbox !== 'undefined') {
     const lightbox = GLightbox({
       selector: '.glightbox',
       loop: true,
       zoomable: false,
       draggable: true,
-      plyr: {
-        config: {
-          muted: true,
-          hideControls: true,
-          youtube: { noCookie: true }
-        }
-      }
+      autoplayVideos: true,
+      touchNavigation: true
     });
   }
 
