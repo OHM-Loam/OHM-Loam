@@ -230,6 +230,16 @@ body {
 .project-hub a.featured { grid-row: span 2; }
 .project-hub a.wide { grid-column: span 2; }
 
+/* Removes the magnifying glass cursor from the lightbox images */
+.gslide-image img {
+    cursor: default !important;
+}
+
+/* Optional: if you want the 'grab' cursor gone too */
+.gslide-image {
+    touch-action: none;
+}
+
 /* =========================
    5. Landing Page
    ========================= */
