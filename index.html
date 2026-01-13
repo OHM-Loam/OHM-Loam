@@ -143,16 +143,17 @@ window.addEventListener('DOMContentLoaded', () => {
     setTimeout(enterSite, 4000); // Auto-enter after 4 seconds
   }
   
-// 3. GLightbox Initialization (The "Daring" Loop Version)
+// 3. GLightbox Initialization (The Infinite Video Fix)
   if (typeof GLightbox !== 'undefined') {
     const lightbox = GLightbox({
       selector: '.glightbox',
-      loop: true,
+      loop: true,               
       autoplayVideos: true,
       plyr: {
         config: {
-          muted: true, // Crucial: Browsers block autoplay if not muted
-          hideControls: false // Let's keep controls in the popup for now to ensure it works
+          loop: { active: true }, 
+          muted: true,
+          hideControls: false
         }
       }
     });
