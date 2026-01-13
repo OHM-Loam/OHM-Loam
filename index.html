@@ -78,7 +78,11 @@
         <img src="images/4600730672_57847acdf5_b_2026_01_11.webp" alt="Wool">
       </a>
       
-   <a href="images/Water_Test_2_2026_01_11.mp4" class="glightbox gallery-item wide">
+  <a href="images/Water_Test_2_2026_01_11.mp4" 
+   class="glightbox gallery-item wide" 
+   data-type="video" 
+   data-description="Water Study No. 1">
+   
    <video muted playsinline autoplay loop class="video-preview">
       <source src="images/Water_Test_2_2026_01_11.mp4" type="video/mp4">
    </video>
@@ -137,15 +141,18 @@ window.addEventListener('DOMContentLoaded', () => {
     setTimeout(enterSite, 4000); 
   }
 
- // 3. GLightbox Initialization
+// 3. GLightbox Initialization (The "Daring" Loop Version)
   if (typeof GLightbox !== 'undefined') {
     const lightbox = GLightbox({
       selector: '.glightbox',
       loop: true,
-      zoomable: false,
-      draggable: true,
       autoplayVideos: true,
-      touchNavigation: true
+      plyr: {
+        config: {
+          muted: true, // Crucial: Browsers block autoplay if not muted
+          hideControls: false // Let's keep controls in the popup for now to ensure it works
+        }
+      }
     });
   }
 
