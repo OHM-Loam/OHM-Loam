@@ -67,13 +67,17 @@ body {
 }
 
 .symbol-spinner {
-  display: inline-block;
-  /* Use 'ch' units: 1ch is the width of the '0' character in your font */
-  width: 1.5ch; 
-  text-align: center;
-  /* Ensure it doesn't shift the baseline of the text */
-  vertical-align: middle; 
+  display: inline-flex;     /* Flex allows for perfect centering */
+  align-items: center;      /* Vertically centers the symbol */
+  justify-content: center;  /* Horizontally centers the symbol */
+  width: 1.2ch;            
+  height: 1em;              /* Locks the height to the font size */
+  vertical-align: middle;   /* Aligns the whole box with the surrounding text */
+  line-height: 1;
   transition: color 0.3s ease;
+  /* Optional: nudge it up 1 pixel if it still feels 'heavy' */
+  position: relative;
+  top: -1px; 
 }
 
 .site-title:hover .symbol-spinner {
