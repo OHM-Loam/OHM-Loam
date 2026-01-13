@@ -19,7 +19,9 @@
   
   <header class="site-header">
     <div class="header-inner">
-      <h1 class="site-title"><span class="ohm">OHM</span>-Loam</h1>
+      <h1 class="site-title">
+  <span class="ohm">OHM</span><span class="symbol-spinner">-</span>Loam
+</h1>
       <nav class="main-nav">
         <a href="#" id="about-toggle">ABOUT</a>
       </nav>
@@ -154,6 +156,27 @@
           youtube: { noCookie: true }
         }
       }
+    });
+  }
+    // Symbol Spinner Logic
+  const title = document.querySelector('.site-title');
+  const spinner = document.querySelector('.symbol-spinner');
+  const symbols = ['-', '+', 'Ω', '·', '×']; 
+  let symbolInterval;
+  let symbolIndex = 0;
+
+  if (title && spinner) {
+    title.addEventListener('mouseenter', () => {
+      symbolInterval = setInterval(() => {
+        symbolIndex = (symbolIndex + 1) % symbols.length;
+        spinner.textContent = symbols[symbolIndex];
+      }, 120); // Speed of the flick (120ms is a nice "glitchy" speed)
+    });
+
+    title.addEventListener('mouseleave', () => {
+      clearInterval(symbolInterval);
+      spinner.textContent = '-'; // Resets to your default hyphen
+      symbolIndex = 0;
     });
   }
 </script>
