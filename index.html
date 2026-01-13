@@ -123,17 +123,26 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 2. Landing Page Logic
+// 2. Landing Page Logic
   const landingPage = document.getElementById('landing-page');
+  
   if (landingPage) {
     const enterSite = () => {
-      landingPage.classList.add('fade-out');
-      setTimeout(() => { landingPage.style.display = 'none'; }, 1000);
-    };
-    landingPage.addEventListener('click', enterSite);
-    setTimeout(enterSite, 4000); 
-  }
+      // Avoid running this twice if user clicks AND timer hits
+      if (landingPage.style.display === 'none') return; 
 
+      landingPage.classList.add('fade-out');
+      
+      // Physically remove the layer after the 1s fade animation
+      setTimeout(() => { 
+        landingPage.style.display = 'none'; 
+      }, 1000);
+    };
+
+    landingPage.addEventListener('click', enterSite);
+    setTimeout(enterSite, 4000); // Auto-enter after 4 seconds
+  }
+  
 // 3. GLightbox Initialization (The "Daring" Loop Version)
   if (typeof GLightbox !== 'undefined') {
     const lightbox = GLightbox({
