@@ -143,17 +143,20 @@ window.addEventListener('DOMContentLoaded', () => {
     setTimeout(enterSite, 4000); // Auto-enter after 4 seconds
   }
   
-// 3. GLightbox Initialization (The Infinite Video Fix)
+// 3. GLightbox Initialization (The "No-UI" Loop Version)
   if (typeof GLightbox !== 'undefined') {
     const lightbox = GLightbox({
       selector: '.glightbox',
-      loop: true,               
+      loop: true,
       autoplayVideos: true,
       plyr: {
         config: {
-          loop: { active: true }, 
+          loop: { active: true },
           muted: true,
-          hideControls: false
+          hideControls: true, // This hides them when the mouse is still
+          controls: [],       // This removes the UI elements entirely
+          clickToPlay: false, // Prevents clicking the video from pausing it
+          disableContextMenu: true // Prevents "Save Video As" on right-click
         }
       }
     });
