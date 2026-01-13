@@ -68,8 +68,11 @@ body {
 
 .symbol-spinner {
   display: inline-block;
-  min-width: 1ch; /* Ensures the space stays the same regardless of the symbol */
+  /* Use 'ch' units: 1ch is the width of the '0' character in your font */
+  width: 1.5ch; 
   text-align: center;
+  /* Ensure it doesn't shift the baseline of the text */
+  vertical-align: middle; 
   transition: color 0.3s ease;
 }
 
