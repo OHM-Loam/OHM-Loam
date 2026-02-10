@@ -384,36 +384,16 @@ body {
 }
 
 /* =========================
-   9. Glightbox
+   9. Glightbox: Final Master
    ========================= */
-/* 1. Reset the Slide Container to be a clean flex-box */
+
+/* 1. The Matte (Shared for Image & Video) */
 .gslide-image, 
 .gslide-video {
   background: #ffffff !important;
-  padding: 15px !important; /* The Matte thickness */
+  padding: 30px !important; /* Thick luxury matte */
   border: 1px solid rgba(0,0,0,0.08);
   box-shadow: 0 20px 50px rgba(0,0,0,0.1) !important;
-  
-  /* This centers whatever is inside (Image or Video) */
-  display: flex !important;
-  align-items: center;
-  justify-content: center;
-  
-  max-width: 90vw !important; /* Safety for wide screens */
-  margin: 0 auto;
-}
-
-/* 2. Fix for Images */
-.gslide-image img {
-  max-height: 80vh !important;
-  width: auto !important;
-  height: auto !important;
-}
-
-/* 1. The Video Container (The white box) */
-.gslide-video {
-  background: #fff !important;
-  padding: 30px !important; /* Thick matte */
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -422,7 +402,15 @@ body {
   margin: 0 auto !important;
 }
 
-/* 2. The Internal Video Wrapper (The fix) */
+/* 2. Image Constraints */
+.gslide-image img {
+  max-height: 80vh !important;
+  width: auto !important;
+  height: auto !important;
+  display: block;
+}
+
+/* 3. Video Centering & Frame Fix */
 .gvideo-container {
   position: relative !important;
   width: 100% !important;
@@ -430,22 +418,33 @@ body {
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
+  background: transparent !important; /* Removes black box */
 }
 
-/* 3. The Player itself */
 .plyr {
   width: 100% !important;
   max-width: 100% !important;
   margin: 0 auto !important;
+  background: transparent !important; /* Removes player black box */
 }
 
-/* 4. Ensure the actual video tag inside respects the frame */
 .gslide-video video {
   position: relative !important;
   display: block !important;
   margin: 0 auto !important;
-  max-height: 75vh !important;
+  max-height: 75vh !important; /* Stays within the white matte */
+  object-fit: contain;
 }
-.gnext, .gprev {
+
+/* 4. The Ghost Look: Remove UI & Controls */
+.gnext, .gprev, .gclose,
+.plyr__controls, 
+.plyr__control--overlaid {
   display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.plyr--video {
+  background: transparent !important;
 }
