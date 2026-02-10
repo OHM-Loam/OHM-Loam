@@ -161,26 +161,28 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- 3. GLIGHTBOX INITIALIZATION ---
-  if (typeof GLightbox !== 'undefined') {
-    const lightbox = GLightbox({
-      selector: '.glightbox',
-      loop: true,
-      autoplayVideos: true,
-      zoomable: false,         
-      draggable: false, 
-      plyr: {
-        config: {
-          loop: { active: true },
-          muted: true,
-          hideControls: true,
-          controls: [],
-          clickToPlay: false,
-          disableContextMenu: true
-        }
-      }
-    });
-  }
+// --- 3. GLIGHTBOX INITIALIZATION (Solo Mode) ---
+if (typeof GLightbox !== 'undefined') {
+  const lightbox = GLightbox({
+    selector: '.glightbox',
+    loop: false,
+    zoomable: false,
+    draggable: false,
+    touchNavigation: false,    // No swiping to next image
+    keyboardNavigation: false, // No arrow keys to next image
+    openEffect: 'fade',
+    closeEffect: 'fade',
+    closeOnOutsideClick: true
+  });
+
+  // This ensures clicking literally anywhere on the screen closes it
+  lightbox.on('open', () => {
+    const container = document.querySelector('.glightbox-container');
+    container.addEventListener('click', () => {
+      lightbox.close();
+    }, { once: true });
+  });
+}
 
   // --- 4. VIDEO AUTOPLAY ---
   document.querySelectorAll('video').forEach(vid => {
