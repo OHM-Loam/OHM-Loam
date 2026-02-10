@@ -288,19 +288,35 @@ body {
    ========================= */
 #landing-page {
   position: fixed;
-  inset: 0;           /* Covers the whole screen */
-  top: 0;             /* Absolute top */
-  left: 0;
-  width: 100%;
-  height: 100vh;
+  inset: 0; 
   background-color: #f2efeb;
-  z-index: 10000;     /* Higher than the header (1000) */
+  z-index: 9999; 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: opacity 1.5s ease-in-out, visibility 1.5s;
+}
+
+.landing-content { 
+  text-align: center; 
+}
+
+.landing-content h1 {
+  font-size: 3rem;
+  font-weight: 200;
+  letter-spacing: 0.5rem;
+  margin: 0;
+  color: #111; /* Ensuring it's visible against the sand background */
+}
+
+.landing-content p {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+  color: #888;
+  margin-top: 2rem;
 }
 
 #landing-page.fade-out {
