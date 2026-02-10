@@ -382,3 +382,30 @@ body {
   margin: 0;
   text-transform: uppercase;
 }
+
+/* =========================
+   9. Glightbox
+   ========================= */
+/* Remove all UI elements: Arrows and Close button */
+.gnext, .gprev, .gclose, .gbtn {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+/* Make the cursor a "pointer" so users know clicking closes it */
+.glightbox-container {
+  cursor: pointer;
+}
+
+/* Match the overlay to your sand color with a slight blur */
+.glightbox-container .goverlay {
+  background: rgba(242, 239, 235, 0.98) !important; /* Nearly solid sand */
+  backdrop-filter: blur(2px);
+}
+
+/* Ensure the image doesn't look like a 'popup' (no shadows) */
+.gslide-image img {
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
