@@ -238,11 +238,12 @@ body {
    ========================= */
 .project-hub {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  grid-auto-rows: 200px; 
-  gap: 8rem;
-  padding: 4rem;
-  max-width: 1400px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-auto-rows: 250px; 
+  /* First value is Row (Vertical), second is Column (Horizontal) */
+  gap: 12rem 6rem; 
+  padding: 10rem 4rem; /* More padding at the top/bottom for that entry effect */
+  max-width: 1600px;
   margin: 0 auto;
 }
 
@@ -269,6 +270,22 @@ body {
 
 .project-hub a.featured { grid-row: span 2; }
 .project-hub a.wide { grid-column: span 2; }
+
+/* Create extra-large gaps for specific projects */
+.extra-room {
+  margin-top: 15rem;
+}
+
+/* Make some images thinner and off-center like the Milez site */
+.slim-shift {
+  max-width: 80%;
+  margin-left: auto; /* Pushes it to the right */
+}
+
+/* Allow images to overlap the "white space" */
+.project-hub a:nth-child(even) {
+  transform: translateY(4rem); /* Every second image sits slightly lower */
+}
 
 /* =========================
    6. Utility & Art Direction
