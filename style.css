@@ -446,3 +446,6 @@ body {
   margin: 0 auto !important;
   max-height: 75vh !important;
 }
+.gnext, .gprev {
+  display: none !important;
+}
