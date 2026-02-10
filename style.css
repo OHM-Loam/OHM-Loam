@@ -410,22 +410,23 @@ body {
   height: auto !important;
 }
 
-/* 3. Fix for Videos (The 'Wonky' fix) */
+/* Target the specific video container inside the slide */
 .gslide-video .gvideo-container {
-  width: 100% !important;
-  max-height: 80vh !important;
-  display: flex !important;
-  align-items: center;
-  justify-content: center;
+    display: flex !important;
+    justify-content: center !important; /* Forces horizontal centering */
+    align-items: center !important;    /* Forces vertical centering */
+    width: 100% !important;
+    margin: 0 auto !important;
 }
 
-/* This targets the actual Plyr player inside */
+/* Force the Plyr player itself to stay centered */
 .plyr {
-  width: 100% !important;
-  height: 100% !important;
+    margin: 0 auto !important;
+    max-width: 100%;
 }
 
-.gslide-video video {
-  max-height: 80vh !important;
-  object-fit: contain;
+/* If there's an internal media wrapper that's floating left, this kills it */
+.gslide-inline, .gslide-external {
+    display: flex !important;
+    justify-content: center !important;
 }
