@@ -410,23 +410,39 @@ body {
   height: auto !important;
 }
 
-/* Target the specific video container inside the slide */
-.gslide-video .gvideo-container {
-    display: flex !important;
-    justify-content: center !important; /* Forces horizontal centering */
-    align-items: center !important;    /* Forces vertical centering */
-    width: 100% !important;
-    margin: 0 auto !important;
+/* 1. The Video Container (The white box) */
+.gslide-video {
+  background: #fff !important;
+  padding: 30px !important; /* Thick matte */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: relative !important;
+  max-width: 85vw !important;
+  margin: 0 auto !important;
 }
 
-/* Force the Plyr player itself to stay centered */
+/* 2. The Internal Video Wrapper (The fix) */
+.gvideo-container {
+  position: relative !important;
+  width: 100% !important;
+  max-height: 80vh !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+/* 3. The Player itself */
 .plyr {
-    margin: 0 auto !important;
-    max-width: 100%;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
 }
 
-/* If there's an internal media wrapper that's floating left, this kills it */
-.gslide-inline, .gslide-external {
-    display: flex !important;
-    justify-content: center !important;
+/* 4. Ensure the actual video tag inside respects the frame */
+.gslide-video video {
+  position: relative !important;
+  display: block !important;
+  margin: 0 auto !important;
+  max-height: 75vh !important;
 }
