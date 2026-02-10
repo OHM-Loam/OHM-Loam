@@ -161,25 +161,36 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-// --- 3. GLIGHTBOX INITIALIZATION (Solo Mode) ---
+// --- 3. GLIGHTBOX INITIALIZATION (Restored Solo Mode) ---
 if (typeof GLightbox !== 'undefined') {
   const lightbox = GLightbox({
     selector: '.glightbox',
     loop: false,
     zoomable: false,
     draggable: false,
-    touchNavigation: false,    // No swiping to next image
-    keyboardNavigation: false, // No arrow keys to next image
-    openEffect: 'fade',
-    closeEffect: 'fade',
-    closeOnOutsideClick: true
+    touchNavigation: false,
+    keyboardNavigation: false,
+    closeOnOutsideClick: true,
+    // Restore video settings
+    autoplayVideos: true,
+    plyr: {
+      config: {
+        muted: true,
+        hideControls: true,
+        loop: { active: true }, // Fixes the broken loop
+        clickToPlay: false
+      }
+    }
   });
 
-  // This ensures clicking literally anywhere on the screen closes it
+  // Click-anywhere-to-close logic
   lightbox.on('open', () => {
     const container = document.querySelector('.glightbox-container');
-    container.addEventListener('click', () => {
-      lightbox.close();
+    container.addEventListener('click', (e) => {
+      // Only close if we didn't click the video controls themselves
+      if (!e.target.closest('.plyr__controls')) {
+        lightbox.close();
+      }
     }, { once: true });
   });
 }
