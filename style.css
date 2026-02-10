@@ -187,18 +187,38 @@ body {
   margin-bottom: 1rem;
 }
 
-.side-section { margin-bottom: 3rem; }
-
-.side-section p, 
-.side-links a {
+/* Keeps paragraphs as blocks, but allows links to sit side-by-side */
+.side-section p {
   font-size: 0.9rem;
   line-height: 1.6;
-  text-decoration: none;
   color: var(--text-main);
   display: block;
 }
 
-.side-links a:hover { opacity: 0.4; }
+.side-links {
+  display: flex;       /* This puts them in a row */
+  align-items: center; 
+  gap: 15px;           /* Clean spacing between icons */
+  margin-top: 0.5rem;
+}
+
+.side-links a {
+  text-decoration: none;
+  display: flex;       /* Centers the icon inside the link click-area */
+  transition: opacity 0.3s ease;
+}
+
+.social-icon {
+  width: 20px;         /* Fixed width for consistency */
+  height: 20px;        /* Fixed height for consistency */
+  object-fit: contain; /* Keeps the proportions perfect */
+  filter: grayscale(1) brightness(0); /* Ensures both icons are pure black */
+  opacity: 0.8;
+}
+
+.side-links a:hover {
+  opacity: 0.5;        /* Soft fade on hover */
+}
 
 /* =========================
    5. Project Hub (Grid)
