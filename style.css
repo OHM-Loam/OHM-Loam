@@ -386,28 +386,37 @@ body {
 /* =========================
    9. Glightbox
    ========================= */
-/* 1. Add a frame/margin so images aren't 'Huge' */
-.gslide-image, .gslide-video {
-  max-height: 85vh !important; /* Limits height to 85% of screen */
-  padding: 20px;
-  box-sizing: border-box;
+/* 1. The Matte (The white frame behind the image) */
+.gslide-image {
+  background: #fff !important; /* The white matte */
+  padding: 15px !important;    /* The thickness of the matte */
+  border: 1px solid rgba(0,0,0,0.05); /* Very subtle outer edge */
+  box-shadow: 0 15px 45px rgba(0,0,0,0.08) !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  max-width: fit-content !important; /* Prevents the matte from stretching too wide */
+  margin: auto;
 }
 
-/* 2. Restore the Border and remove the 'raw' look */
-.gslide-image img, .gslide-video video {
-  border: 1px solid rgba(0,0,0,0.1); /* Subtle border */
-  background: #fff;
-  padding: 10px; /* Creates a 'Polaroid' or gallery matting effect */
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05) !important;
+/* 2. The Image (Inside the matte) */
+.gslide-image img {
+  max-height: 80vh !important; /* Leaves room for the matte on screen */
+  width: auto !important;
+  height: auto !important;
+  display: block;
 }
 
-/* 3. Smooth background transition */
+/* 3. Handling Video Frames similarly */
+.gslide-video {
+  background: #fff !important;
+  padding: 15px !important;
+  max-width: 80vw !important;
+  margin: auto;
+}
+
+/* Ensure the background overlay is clean */
 .glightbox-container .goverlay {
-  background: rgba(242, 239, 235, 0.96) !important;
-  backdrop-filter: blur(8px);
-}
-
-/* 4. Hide UI clutter */
-.gclose, .gnext, .gprev {
-  display: none !important;
+  background: rgba(242, 239, 235, 0.97) !important;
+  backdrop-filter: blur(5px);
 }
