@@ -22,15 +22,15 @@
       <h1 class="site-title">
   <span class="ohm">OHM</span><span class="symbol-spinner">-</span>Loam
 </h1>
-      <nav class="main-nav">
+ <nav class="main-nav">
   <a href="#" id="about-toggle" class="nav-link">
-    ABOUT
-    <div class="hamburger-icon" id="hamburger">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  </a>
+  <span class="link-text">About</span>
+  <div class="hamburger-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</a>
 </nav>
   </header>
 
@@ -114,46 +114,47 @@
   </main>
 
 
-  <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
 
 <script>
 window.addEventListener('DOMContentLoaded', () => {
 
-  // 1. About Panel Logic
+  // 1. Consolidated About & Hamburger Logic
   const aboutToggle = document.getElementById('about-toggle');
   const aboutPanel = document.getElementById('about-panel');
+  // We look for a span inside the link so we don't overwrite the hamburger lines
+  const linkText = aboutToggle ? aboutToggle.querySelector('.link-text') : null;
 
   if (aboutToggle && aboutPanel) {
     aboutToggle.addEventListener('click', (e) => {
       e.preventDefault();
-      aboutPanel.classList.toggle('open');
+      
+      const isOpen = aboutPanel.classList.toggle('open');
+      aboutToggle.classList.toggle('active');
       aboutToggle.classList.toggle('dimmed');
       
-      aboutToggle.textContent = aboutPanel.classList.contains('open') ? 'Close' : 'About';
+      // Update text safely
+      if (linkText) {
+        linkText.textContent = isOpen ? 'Close' : 'About';
+      }
     });
   }
 
-// 2. Landing Page Logic
+  // 2. Landing Page Logic
   const landingPage = document.getElementById('landing-page');
-  
   if (landingPage) {
     const enterSite = () => {
-      // Avoid running this twice if user clicks AND timer hits
       if (landingPage.style.display === 'none') return; 
-
       landingPage.classList.add('fade-out');
-      
-      // Physically remove the layer after the 1s fade animation
       setTimeout(() => { 
         landingPage.style.display = 'none'; 
       }, 1000);
     };
-
     landingPage.addEventListener('click', enterSite);
-    setTimeout(enterSite, 4000); // Auto-enter after 4 seconds
+    setTimeout(enterSite, 4000);
   }
-  
-// 3. GLightbox Initialization (The "No-UI" Loop Version)
+
+  // 3. GLightbox Initialization
   if (typeof GLightbox !== 'undefined') {
     const lightbox = GLightbox({
       selector: '.glightbox',
@@ -165,27 +166,25 @@ window.addEventListener('DOMContentLoaded', () => {
         config: {
           loop: { active: true },
           muted: true,
-          hideControls: true, // This hides them when the mouse is still
-          controls: [],       // This removes the UI elements entirely
-          clickToPlay: false, // Prevents clicking the video from pausing it
-          disableContextMenu: true // Prevents "Save Video As" on right-click
+          hideControls: true,
+          controls: [],
+          clickToPlay: false,
+          disableContextMenu: true
         }
       }
     });
   }
-  
-  // 5. Video Autoplay Jumpstart
+
+  // 4. Video Autoplay Jumpstart
   document.querySelectorAll('video').forEach(vid => {
-    vid.play().catch(error => {
-      console.log("Autoplay was prevented, waiting for interaction.");
-    });
+    vid.play().catch(err => console.log("Autoplay blocked."));
   });
 
-  // 4. Symbol Spinner Logic (Scoped inside)
+  // 5. Symbol Spinner Logic
   (function() {
     let symbolInterval;
     let symbolIndex = 0;
-    const symbols = ['-', '+', 'Ω', '·', '×','?'];
+    const symbols = ['-', '+', 'Ω', '·', '×', '?'];
 
     document.addEventListener('mouseover', function(e) {
       const title = e.target.closest('.site-title');
@@ -212,15 +211,6 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   })();
 
-});
-  const aboutToggle = document.getElementById('about-toggle');
-
-aboutToggle.addEventListener('click', (e) => {
-  e.preventDefault(); // Prevents the page from jumping
-  aboutToggle.classList.toggle('active');
-  
-  // You can also trigger your menu or 'About' section visibility here
-  console.log("About toggled!");
 });
 </script>
 </body>
