@@ -115,17 +115,39 @@
 
 
 <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
 
 <script>
 window.addEventListener('DOMContentLoaded', () => {
 
-  // 1. Consolidated About & Hamburger Logic
+  // --- 1. LANDING PAGE LOGIC ---
+  const landingPage = document.getElementById('landing-page');
+  
+  if (landingPage) {
+    const enterSite = () => {
+      // If it's already fading or gone, do nothing
+      if (landingPage.classList.contains('fade-out') || landingPage.style.display === 'none') return; 
+
+      landingPage.classList.add('fade-out');
+      
+      // Physically remove the layer after the 1.5s fade animation (matching your CSS)
+      setTimeout(() => { 
+        landingPage.style.display = 'none'; 
+      }, 1500);
+    };
+
+    landingPage.addEventListener('click', enterSite);
+    setTimeout(enterSite, 4000); // Auto-enter after 4 seconds
+  }
+
+  // --- 2. ABOUT PANEL & HAMBURGER LOGIC ---
   const aboutToggle = document.getElementById('about-toggle');
   const aboutPanel = document.getElementById('about-panel');
-  // We look for a span inside the link so we don't overwrite the hamburger lines
-  const linkText = aboutToggle ? aboutToggle.querySelector('.link-text') : null;
-
+  
   if (aboutToggle && aboutPanel) {
+    // We look for the specific text span so we don't delete the hamburger lines
+    const linkText = aboutToggle.querySelector('.link-text');
+
     aboutToggle.addEventListener('click', (e) => {
       e.preventDefault();
       
@@ -140,21 +162,7 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 2. Landing Page Logic
-  const landingPage = document.getElementById('landing-page');
-  if (landingPage) {
-    const enterSite = () => {
-      if (landingPage.style.display === 'none') return; 
-      landingPage.classList.add('fade-out');
-      setTimeout(() => { 
-        landingPage.style.display = 'none'; 
-      }, 1000);
-    };
-    landingPage.addEventListener('click', enterSite);
-    setTimeout(enterSite, 4000);
-  }
-
-  // 3. GLightbox Initialization
+  // --- 3. GLIGHTBOX INITIALIZATION ---
   if (typeof GLightbox !== 'undefined') {
     const lightbox = GLightbox({
       selector: '.glightbox',
@@ -175,12 +183,14 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 4. Video Autoplay Jumpstart
+  // --- 4. VIDEO AUTOPLAY ---
   document.querySelectorAll('video').forEach(vid => {
-    vid.play().catch(err => console.log("Autoplay blocked."));
+    vid.play().catch(() => {
+      // Autoplay silent fail is fine
+    });
   });
 
-  // 5. Symbol Spinner Logic
+  // --- 5. SYMBOL SPINNER LOGIC ---
   (function() {
     let symbolInterval;
     let symbolIndex = 0;
