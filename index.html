@@ -23,9 +23,15 @@
   <span class="ohm">OHM</span><span class="symbol-spinner">-</span>Loam
 </h1>
       <nav class="main-nav">
-        <a href="#" id="about-toggle">ABOUT</a>
-      </nav>
+  <a href="#" id="about-toggle" class="nav-link">
+    ABOUT
+    <div class="hamburger-icon" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
     </div>
+  </a>
+</nav>
   </header>
 
  <div id="about-panel" aria-hidden="true">
@@ -206,6 +212,15 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   })();
 
+});
+  const aboutToggle = document.getElementById('about-toggle');
+
+aboutToggle.addEventListener('click', (e) => {
+  e.preventDefault(); // Prevents the page from jumping
+  aboutToggle.classList.toggle('active');
+  
+  // You can also trigger your menu or 'About' section visibility here
+  console.log("About toggled!");
 });
 </script>
 </body>
