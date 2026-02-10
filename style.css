@@ -371,3 +371,54 @@ body .gslide-image img {
 .nudge-up {
   margin-top: -40px;
 }
+
+/* =========================
+   10. HAMBURGER
+   ========================= */
+.main-nav {
+  display: flex;
+  align-items: center;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* Space between ABOUT and the lines */
+  text-decoration: none;
+  color: #000;
+  font-family: sans-serif; /* Match your site's font */
+  font-weight: 500;
+}
+
+/* The Icon Container */
+.hamburger-icon {
+  width: 20px;
+  height: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+.hamburger-icon span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background-color: currentColor; /* Matches the text color */
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform-origin: center;
+}
+
+/* The "Collapse" Animation to X */
+.active .hamburger-icon span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.active .hamburger-icon span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.active .hamburger-icon span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
