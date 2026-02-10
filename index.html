@@ -115,29 +115,28 @@
 
 
 <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
 
 <script>
 window.addEventListener('DOMContentLoaded', () => {
 
-  // --- 1. LANDING PAGE LOGIC ---
+  // --- 1. LANDING PAGE LOGIC (Reverted to your original style) ---
   const landingPage = document.getElementById('landing-page');
   
   if (landingPage) {
     const enterSite = () => {
-      // If it's already fading or gone, do nothing
-      if (landingPage.classList.contains('fade-out') || landingPage.style.display === 'none') return; 
+      // Reverted to your exact original check
+      if (landingPage.style.display === 'none') return; 
 
       landingPage.classList.add('fade-out');
       
-      // Physically remove the layer after the 1.5s fade animation (matching your CSS)
+      // Physically remove the layer after the 1s fade animation
       setTimeout(() => { 
         landingPage.style.display = 'none'; 
-      }, 1500);
+      }, 1000);
     };
 
     landingPage.addEventListener('click', enterSite);
-    setTimeout(enterSite, 4000); // Auto-enter after 4 seconds
+    setTimeout(enterSite, 4000); 
   }
 
   // --- 2. ABOUT PANEL & HAMBURGER LOGIC ---
@@ -145,7 +144,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const aboutPanel = document.getElementById('about-panel');
   
   if (aboutToggle && aboutPanel) {
-    // We look for the specific text span so we don't delete the hamburger lines
+    // We target the link-text span so your lines don't vanish
     const linkText = aboutToggle.querySelector('.link-text');
 
     aboutToggle.addEventListener('click', (e) => {
@@ -155,7 +154,6 @@ window.addEventListener('DOMContentLoaded', () => {
       aboutToggle.classList.toggle('active');
       aboutToggle.classList.toggle('dimmed');
       
-      // Update text safely
       if (linkText) {
         linkText.textContent = isOpen ? 'Close' : 'About';
       }
@@ -185,16 +183,14 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // --- 4. VIDEO AUTOPLAY ---
   document.querySelectorAll('video').forEach(vid => {
-    vid.play().catch(() => {
-      // Autoplay silent fail is fine
-    });
+    vid.play().catch(() => {});
   });
 
   // --- 5. SYMBOL SPINNER LOGIC ---
   (function() {
     let symbolInterval;
     let symbolIndex = 0;
-    const symbols = ['-', '+', 'Ω', '·', '×', '?'];
+    const symbols = ['-', '+', 'Ω', '·', '×', '?', '#'];
 
     document.addEventListener('mouseover', function(e) {
       const title = e.target.closest('.site-title');
