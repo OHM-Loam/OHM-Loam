@@ -386,26 +386,28 @@ body {
 /* =========================
    9. Glightbox
    ========================= */
-/* Remove all UI elements: Arrows and Close button */
-.gnext, .gprev, .gclose, .gbtn {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
+/* 1. Add a frame/margin so images aren't 'Huge' */
+.gslide-image, .gslide-video {
+  max-height: 85vh !important; /* Limits height to 85% of screen */
+  padding: 20px;
+  box-sizing: border-box;
 }
 
-/* Make the cursor a "pointer" so users know clicking closes it */
-.glightbox-container {
-  cursor: pointer;
+/* 2. Restore the Border and remove the 'raw' look */
+.gslide-image img, .gslide-video video {
+  border: 1px solid rgba(0,0,0,0.1); /* Subtle border */
+  background: #fff;
+  padding: 10px; /* Creates a 'Polaroid' or gallery matting effect */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05) !important;
 }
 
-/* Match the overlay to your sand color with a slight blur */
+/* 3. Smooth background transition */
 .glightbox-container .goverlay {
-  background: rgba(242, 239, 235, 0.98) !important; /* Nearly solid sand */
-  backdrop-filter: blur(2px);
+  background: rgba(242, 239, 235, 0.96) !important;
+  backdrop-filter: blur(8px);
 }
 
-/* Ensure the image doesn't look like a 'popup' (no shadows) */
-.gslide-image img {
-  box-shadow: none !important;
-  border-radius: 0 !important;
+/* 4. Hide UI clutter */
+.gclose, .gnext, .gprev {
+  display: none !important;
 }
