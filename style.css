@@ -217,10 +217,10 @@ body {
 }
 
 .social-icon {
-  width: 100%;       /* Default to filling the box */
+  width: 100%;
   height: auto;
   object-fit: contain;
-  filter: brightness(0); /* Pure black */
+  filter: var(--text-color);
   opacity: 0.7;
   transition: opacity 0.2s ease;
 }
@@ -232,10 +232,16 @@ body {
   width: 19px; 
 }
 
-/* The email icon is wide and thin, so we let it be 
-   a bit wider to compensate. */
 .email-link .social-icon {
   width: 22px;
+}
+
+.github-link .social-icon {
+  width: 21px; 
+}
+
+.social-icon:hover {
+  opacity: 1;
 }
 
 /* =========================
