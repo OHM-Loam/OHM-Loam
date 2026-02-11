@@ -286,6 +286,19 @@ body {
 .project-hub a:nth-child(even) {
   transform: translateY(4rem); /* Every second image sits slightly lower */
 }
+/* The Default: Muted, B&W look */
+.project-hub a img, 
+.project-hub a video {
+  filter: grayscale(100%);
+  transition: filter 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+  will-change: filter;
+}
+
+/* The Reveal: Fade into color on hover */
+.project-hub a:hover img, 
+.project-hub a:hover video {
+  filter: grayscale(0%);
+}
 
 /* =========================
    6. Utility & Art Direction
