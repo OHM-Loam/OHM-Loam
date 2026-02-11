@@ -473,3 +473,32 @@ body {
 .plyr--video {
   background: transparent !important;
 }
+
+/* =========================
+   10. The Toggler
+   ========================= */
+
+/* Base Light Mode (Default) */
+body {
+  background-color: #ffffff;
+  color: #000000;
+  transition: background-color 0.8s ease, color 0.8s ease;
+}
+
+/* Dark Mode State */
+body.dark-mode {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+/* Ensure the GLightbox overlay also flips */
+body.dark-mode .goverlay {
+  background: rgba(15, 15, 15, 0.95) !important;
+}
+
+/* Make sure your white mattes turn black too */
+body.dark-mode .gslide-image, 
+body.dark-mode .gslide-video {
+  background: #111111 !important;
+  border-color: rgba(255,255,255,0.1);
+}
