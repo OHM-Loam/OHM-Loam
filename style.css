@@ -264,8 +264,10 @@ body {
   transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-.project-hub a:hover img {
-  transform: scale(1.00);
+.project-hub a:hover img, 
+.project-hub a:hover video {
+  filter: grayscale(0%);
+  transform: scale(1.005) !important;
 }
 
 .project-hub a.featured { grid-row: span 2; }
