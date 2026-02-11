@@ -493,30 +493,28 @@ body.dark-mode {
 /* The "Static" Film Grain Overlay */
 body::before {
   content: "";
+  display: block; /* CRITICAL: This makes the grain have dimensions */
   position: fixed;
-  top: -150%;
-  left: -150%;
-  width: 300%;
-  height: 300%;
+  top: 0; 
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* We use a slightly different URL that is more reliable for grain */
   background-image: url("https://grains.minimal.gallery/grain.png");
-  opacity: 0.08; 
-  pointer-events: none;
-  z-index: 10000;
-  animation: grain-dance 8s steps(10) infinite;
-  will-change: transform; /* Hardware acceleration safety net */
+  background-repeat: repeat;
+  opacity: 0.12; /* Pushed it a bit higher so it's unmistakable */
+  pointer-events: none; /* Let's you click through to links */
+  z-index: 10000; /* Stays on top of everything */
+  animation: grain-dance 1s steps(6) infinite; /* Faster jitter for a 'static' look */
 }
 
 @keyframes grain-dance {
-  0%, 100% { transform: translate(0, 0); }
-  10% { transform: translate(-5%, -10%); }
-  20% { transform: translate(-15%, 5%); }
-  30% { transform: translate(7%, -25%); }
-  40% { transform: translate(-5%, 25%); }
-  50% { transform: translate(-15%, 10%); }
-  60% { transform: translate(15%, 0%); }
-  70% { transform: translate(0%, 15%); }
-  80% { transform: translate(3%, 35%); }
-  90% { transform: translate(-10%, 10%); }
+  0% { transform: translate(0, 0); }
+  20% { transform: translate(-2%, 1%); }
+  40% { transform: translate(-1%, -2%); }
+  60% { transform: translate(2%, 1%); }
+  80% { transform: translate(1%, -1%); }
+  100% { transform: translate(-1%, 2%); }
 }
 
 body {
