@@ -326,11 +326,17 @@ body {
 /* =========================
    7. Responsiveness
    ========================= */
+ /* 1. Base/Desktop Spacers (The Void) */
+.spacer-sm { height: 20vh; }
+.spacer-md { height: 40vh; }
+.spacer-lg { height: 70vh; } 
+
+/* 2. Responsiveness (Overrides) */
 @media (max-width: 768px) {
-  .about-grid {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
+  /* Scale the void down so mobile users don't think the page ended */
+  .spacer-lg { height: 30vh; } 
+  .spacer-md { height: 20vh; }
+  .spacer-sm { height: 10vh; }
 
   .project-hub {
     grid-template-columns: 1fr;
@@ -339,10 +345,14 @@ body {
     padding: 1.5rem;
   }
 
+  /* Flatten the "Wild" layout for small screens */
   .project-hub a.featured, 
-  .project-hub a.wide {
-    grid-row: span 1; 
-    grid-column: span 1;
+  .project-hub a.wide,
+  .project-hub a.nudge-down,
+  .project-hub a.slim-shift {
+    grid-row: span 1 !important; 
+    grid-column: span 1 !important;
+    transform: none !important; /* Remove the "wild" offsets on mobile */
   }
 }
 
