@@ -486,21 +486,21 @@ body {
    ========================= */
 
 :root {
-  --bg-color: #f2efeb;     
-  --header-bg: #ffffff;    
-  --text-color: #1a1a1a; 
-  --matte-color: #ffffff; 
+  --bg-color: #f2efeb;      
+  --header-bg: #ffffff;     
+  --text-color: #1a1a1a;  
+  --matte-color: #ffffff;  
 }
 
 body.dark-mode {
-  --bg-color: #1a1a1a;     
-  --header-bg: #222222;    
-  --text-color: #f2efeb; 
-  --matte-color: #252525; 
+  --bg-color: #1a1a1a;      
+  --header-bg: #222222;     
+  --text-color: #f2efeb;  
+  --matte-color: #252525;  
 }
 
 .grain-overlay {
-  content: "";
+  /* Remove content: ""; - that was for pseudo-elements only */
   position: fixed;
   top: -100px;
   left: -100px;
@@ -508,20 +508,19 @@ body.dark-mode {
   height: calc(100% + 200px);
   background-image: url("https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Noise_Texture.png");
   background-repeat: repeat;
-  opacity: 0.12; /* Increased slightly so you can finally see it */
+  background-size: 250px 250px; /* Forces the fuzz to be big enough to see */
+  opacity: 0.15; /* High enough to verify; dial back to 0.08 once seen */
   pointer-events: none;
-  z-index: 99999; /* Set extremely high to sit on top of everything */
-  animation: grain-dance 0.2s steps(2) infinite;
-  display: block;
+  z-index: 999999; 
+  animation: grain-dance 0.15s steps(3) infinite; /* Faster jitter */
+  display: block !important;
 }
 
 @keyframes grain-dance {
-  0%, 100% { transform: translate(0, 0); }
-  10% { transform: translate(-1%, -1%); }
-  30% { transform: translate(1%, -1%); }
-  50% { transform: translate(-1%, 1%); }
-  70% { transform: translate(1%, 1%); }
-  90% { transform: translate(-1%, -1%); }
+  0% { transform: translate(0, 0); }
+  33% { transform: translate(-2%, -1%); }
+  66% { transform: translate(1%, 2%); }
+  100% { transform: translate(-1%, -2%); }
 }
 
 body {
@@ -532,7 +531,6 @@ body {
   margin: 0;
   overflow-x: hidden;
   width: 100%;
-  position: relative; /* Keeps body content below the html::after grain */
 }
 
 /* =========================
