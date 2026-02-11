@@ -23,12 +23,12 @@ body {
 }
 
 /* =========================
-   2. Header & Navigation
+   2. Header & Navigation (Fixed for Dark Mode)
    ========================= */
 .site-header {
   position: sticky;
   top: 0;
-  background: var(--header-bg); /* Now uses the contrasting variable */
+  background: var(--header-bg); 
   z-index: 1000;
   border-bottom: 1px solid rgba(0,0,0,0.07);
   padding: 1rem 0;
@@ -48,9 +48,11 @@ body {
   font-size: 1.35rem;
   font-weight: 200;
   margin: 0;
-  color: #112;
+  /* CHANGE: Swapped #112 for the variable */
+  color: var(--text-color); 
   text-decoration: none;
   letter-spacing: 0.02em;
+  transition: color 1.2s ease;
 }
 
 .site-title .ohm {
@@ -68,10 +70,11 @@ body {
   align-items: center;
   gap: 12px;
   text-decoration: none;
-  color: var(--text-main);
+  /* CHANGE: Swapped --text-main for --text-color */
+  color: var(--text-color); 
   font-size: 0.95rem;
   font-weight: 500;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease, color 1.2s ease;
 }
 
 /* Targeted underline on text only */
@@ -84,7 +87,8 @@ body {
 
 .nav-link:hover .link-text,
 .nav-link.active .link-text {
-  border-bottom-color: var(--text-main);
+  /* CHANGE: Ensure the underline also uses the variable */
+  border-bottom-color: var(--text-color);
 }
 
 .nav-link.dimmed {
