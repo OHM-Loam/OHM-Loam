@@ -496,6 +496,7 @@ body {
   --header-bg: #ffffff;     
   --text-color: #1a1a1a;  
   --matte-color: #ffffff;  
+  --grain-opacity: 0.05; /* Control opacity here */
 }
 
 body.dark-mode {
@@ -503,30 +504,38 @@ body.dark-mode {
   --header-bg: #222222;     
   --text-color: #f2efeb;  
   --matte-color: #252525;  
+  --grain-opacity: 0.07; /* Grain often needs to be slightly stronger in dark mode */
 }
 
 .grain-overlay {
-  /* Remove content: ""; - that was for pseudo-elements only */
   position: fixed;
-  top: -100px;
-  left: -100px;
-  width: calc(100% + 200px);
-  height: calc(100% + 200px);
-  background-image: url("https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Noise_Texture.png");
-  background-repeat: repeat;
-  background-size: 250px 250px; /* Forces the fuzz to be big enough to see */
-  opacity: 0.15; /* High enough to verify; dial back to 0.08 once seen */
-  pointer-events: none;
-  z-index: 999999; 
-  animation: grain-dance 0.15s steps(3) infinite; /* Faster jitter */
-  display: block !important;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  
+  /* Replace "your-base64-string-here" with your actual iVBORw0... string */
+  background-image: url("your-base64-string-here");
+   
+  animation: noise 0.2s steps(10) infinite;
+  opacity: var(--grain-opacity); 
+  
+  pointer-events: none; /* Allows clicking through to buttons below */
+  will-change: transform;
+  z-index: 9999; /* Ensures it stays as the top "atmosphere" layer */
 }
 
-@keyframes grain-dance {
-  0% { transform: translate(0, 0); }
-  33% { transform: translate(-2%, -1%); }
-  66% { transform: translate(1%, 2%); }
-  100% { transform: translate(-1%, -2%); }
+@keyframes noise {
+  0%, 100% { transform:translate(0, 0) }
+  10% { transform:translate(-5%, -10%) }
+  20% { transform:translate(-15%, 5%) }
+  30% { transform:translate(7%, -25%) }
+  40% { transform:translate(-5%, 25%) }
+  50% { transform:translate(-15%, 10%) }
+  60% { transform:translate(15%, 0) }
+  70% { transform:translate(0, 15%) }
+  80% { transform:translate(3%, 35%) }
+  90% { transform:translate(-10%, 10%) }
 }
 
 body {
