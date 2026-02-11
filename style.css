@@ -494,11 +494,28 @@ body.dark-mode {
 body::before {
   content: "";
   position: fixed;
-  top: 0; left: 0; width: 100%; height: 100%;
+  top: -150%; /* Larger than the viewport so we can move it without showing edges */
+  left: -150%;
+  width: 300%;
+  height: 300%;
   background-image: url("https://grains.minimal.gallery/grain.png");
-  opacity: 0.05; 
+  opacity: 0.08; /* Bumped up from 0.05 so you can see the texture better */
   pointer-events: none;
   z-index: 10000;
+  animation: grain-dance 8s steps(10) infinite;
+}
+
+@keyframes grain-dance {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-5%, -10%); }
+  20% { transform: translate(-15%, 5%); }
+  30% { transform: translate(7%, -25%); }
+  40% { transform: translate(-5%, 25%); }
+  50% { transform: translate(-15%, 10%); }
+  60% { transform: translate(15%, 0%); }
+  70% { transform: translate(0%, 15%); }
+  80% { transform: translate(3%, 35%); }
+  90% { transform: translate(-10%, 10%); }
 }
 
 body {
