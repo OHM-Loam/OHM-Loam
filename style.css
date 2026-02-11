@@ -28,10 +28,11 @@ body {
 .site-header {
   position: sticky;
   top: 0;
-  background: #fff;
+  background: var(--bg-color); /* Use the variable! */
   z-index: 1000;
   border-bottom: 1px solid rgba(0,0,0,0.07);
   padding: 1rem 0;
+  transition: background 1.2s ease;
 }
 
 .header-inner {
@@ -372,6 +373,8 @@ body {
   justify-content: center;
   cursor: pointer;
   transition: opacity 1.5s ease-in-out, visibility 1.5s;
+  background-color: var(--bg-color);
+  z-index: 9998; /* One step below the grain */
 }
 
 .landing-content { 
@@ -494,17 +497,17 @@ body.dark-mode {
 html::after {
   content: "";
   position: fixed;
-  top: -100%; 
-  left: -100%;
-  width: 300%;
-  height: 300%;
-  /* Using a verified high-contrast grain tile */
-  background-image: url("https://raw.githubusercontent.com/martasig/noise/master/noise.png");
+  top: -100px;
+  left: -100px;
+  width: calc(100% + 200px);
+  height: calc(100% + 200px);
+  /* Using a more aggressive grain for testing */
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Noise_Texture.png");
   background-repeat: repeat;
-  opacity: 0.1; /* Adjust this to see more or less "static" */
+  opacity: 0.08; /* Start here and bump to 0.15 if still invisible */
   pointer-events: none;
-  z-index: 999999; /* Absolute highest layer */
-  animation: grain-dance 0.4s steps(4) infinite;
+  z-index: 10001; /* Must be higher than header (1000) and landing (9999) */
+  animation: grain-dance 0.3s steps(3) infinite;
   display: block;
 }
 
