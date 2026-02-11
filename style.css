@@ -478,27 +478,58 @@ body {
    10. The Toggler
    ========================= */
 
-/* Base Light Mode (Default) */
-body {
-  background-color: #ffffff;
-  color: #000000;
-  transition: background-color 0.8s ease, color 0.8s ease;
+/* 1. Define the variables so the button can "see" them */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --matte-color: #ffffff;
 }
 
-/* Dark Mode State */
+/* 2. Update variables for Dark Mode */
 body.dark-mode {
-  background-color: #000000;
-  color: #ffffff;
+  --bg-color: #1a1a1a; /* Sergio's Charcoal Grey */
+  --text-color: #f0f0f0; /* Soft White */
+  --matte-color: #252525; /* Darker Matte */
 }
 
-/* Ensure the GLightbox overlay also flips */
+/* 3. Apply variables to the Body */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 1.2s cubic-bezier(0.4, 0, 0.2, 1), 
+              color 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  margin: 0;
+}
+
+/* 4. Fix the Button Visuals */
+#theme-toggle {
+  margin-left: 20px;
+  padding: 6px 12px;
+  /* Use the variables here so the border/text flips automatically */
+  border: 1px solid var(--text-color) !important; 
+  background: transparent;
+  border-radius: 20px;
+  color: var(--text-color);
+  font-family: inherit;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+#theme-toggle:hover {
+  background-color: var(--text-color);
+  color: var(--bg-color);
+}
+
+/* 5. GLightbox Integration */
 body.dark-mode .goverlay {
-  background: rgba(15, 15, 15, 0.95) !important;
+  background: rgba(10, 10, 10, 0.98) !important;
 }
 
-/* Make sure your white mattes turn black too */
 body.dark-mode .gslide-image, 
 body.dark-mode .gslide-video {
-  background: #111111 !important;
-  border-color: rgba(255,255,255,0.1);
+  background: var(--matte-color) !important;
+  border: none !important;
 }
