@@ -539,8 +539,8 @@ body {
   background: transparent;
   border: 1px solid var(--text-color);
   border-radius: 50%;
-  width: 25px;
-  height: 25px;
+  width: 35px;
+  height: 35px;
   display: flex;
   align-items: center;
   justify-content: center;
