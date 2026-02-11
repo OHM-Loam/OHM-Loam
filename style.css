@@ -487,6 +487,11 @@ body {
   background: transparent !important;
 }
 
+.video-locked {
+  pointer-events: none;
+  cursor: default;
+  user-select: none;
+}
 
 /* =========================
    10. The Floating Toggle Icon
