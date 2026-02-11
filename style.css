@@ -494,15 +494,16 @@ body.dark-mode {
 body::before {
   content: "";
   position: fixed;
-  top: -150%; /* Larger than the viewport so we can move it without showing edges */
+  top: -150%;
   left: -150%;
   width: 300%;
   height: 300%;
   background-image: url("https://grains.minimal.gallery/grain.png");
-  opacity: 0.08; /* Bumped up from 0.05 so you can see the texture better */
+  opacity: 0.08; 
   pointer-events: none;
   z-index: 10000;
   animation: grain-dance 8s steps(10) infinite;
+  will-change: transform; /* Hardware acceleration safety net */
 }
 
 @keyframes grain-dance {
@@ -524,6 +525,8 @@ body {
   transition: background-color 1.2s cubic-bezier(0.4, 0, 0.2, 1), 
               color 1.2s cubic-bezier(0.4, 0, 0.2, 1);
   margin: 0;
+  overflow-x: hidden; /* Prevents the grain from causing horizontal scroll */
+  width: 100%;
 }
 
 /* =========================
