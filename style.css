@@ -487,68 +487,9 @@ body {
   background: transparent !important;
 }
 
-/* =========================
-   10. The Atmosphere (The Top-Level Grain)
-   ========================= */
-
-:root {
-  --bg-color: #f2efeb;      
-  --header-bg: #ffffff;     
-  --text-color: #1a1a1a;  
-  --matte-color: #ffffff;  
-  --grain-opacity: 0.05; /* Control opacity here */
-}
-
-body.dark-mode {
-  --bg-color: #1a1a1a;      
-  --header-bg: #222222;     
-  --text-color: #f2efeb;  
-  --matte-color: #252525;  
-  --grain-opacity: 0.07; /* Grain often needs to be slightly stronger in dark mode */
-}
-
-.grain-overlay {
-  position: fixed;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-   
-  animation: noise 0.8s steps(10) infinite;
-  opacity: var(--grain-opacity);
-  
-  pointer-events: none;
-  will-change: transform; /* Helps the Mac GPU handle it separately */
-  z-index: 9999;
-}
-
-@keyframes noise {
-  0%, 100% { transform:translate(0, 0) }
-  10% { transform:translate(-1%, -2%) }
-  20% { transform:translate(-3%, 1%) }
-  30% { transform:translate(1%, -4%) }
-  40% { transform:translate(-1%, 4%) }
-  50% { transform:translate(-3%, 2%) }
-  60% { transform:translate(3%, 0) }
-  70% { transform:translate(0, 3%) }
-  80% { transform:translate(1%, 2%) }
-  90% { transform:translate(-2%, 1%) }
-}
-
-body {
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  transition: background-color 1.2s cubic-bezier(0.4, 0, 0.2, 1), 
-              color 1.2s cubic-bezier(0.4, 0, 0.2, 1);
-  margin: 0;
-  overflow-x: hidden;
-  width: 100%;
-}
 
 /* =========================
-   11. The Floating Toggle Icon
+   10. The Floating Toggle Icon
    ========================= */
 
 .floating-toggle {
