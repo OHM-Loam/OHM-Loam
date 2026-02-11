@@ -235,6 +235,11 @@ if (typeof GLightbox !== 'undefined') {
   })();
 
 });
+const btn = document.querySelector('#theme-toggle');
+
+btn.addEventListener('click', function() {
+  document.body.classList.toggle('dark-mode');
+});
 </script>
 </body>
 </html>
