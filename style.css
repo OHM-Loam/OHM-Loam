@@ -526,3 +526,17 @@ body {
 body.dark-mode .goverlay {
   background: rgba(15, 15, 15, 0.98) !important;
 }
+/* The Grain Overlay */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* This is a high-speed way to generate noise without an image file */
+  background-image: url("https://grains.minimal.gallery/grain.png"); 
+  opacity: 0.04; /* Keep it subtle - you want to 'feel' it more than see it */
+  pointer-events: none; /* Allows you to click through the grain to your links */
+  z-index: 9999;
+}
