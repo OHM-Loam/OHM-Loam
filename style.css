@@ -102,22 +102,49 @@ body {
 }
 
 /* =========================
-   4. ABOUT PANEL (Overlay)
+   4. ABOUT PANEL (The Fixed Overlay)
    ========================= */
 #about-panel {
   position: fixed;
   inset: 0;
-  background: var(--white-overlay);
+  height: 100vh;
+  width: 100%;
+  background: var(--white-overlay); /* The clean matte background */
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
-  transform: translateY(-100%);
-  transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-  z-index: 10002; /* Above Header */
+  
+  /* Start hidden above the screen */
+  transform: translateY(-100%); 
+  transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+  
+  /* Vital: Must be higher than the fixed header and footer */
+  z-index: 20000; 
   overflow-y: auto;
-  color: #111;
+  color: #111; /* Locked dark text for readability on the white matte */
+  pointer-events: none; /* Ignore clicks when closed */
 }
 
-#about-panel.open { transform: translateY(0); }
+#about-panel.open {
+  transform: translateY(0);
+  pointer-events: auto; /* Enable clicks when open */
+}
+
+.about-content {
+  max-width: 48rem;
+  margin: 10rem auto 6rem; /* Extra top margin so it doesn't hit the header */
+  padding: 0 1.5rem;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 4rem;
+}
+
+/* Ensure the landing page doesn't trap the About Panel */
+body.landing-active #about-panel {
+  display: block;
+}
 
 /* =========================
    5. PROJECT HUB (The "Wild" Grid)
