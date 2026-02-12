@@ -375,19 +375,27 @@ body {
 }
 
 /* =========================
-   8. Landing Page (Cleaned)
+   8. Landing Page (Cleaned & Fixed)
    ========================= */
 #landing-page {
   position: fixed;
   inset: 0; 
-  background-color: var(--bg-color); /* Syncs with your theme variables */
+  /* Use the hardcoded hex or move variables up. To be safe, we'll use hex: */
+  background-color: #f2efeb; 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  z-index: 20000; /* Must stay above the smart header and footer */
+  z-index: 20000; 
   transition: opacity 1.5s ease-in-out, visibility 1.5s;
+  opacity: 1 !important; /* Force visibility */
+  visibility: visible !important;
+}
+
+/* Ensure the dark mode variable works if active */
+body.dark-mode #landing-page {
+  background-color: #1a1a1a;
 }
 
 .landing-content { 
@@ -395,21 +403,24 @@ body {
 }
 
 .landing-content .landing-title {
-  font-size: 3.5rem; /* Slightly larger for impact */
+  font-size: 3.5rem;
   font-weight: 200;
   letter-spacing: 0.6rem;
   margin: 0;
   text-transform: uppercase;
-  color: var(--text-color); /* Adapts to light/dark mode */
+  color: #1a1a1a; /* Match your text-main */
   transition: letter-spacing 1s ease;
 }
 
-/* Hover effect for that "Wild" feel */
+body.dark-mode .landing-title {
+  color: #f2efeb;
+}
+
 #landing-page:hover .landing-title {
   letter-spacing: 1rem;
 }
 
-/* Hide everything else while landing is active */
+/* Fix: Only hide the UI elements, specifically ignoring the landing page */
 body:not(.landing-active) .site-header,
 body:not(.landing-active) .smart-footer,
 body:not(.landing-active) main {
@@ -418,8 +429,8 @@ body:not(.landing-active) main {
 }
 
 #landing-page.fade-out {
-  opacity: 0;
-  visibility: hidden;
+  opacity: 0 !important;
+  visibility: hidden !important;
   pointer-events: none;
 }
 
