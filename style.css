@@ -132,33 +132,89 @@ body {
 .social-icon:hover { opacity: 1; }
 
 /* =========================
-   5. Project Hub (The Wild Grid)
+   5. Project Hub (Grid) - RESTORED
    ========================= */
 .project-hub {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-auto-rows: 250px; 
+  /* First value is Row (Vertical), second is Column (Horizontal) */
   gap: 12rem 6rem; 
   padding: 10rem 4rem;
   max-width: 1600px;
   margin: 0 auto;
 }
 
-.project-hub a { display: block; overflow: hidden; position: relative; border-radius: 5px; }
-.project-hub video { pointer-events: none; }
-
-.project-hub img, .project-hub video {
-  width: 100%; height: 100%; object-fit: cover;
-  filter: grayscale(100%);
-  transition: filter 1.2s ease, transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+.project-hub a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  border-radius: 5px;
 }
 
-.project-hub a:hover img, .project-hub a:hover video { filter: grayscale(0%); transform: scale(1.02); }
+.project-hub img, .video-preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
 
-/* Restore Wild Offsets */
 .project-hub a.featured { grid-row: span 2; }
 .project-hub a.wide { grid-column: span 2; }
-.project-hub a:nth-child(even) { transform: translateY(4rem); }
+
+/* Create extra-large gaps for specific projects */
+.extra-room {
+  margin-top: 15rem;
+}
+
+/* Make some images thinner and off-center */
+.slim-shift {
+  max-width: 80%;
+  margin-left: auto;
+}
+
+/* The Staggered Offset */
+.project-hub a:nth-child(even) {
+  transform: translateY(4rem);
+}
+
+/* The Default: Muted, B&W look */
+.project-hub a img, 
+.project-hub a video {
+  filter: grayscale(100%);
+  transition: filter 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+  will-change: filter;
+}
+
+/* The Reveal: Fade into color & slight scale on hover */
+.project-hub a:hover img, 
+.project-hub a:hover video {
+  filter: grayscale(0%);
+  transform: scale(1.005) !important;
+}
+
+/* =========================
+   6. Utility & Symbol Spinner
+   ========================= */
+.symbol-spinner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.2ch;
+  height: 1em;
+  vertical-align: middle;
+  line-height: 1;
+  transition: color 0.3s ease;
+  position: relative;
+  top: -1px; 
+}
+
+.site-title:hover .symbol-spinner {
+  color: #888;
+}
 
 /* =========================
    6. Footer & The Eye
