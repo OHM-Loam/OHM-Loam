@@ -1,81 +1,114 @@
 /* =========================
-   1. The Atmosphere (Variables)
+   1. Base Reset & Colors
    ========================= */
 :root {
-  --bg-color: #f2efeb;      
-  --text-color: #1a1a1a;    
+  --bg-warm: #f2efeb;
+  --text-main: #111;
   --text-muted: #888;
+  --text-light: #999;
   --white-overlay: rgba(255, 255, 255, 0.8);
   --glass-blur: blur(10px);
+  --bg-color: #f2efeb;      
+  --text-color: #1a1a1a;
 }
 
-/* THE FIX: Ensure these variables are what your JS toggle targets */
 body.dark-mode {
   --bg-color: #1a1a1a;      
   --text-color: #f2efeb;
-  --text-muted: #999;
+  --bg-warm: #1a1a1a;
+  --text-main: #f2efeb;
 }
+
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  font-family: system-ui, -apple-system, sans-serif;
-  transition: background-color 1.2s ease, color 1.2s ease;
+  padding: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: var(--text-main);
+  background-color: var(--bg-warm);
+  transition: background-color 1.2s cubic-bezier(0.4, 0, 0.2, 1), color 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
 
 /* =========================
-   2. Landing & OHM Animation
+   2. Landing Page (The Entry)
    ========================= */
 #landing-page {
   position: fixed;
-  inset: 0;
+  inset: 0; 
   background-color: var(--bg-color);
-  z-index: 99999;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  transition: opacity 1.5s ease;
+  cursor: pointer;
+  z-index: 99999;
+  transition: opacity 1.5s ease-in-out, visibility 1.5s;
 }
 
 .landing-title {
   font-size: 3.5rem;
-  letter-spacing: 0.5rem;
+  font-weight: 200;
+  letter-spacing: 0.6rem;
   text-transform: uppercase;
+  color: var(--text-color);
   animation: ohm-breathe 4s ease-in-out infinite;
 }
 
 @keyframes ohm-breathe {
-  0%, 100% { letter-spacing: 0.5rem; }
+  0%, 100% { letter-spacing: 0.6rem; }
   50% { letter-spacing: 1.1rem; }
 }
 
-#landing-page.fade-out { opacity: 0; visibility: hidden; }
+#landing-page.fade-out {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
 
 /* =========================
-   3. Header & The "X" Hamburger
+   3. Smart Header & Hamburger
    ========================= */
 .site-header {
-  position: fixed;
+  position: fixed; 
   top: 0; width: 100%;
-  mix-blend-mode: difference;
-  z-index: 10001;
+  mix-blend-mode: difference; 
+  z-index: 10001; 
   padding: 1.5rem 0;
 }
 
-.nav-link { color: white; text-decoration: none; display: flex; align-items: center; gap: 10px; cursor: pointer; }
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
 
-/* THE FIX: Hamburger Close Animation */
+.site-title { font-size: 1.35rem; font-weight: 200; color: white; text-decoration: none; }
+.site-title .ohm { font-weight: 600; text-transform: uppercase; }
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: white; 
+}
+
+/* Hamburger to X Animation */
 .hamburger-icon { width: 20px; height: 12px; display: flex; flex-direction: column; justify-content: space-between; }
-.hamburger-icon span { display: block; height: 2px; width: 100%; background: currentColor; transition: 0.3s; }
+.hamburger-icon span { display: block; height: 2px; width: 100%; background-color: currentColor; transition: 0.3s ease; }
 
-.nav-link.active span:nth-child(1) { transform: translateY(5px) rotate(45deg); }
-.nav-link.active span:nth-child(2) { opacity: 0; }
-.nav-link.active span:nth-child(3) { transform: translateY(-5px) rotate(-45deg); }
+.nav-link.active .hamburger-icon span:nth-child(1) { transform: translateY(5px) rotate(45deg); }
+.nav-link.active .hamburger-icon span:nth-child(2) { opacity: 0; }
+.nav-link.active .hamburger-icon span:nth-child(3) { transform: translateY(-5px) rotate(-45deg); }
 
 /* =========================
-   4. About Panel & Social Icons
+   4. About Overlay & Side Links
    ========================= */
 #about-panel {
   position: fixed;
@@ -83,52 +116,52 @@ body {
   background: var(--white-overlay);
   backdrop-filter: var(--glass-blur);
   transform: translateY(-100%);
-  transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
   z-index: 10000;
-  color: #111; /* Locked dark text */
   overflow-y: auto;
+  color: #111;
 }
 
 #about-panel.open { transform: translateY(0); }
 
-.about-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 4rem; max-width: 48rem; margin: 8rem auto; padding: 0 1.5rem; }
+.about-content { max-width: 48rem; margin: 8rem auto; padding: 0 1.5rem; }
+.about-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 4rem; }
 
-/* Social Icons Optical Fix */
-.side-links { display: flex; align-items: center; gap: 20px; }
-.social-icon { width: 22px; filter: brightness(0); opacity: 0.6; transition: 0.3s; }
+.side-links { display: flex; align-items: center; gap: 20px; margin-top: 1rem; }
+.social-icon { width: 22px; height: auto; opacity: 0.7; filter: brightness(0); transition: opacity 0.2s ease; }
 .social-icon:hover { opacity: 1; }
 
 /* =========================
-   5. The "Wild" Gallery (Restored Offsets)
+   5. Project Hub (The Wild Grid)
    ========================= */
 .project-hub {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  grid-auto-rows: 250px;
-  gap: 12rem 6rem;
+  grid-auto-rows: 250px; 
+  gap: 12rem 6rem; 
   padding: 10rem 4rem;
   max-width: 1600px;
   margin: 0 auto;
 }
 
-.project-hub a { display: block; overflow: hidden; border-radius: 4px; position: relative; }
+.project-hub a { display: block; overflow: hidden; position: relative; border-radius: 5px; }
 .project-hub video { pointer-events: none; }
 
 .project-hub img, .project-hub video {
   width: 100%; height: 100%; object-fit: cover;
   filter: grayscale(100%);
-  transition: 1s ease;
+  transition: filter 1.2s ease, transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .project-hub a:hover img, .project-hub a:hover video { filter: grayscale(0%); transform: scale(1.02); }
 
-/* Restore the "Wild" offsets */
+/* Restore Wild Offsets */
 .project-hub a.featured { grid-row: span 2; }
 .project-hub a.wide { grid-column: span 2; }
 .project-hub a:nth-child(even) { transform: translateY(4rem); }
 
 /* =========================
-   6. Footer & Eye
+   6. Footer & The Eye
    ========================= */
 .smart-footer {
   position: fixed;
@@ -141,10 +174,21 @@ body {
 .footer-content { display: flex; justify-content: space-between; align-items: center; }
 
 .eye { width: 28px; height: 16px; background: white; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; animation: blink 5s infinite; }
-.pupil { width: 10px; height: 10px; background: black; border-radius: 50%; animation: saccade 10s infinite; }
+.pupil { width: 10px; height: 10px; background: black; border-radius: 50%; animation: saccadeLook 12s infinite; }
 
-/* Toggle */
-.floating-toggle { background: none; border: none; color: white; cursor: pointer; }
+.floating-toggle { background: transparent; border: none; color: white; cursor: pointer; transition: transform 0.8s ease; }
+.floating-toggle svg { width: 24px; height: 24px; }
 
-@keyframes blink { 0%, 90%, 100% { transform: scaleY(1); } 93% { transform: scaleY(0.1); } }
-@keyframes saccade { 0%, 20%, 100% { transform: translate(0); } 25% { transform: translate(4px, -2px); } 50% { transform: translate(-3px, 1px); } }
+/* =========================
+   7. Animations
+   ========================= */
+@keyframes blink { 0%, 90%, 100% { transform: scaleY(1); } 93% { transform: scaleY(0.1); } 96% { transform: scaleY(1); } 98% { transform: scaleY(0.1); } }
+@keyframes saccadeLook {
+  0%, 15%, 100% { transform: translate(0, 0); }
+  17% { transform: translate(5px, -1px); }
+  37% { transform: translate(-3px, -2px); }
+  57% { transform: translate(0, 3px); }
+  77% { transform: translate(4px, 2px); }
+}
+
+.spacer-md { height: 40vh; }
