@@ -494,86 +494,119 @@ body {
 }
 
 /* =========================
-   10. The Floating Toggle Icon
+   10. The Smart Footer & Eye
    ========================= */
 
-.floating-toggle {
+.smart-footer {
   position: fixed;
   bottom: 40px;
-  left: 40px;
-  z-index: 9999;
-  background: transparent;
-  border: 1px solid var(--text-color);
+  left: 0;
+  width: 100%;
+  padding: 0 40px; /* Aligns with your 40px left/bottom toggle position */
+  z-index: 10000;
+  mix-blend-mode: difference; /* The contrast magic */
+  pointer-events: none; /* Let scrolls pass through */
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: auto; /* Re-enable for the toggle */
+}
+
+/* The Blinking Eye */
+.eye-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.eye {
+  width: 28px;
+  height: 16px;
+  background: white; /* Will appear black on light bg due to 'difference' */
   border-radius: 50%;
-  width: 35px;
-  height: 35px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: blink 5s infinite;
+  transform-origin: center;
+}
+
+.pupil {
+  width: 10px;
+  height: 10px;
+  background: black; /* Will appear white on light bg due to 'difference' */
+  border-radius: 50%;
+  animation: subtleLook 8s ease-in-out infinite;
+}
+
+/* The Toggle - Simplified to work with Blend Modes */
+.floating-toggle {
+  background: transparent;
+  border: none; /* Removed border for a cleaner 'editorial' look */
+  padding: 0;
+  margin: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: var(--text-color);
-  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  color: white; /* 'Difference' makes this react to bg color */
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .floating-toggle svg {
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
   transition: transform 0.8s ease;
 }
 
-/* Hover & Dark Mode Interactions */
+/* Hover effect stays, but we stick to transforms rather than color changes */
 .floating-toggle:hover {
-  transform: scale(1.1) rotate(15deg);
-  background-color: var(--text-color);
-  color: var(--bg-color);
-}
-
-body.dark-mode .floating-toggle svg {
-  transform: rotate(360deg);
+  transform: scale(1.2) rotate(15deg);
 }
 
 /* Lightbox Sync */
 body.dark-mode .goverlay {
   background: rgba(15, 15, 15, 0.98) !important;
 }
+
 /* =========================
-   11. The Atmosphere (Stable & Clean)
+   11. The Atmosphere (Variables)
    ========================= */
 
 :root {
   --bg-color: #f2efeb;      
-  --header-bg: #ffffff;     
   --text-color: #1a1a1a;  
-  --matte-color: #ffffff;  
 }
 
 body.dark-mode {
   --bg-color: #1a1a1a;      
-  --header-bg: #222222;     
   --text-color: #f2efeb;  
-  --matte-color: #252525;  
-}
-
-.grain-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  
-  /* We removed the background-image and animation here */
-  
-  pointer-events: none;
-  z-index: 9999;
 }
 
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
-  /* This is the magic line that makes the dark mode toggle feel premium */
   transition: background-color 1.2s cubic-bezier(0.4, 0, 0.2, 1), 
               color 1.2s cubic-bezier(0.4, 0, 0.2, 1);
   margin: 0;
   overflow-x: hidden;
   width: 100%;
+}
+
+/* Animations */
+@keyframes blink {
+  0%, 90%, 100% { transform: scaleY(1); }
+  93% { transform: scaleY(0.1); }
+  96% { transform: scaleY(1); }
+  98% { transform: scaleY(0.1); }
+}
+
+@keyframes subtleLook {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(3px, 0); }
+  75% { transform: translate(-3px, 0); }
 }
