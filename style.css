@@ -131,8 +131,8 @@ body {
 .social-icon { width: 22px; height: auto; opacity: 0.7; filter: brightness(0); transition: opacity 0.2s ease; }
 .social-icon:hover { opacity: 1; }
 
- =========================
-   5. Project Hub (Grid)
+/* =========================
+   5. Project Hub (Grid) 
    ========================= */
 .project-hub {
   display: grid;
@@ -140,7 +140,7 @@ body {
   grid-auto-rows: 250px; 
   /* First value is Row (Vertical), second is Column (Horizontal) */
   gap: 12rem 6rem; 
-  padding: 10rem 4rem; /* More padding at the top/bottom for that entry effect */
+  padding: 10rem 4rem;
   max-width: 1600px;
   margin: 0 auto;
 }
@@ -162,12 +162,6 @@ body {
   transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-.project-hub a:hover img, 
-.project-hub a:hover video {
-  filter: grayscale(0%);
-  transform: scale(1.005) !important;
-}
-
 .project-hub a.featured { grid-row: span 2; }
 .project-hub a.wide { grid-column: span 2; }
 
@@ -176,16 +170,17 @@ body {
   margin-top: 15rem;
 }
 
-/* Make some images thinner and off-center like the Milez site */
+/* Make some images thinner and off-center */
 .slim-shift {
   max-width: 80%;
-  margin-left: auto; /* Pushes it to the right */
+  margin-left: auto;
 }
 
-/* Allow images to overlap the "white space" */
+/* The Staggered Offset */
 .project-hub a:nth-child(even) {
-  transform: translateY(4rem); /* Every second image sits slightly lower */
+  transform: translateY(4rem);
 }
+
 /* The Default: Muted, B&W look */
 .project-hub a img, 
 .project-hub a video {
@@ -194,10 +189,11 @@ body {
   will-change: filter;
 }
 
-/* The Reveal: Fade into color on hover */
+/* The Reveal: Fade into color & slight scale on hover */
 .project-hub a:hover img, 
 .project-hub a:hover video {
   filter: grayscale(0%);
+  transform: scale(1.005) !important;
 }
 
 /* =========================
@@ -221,7 +217,7 @@ body {
 }
 
 /* =========================
-   6. Footer & The Eye
+   7. Footer & The Eye
    ========================= */
 .smart-footer {
   position: fixed;
@@ -240,7 +236,7 @@ body {
 .floating-toggle svg { width: 24px; height: 24px; }
 
 /* =========================
-   7. Animations
+   8. Animations
    ========================= */
 @keyframes blink { 0%, 90%, 100% { transform: scaleY(1); } 93% { transform: scaleY(0.1); } 96% { transform: scaleY(1); } 98% { transform: scaleY(0.1); } }
 @keyframes saccadeLook {
@@ -254,7 +250,7 @@ body {
 .spacer-md { height: 40vh; }
 
 /* =========================
-  8. SYMBOL SPINNER (The OHM Fix)
+  9. SYMBOL SPINNER (The OHM Fix)
    ========================= */
 .symbol-spinner {
   display: inline-flex;     /* Perfect centering */
