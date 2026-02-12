@@ -266,36 +266,36 @@ themeBtn.addEventListener('click', () => {
   }
 });
 
-let isPayingAttention = false;
-
-document.addEventListener('mousemove', (e) => {
+window.addEventListener('load', () => {
+  let isPayingAttention = false;
   const eye = document.querySelector('.eye');
   const pupil = document.querySelector('.pupil');
+
   if (!eye || !pupil) return;
 
-  // 1. Every time the mouse moves, there's a 1 in 100 chance the eye "wakes up"
-  // and a 1 in 200 chance it "gets bored" and looks away.
-  if (!isPayingAttention && Math.random() < 0.01) {
-    isPayingAttention = true;
-  } else if (isPayingAttention && Math.random() < 0.005) {
-    isPayingAttention = false;
-    pupil.style.transform = `translate(0, 0)`; // Reset to center
-  }
+  document.addEventListener('mousemove', (e) => {
+    // 1% chance to start paying attention, 0.5% chance to stop
+    if (!isPayingAttention && Math.random() < 0.01) {
+      isPayingAttention = true;
+    } else if (isPayingAttention && Math.random() < 0.005) {
+      isPayingAttention = false;
+      pupil.style.transform = `translate(0, 0)`;
+    }
 
-  // 2. Only track the mouse if it's currently paying attention
-  if (isPayingAttention) {
-    const rect = eye.getBoundingClientRect();
-    const eyeX = rect.left + rect.width / 2;
-    const eyeY = rect.top + rect.height / 2;
-    
-    const angle = Math.atan2(e.clientY - eyeY, e.clientX - eyeX);
-    const moveDist = 5; 
-    
-    const x = Math.cos(angle) * moveDist;
-    const y = Math.sin(angle) * moveDist;
-    
-    pupil.style.transform = `translate(${x}px, ${y}px)`;
-  }
+    if (isPayingAttention) {
+      const rect = eye.getBoundingClientRect();
+      const eyeX = rect.left + rect.width / 2;
+      const eyeY = rect.top + rect.height / 2;
+      
+      const angle = Math.atan2(e.clientY - eyeY, e.clientX - eyeX);
+      const moveDist = 4; // Keeps it inside the socket
+      
+      const x = Math.cos(angle) * moveDist;
+      const y = Math.sin(angle) * moveDist;
+      
+      pupil.style.transform = `translate(${x}px, ${y}px)`;
+    }
+  });
 });
 </script>
 </body>
