@@ -256,22 +256,40 @@ body {
 
 .footer-content { display: flex; justify-content: space-between; align-items: center; }
 
-.eye { width: 28px; height: 16px; background: white; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; animation: blink 5s infinite; }
-.pupil { width: 10px; height: 10px; background: black; border-radius: 50%; animation: saccadeLook 12s infinite; }
+.eye {
+  width: 28px;
+  height: 16px;
+  background: white;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  isolation: Isolate;
+  animation: blink 5s infinite;
+}
 
+.pupil {
+  width: 10px;
+  height: 10px;
+  background: black;
+  border-radius: 50%;
+  position: absolute;
+  /* Transition makes the movement feel "organic" rather than robotic */
+  transition: transform 0.1s ease-out; 
+  will-change: transform;
+}
 .floating-toggle { background: transparent; border: none; color: white; cursor: pointer; transition: transform 0.8s ease; }
 .floating-toggle svg { width: 24px; height: 24px; }
 
 /* =========================
    9. Animations
    ========================= */
-@keyframes blink { 0%, 90%, 100% { transform: scaleY(1); } 93% { transform: scaleY(0.1); } 96% { transform: scaleY(1); } 98% { transform: scaleY(0.1); } }
-@keyframes saccadeLook {
-  0%, 15%, 100% { transform: translate(0, 0); }
-  17% { transform: translate(5px, -1px); }
-  37% { transform: translate(-3px, -2px); }
-  57% { transform: translate(0, 3px); }
-  77% { transform: translate(4px, 2px); }
+@keyframes blink { 
+  0%, 90%, 100% { transform: scaleY(1); } 
+  93% { transform: scaleY(0.1); } 
+  96% { transform: scaleY(1); } 
 }
 
 .spacer-md { height: 40vh; }
