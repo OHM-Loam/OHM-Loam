@@ -151,7 +151,7 @@ body {
   overflow: hidden;
   position: relative;
   border-radius: 5px;
-  pointer-events: auto; /* Ensures the link is the clickable target */
+  pointer-events: auto;
 }
 
 /* FIX: Click-through for videos/images */
@@ -175,12 +175,12 @@ body {
   margin-left: auto;
 }
 
-/* The Staggered Offset */
+
 .project-hub a:nth-child(even) {
   transform: translateY(4rem);
 }
 
-/* Default Muted look */
+
 .project-hub a img, 
 .project-hub a video {
   filter: grayscale(100%);
@@ -189,11 +189,26 @@ body {
   will-change: filter, transform;
 }
 
-/* The Reveal */
 .project-hub a:hover img, 
 .project-hub a:hover video {
   filter: grayscale(0%);
   transform: scale(1.005) !important;
+}
+
+.video-locked {
+  display: block;
+  cursor: pointer;
+  pointer-events: auto !important;
+}
+
+.video-locked .video-preview {
+  pointer-events: none !important;
+  user-select: none;
+}
+
+.video-locked:hover .video-preview {
+  transform: scale(1.005);
+  filter: grayscale(0%);
 }
 
 /* =========================
@@ -207,26 +222,27 @@ body {
   padding: 30px !important;
   border: 1px solid rgba(0,0,0,0.05);
   box-shadow: 0 20px 50px rgba(0,0,0,0.1) !important;
+  
+  /* FIX: Ensures padding is INSIDE the width calculation */
+  box-sizing: border-box !important; 
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Hide UI Elements */
-.gnext, 
-.gprev, 
-.gclose, 
-.gbtn,
-.plyr__controls { 
-  display: none !important; 
+.gslide-inner-content {
+  max-width: 75vw !important; /* Dialed back slightly to give the 'matte' room to breathe */
+  margin: auto;
+  overflow: visible !important; /* Prevents the shadow from being clipped */
 }
 
-/* Background opacity fix */
-.glightbox-container {
-  background: rgba(242, 239, 235, 0.98); /* Warm light mode bg */
+.gslide-image img, 
+.gslide-video video {
+  max-height: 80vh !important;
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain !important;
 }
-
-body.dark-mode .glightbox-container {
-  background: rgba(26, 26, 26, 0.98); /* Dark mode bg */
-}
-
 /* =========================
    7. Utility & Symbol Spinner
    ========================= */
