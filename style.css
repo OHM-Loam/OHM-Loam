@@ -279,6 +279,13 @@ body {
   transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   will-change: transform;
 }
+.eye.startled {
+  animation: rapid-blink 0.4s ease-in-out 2; /* Two quick blinks */
+}
+.eye.startled .pupil {
+  transform: scale(0.4) !important; /* Pupil dilates/shrinks in shock */
+  transition: transform 0.1s ease;
+}
 .floating-toggle { background: transparent; border: none; color: white; cursor: pointer; transition: transform 0.8s ease; }
 .floating-toggle svg { width: 24px; height: 24px; }
 
@@ -289,6 +296,11 @@ body {
   0%, 90%, 100% { transform: scaleY(1); } 
   93% { transform: scaleY(0.1); } 
   96% { transform: scaleY(1); } 
+}
+
+@keyframes rapid-blink {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(0.1); }
 }
 
 .spacer-md { height: 40vh; }
