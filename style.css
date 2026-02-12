@@ -144,6 +144,7 @@ body {
   margin: 0 auto;
 }
 
+/* THE ANCHOR: The only thing that should catch a click */
 .project-hub a {
   display: block;
   width: 100%;
@@ -151,10 +152,10 @@ body {
   overflow: hidden;
   position: relative;
   border-radius: 5px;
-  pointer-events: auto;
+  pointer-events: auto !important; /* Forces the link to be the master target */
 }
 
-/* FIX: Click-through for videos/images */
+/* THE MEDIA: Forced to be "ghosts" even when hovered */
 .project-hub img, 
 .project-hub video,
 .video-preview {
@@ -162,55 +163,36 @@ body {
   height: 100%;
   object-fit: cover;
   display: block;
-  pointer-events: none; /* Crucial: lets the click hit the <a> tag */
-}
-
-.project-hub a.featured { grid-row: span 2; }
-.project-hub a.wide { grid-column: span 2; }
-
-.extra-room { margin-top: 15rem; }
-
-.slim-shift {
-  max-width: 80%;
-  margin-left: auto;
-}
-
-
-.project-hub a:nth-child(even) {
-  transform: translateY(4rem);
-}
-
-
-.project-hub a img, 
-.project-hub a video {
+  pointer-events: none !important; /* Prevents media from "stealing" the click */
   filter: grayscale(100%);
   transition: filter 1.2s cubic-bezier(0.165, 0.84, 0.44, 1), 
               transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
   will-change: filter, transform;
 }
 
+/* THE HOVER: Handled strictly via the Anchor */
 .project-hub a:hover img, 
-.project-hub a:hover video {
+.project-hub a:hover video,
+.project-hub a:hover .video-preview {
   filter: grayscale(0%);
-  transform: scale(1.005) !important;
-}
-
-.video-locked {
-  display: block;
-  cursor: pointer;
-  pointer-events: auto !important;
-}
-
-.video-locked .video-preview {
-  pointer-events: none !important;
-  user-select: none;
-}
-
-.video-locked:hover .video-preview {
   transform: scale(1.005);
-  filter: grayscale(0%);
 }
 
+/* Grid Modifiers */
+.project-hub a.featured { grid-row: span 2; }
+.project-hub a.wide { grid-column: span 2; }
+.extra-room { margin-top: 15rem; }
+.slim-shift { max-width: 80%; margin-left: auto; }
+
+/* Staggered Offset */
+.project-hub a:nth-child(even) {
+  transform: translateY(4rem);
+}
+
+/* Specific Video Lock: Just ensures the wrapper is solid */
+.video-locked {
+  cursor: pointer;
+}
 /* =========================
    6. Glightbox: Luxury Matte (Restored)
    ========================= */
