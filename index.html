@@ -266,13 +266,26 @@ themeBtn.addEventListener('click', () => {
   }
 });
 
-  document.addEventListener('mousemove', (e) => {
-  const eye = document.querySelector('.pupil');
-  const x = (e.clientX / window.innerWidth) * 100;
-  const y = (e.clientY / window.innerHeight) * 100;
+ document.addEventListener('mousemove', (e) => {
+  const eye = document.querySelector('.eye');
+  const pupil = document.querySelector('.pupil');
   
-  // Moves pupil within the eye socket based on mouse %
-  eye.style.transform = `translate(${x / 5 - 10}px, ${y / 5 - 10}px)`;
+  if (eye && pupil) {
+    const rect = eye.getBoundingClientRect();
+    const eyeX = rect.left + rect.width / 2;
+    const eyeY = rect.top + rect.height / 2;
+    
+    // Calculate angle between mouse and eye center
+    const angle = Math.atan2(e.clientY - eyeY, e.clientX - eyeX);
+    
+    // Distance the pupil can move from center (in pixels)
+    const moveDist = 4; 
+    
+    const x = Math.cos(angle) * moveDist;
+    const y = Math.sin(angle) * moveDist;
+    
+    pupil.style.transform = `translate(${x}px, ${y}px)`;
+  }
 });
 </script>
 </body>
