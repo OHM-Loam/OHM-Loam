@@ -1,5 +1,5 @@
 /* =========================
-   1. Base Reset & Colors
+   1. The Atmosphere (Variables)
    ========================= */
 :root {
   --bg-warm: #f2efeb;
@@ -8,6 +8,7 @@
   --text-light: #999;
   --white-overlay: rgba(255, 255, 255, 0.8);
   --glass-blur: blur(10px);
+  /* Sync variables for toggles */
   --bg-color: #f2efeb;      
   --text-color: #1a1a1a;
 }
@@ -27,9 +28,9 @@ body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   color: var(--text-main);
   background-color: var(--bg-warm);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
   transition: background-color 1.2s cubic-bezier(0.4, 0, 0.2, 1), color 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 /* =========================
@@ -57,13 +58,7 @@ body {
   transition: letter-spacing 1s ease;
 }
 
-#landing-page:hover .landing-title { letter-spacing: 1.2rem; }
-
-#landing-page.fade-out {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
+#landing-page.fade-out { opacity: 0; visibility: hidden; pointer-events: none; }
 
 /* =========================
    3. Header & Hamburger (The X Fix)
@@ -86,13 +81,7 @@ body {
   padding: 0 1.5rem;
 }
 
-.site-title {
-  font-size: 1.35rem;
-  font-weight: 200;
-  color: white; 
-  text-decoration: none;
-}
-
+.site-title { font-size: 1.35rem; font-weight: 200; color: white; text-decoration: none; }
 .site-title .ohm { font-weight: 600; text-transform: uppercase; }
 
 .nav-link {
@@ -102,39 +91,17 @@ body {
   text-decoration: none;
   color: white; 
   cursor: pointer;
-  pointer-events: auto;
 }
 
-.hamburger-icon {
-  width: 20px;
-  height: 12px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
+.hamburger-icon { width: 20px; height: 12px; display: flex; flex-direction: column; justify-content: space-between; }
+.hamburger-icon span { display: block; height: 2px; width: 100%; background-color: currentColor; transition: all 0.3s ease; }
 
-.hamburger-icon span {
-  display: block;
-  height: 2px;
-  width: 100%;
-  background-color: currentColor;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  transform-origin: center;
-}
-
-/* THE FIX: Transform to X when About is open */
-.nav-link.active .hamburger-icon span:nth-child(1) {
-  transform: translateY(5px) rotate(45deg);
-}
-.nav-link.active .hamburger-icon span:nth-child(2) {
-  opacity: 0;
-}
-.nav-link.active .hamburger-icon span:nth-child(3) {
-  transform: translateY(-5px) rotate(-45deg);
-}
+.nav-link.active .hamburger-icon span:nth-child(1) { transform: translateY(5px) rotate(45deg); }
+.nav-link.active .hamburger-icon span:nth-child(2) { opacity: 0; }
+.nav-link.active .hamburger-icon span:nth-child(3) { transform: translateY(-5px) rotate(-45deg); }
 
 /* =========================
-   4. About Overlay
+   4. About Overlay & Social Icons (REBUILT)
    ========================= */
 #about-panel {
   position: fixed;
@@ -146,7 +113,7 @@ body {
   transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
   z-index: 10000;
   overflow-y: auto;
-  color: #111;
+  color: #111; /* Locked dark text for contrast on white matte */
 }
 
 #about-panel.open { transform: translateY(0); }
@@ -154,8 +121,35 @@ body {
 .about-content { max-width: 48rem; margin: 8rem auto; padding: 0 1.5rem; }
 .about-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 4rem; }
 
+.side-links {
+  display: flex;
+  align-items: center; 
+  gap: 20px;
+  margin-top: 1rem;
+}
+
+.side-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+.social-icon {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+  filter: brightness(0); /* Forces icons to be black in the white about panel */
+}
+
+.instagram-link .social-icon { width: 19px; } /* Optical adjustment */
+.social-icon:hover { opacity: 1; }
+
 /* =========================
-   5. Project Hub (Gallery Fix)
+   5. Project Hub (The "Wild" Gallery)
    ========================= */
 .project-hub {
   display: grid;
@@ -168,11 +162,7 @@ body {
 }
 
 .project-hub a { display: block; position: relative; overflow: hidden; border-radius: 5px; }
-
-/* THE FIX: Prevent video from intercepting the click */
-.project-hub video, .video-preview {
-  pointer-events: none; 
-}
+.project-hub video, .video-preview { pointer-events: none; } /* FIXED: Click passes through to Link */
 
 .project-hub img, .project-hub video {
   width: 100%; height: 100%; object-fit: cover;
@@ -180,17 +170,13 @@ body {
   transition: filter 1s ease, transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-.project-hub a:hover img, .project-hub a:hover video { 
-  filter: grayscale(0%); 
-  transform: scale(1.02); 
-}
-
+.project-hub a:hover img, .project-hub a:hover video { filter: grayscale(0%); transform: scale(1.02); }
 .project-hub a.featured { grid-row: span 2; }
 .project-hub a.wide { grid-column: span 2; }
 .project-hub a:nth-child(even) { transform: translateY(4rem); }
 
 /* =========================
-   6. Footer, Eye & Animations
+   6. Footer, Eye & Toggles
    ========================= */
 .smart-footer {
   position: fixed;
@@ -199,9 +185,10 @@ body {
   padding: 0 40px;
   mix-blend-mode: difference;
   z-index: 10000;
+  pointer-events: none;
 }
 
-.footer-content { display: flex; justify-content: space-between; align-items: center; }
+.footer-content { display: flex; justify-content: space-between; align-items: center; pointer-events: auto; }
 
 .eye {
   width: 28px; height: 16px; background: white; border-radius: 50%;
@@ -212,7 +199,22 @@ body {
 .pupil { width: 10px; height: 10px; background: black; border-radius: 50%; animation: saccadeLook 12s infinite; }
 
 .floating-toggle { background: transparent; border: none; color: white; cursor: pointer; transition: transform 0.8s ease; }
+.floating-toggle svg { width: 24px; height: 24px; }
+.floating-toggle:hover { transform: scale(1.2) rotate(15deg); }
 
+/* =========================
+   7. Glightbox: Luxury Matte
+   ========================= */
+.gslide-image, .gslide-video {
+  background: #ffffff !important;
+  padding: 30px !important;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+.gnext, .gprev, .gclose, .plyr__controls { display: none !important; }
+
+/* =========================
+   8. Animations & Spacers
+   ========================= */
 @keyframes blink { 0%, 90%, 100% { transform: scaleY(1); } 93% { transform: scaleY(0.1); } 96% { transform: scaleY(1); } 98% { transform: scaleY(0.1); } }
 @keyframes saccadeLook {
   0%, 15%, 100% { transform: translate(0, 0); }
@@ -223,3 +225,4 @@ body {
 }
 
 .spacer-md { height: 40vh; }
+.spacer-lg { height: 70vh; }
