@@ -266,6 +266,15 @@ themeBtn.addEventListener('click', () => {
     themeText.innerText = "DARK";
   }
 });
+
+  document.addEventListener('mousemove', (e) => {
+  const eye = document.querySelector('.pupil');
+  const x = (e.clientX / window.innerWidth) * 100;
+  const y = (e.clientY / window.innerHeight) * 100;
+  
+  // Moves pupil within the eye socket based on mouse %
+  eye.style.transform = `translate(${x / 5 - 10}px, ${y / 5 - 10}px)`;
+});
 </script>
 </body>
 </html>
