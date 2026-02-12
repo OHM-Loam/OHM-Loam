@@ -1,5 +1,5 @@
 /* =========================
-   1. The Atmosphere (Variables)
+   1. The Atmosphere (Variables & Reset)
    ========================= */
 :root {
   --bg-warm: #f2efeb;
@@ -8,7 +8,6 @@
   --text-light: #999;
   --white-overlay: rgba(255, 255, 255, 0.8);
   --glass-blur: blur(10px);
-  /* Sync variables for toggles */
   --bg-color: #f2efeb;      
   --text-color: #1a1a1a;
 }
@@ -25,43 +24,49 @@ body.dark-mode {
 body {
   margin: 0;
   padding: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  /* Restored consistent System Font Stack */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   color: var(--text-main);
   background-color: var(--bg-warm);
-  transition: background-color 1.2s cubic-bezier(0.4, 0, 0.2, 1), color 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color 1.2s ease, color 1.2s ease;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
 
 /* =========================
-   2. Landing Page
+   2. Landing Page (The Entry + OHM Animation)
    ========================= */
 #landing-page {
   position: fixed;
   inset: 0; 
   background-color: var(--bg-color);
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
   z-index: 99999;
-  transition: opacity 1.5s ease-in-out, visibility 1.5s;
+  /* Automatic fade-out logic handled by your JS */
+  transition: opacity 2s cubic-bezier(0.4, 0, 0.2, 1), visibility 2s;
 }
 
 .landing-title {
   font-size: 3.5rem;
   font-weight: 200;
-  letter-spacing: 0.6rem;
   text-transform: uppercase;
   color: var(--text-color);
-  transition: letter-spacing 1s ease;
+  /* The OHM Animation */
+  letter-spacing: 0.5rem;
+  animation: ohm-breathe 4s ease-in-out infinite;
+}
+
+@keyframes ohm-breathe {
+  0%, 100% { letter-spacing: 0.5rem; opacity: 0.8; }
+  50% { letter-spacing: 1.2rem; opacity: 1; }
 }
 
 #landing-page.fade-out { opacity: 0; visibility: hidden; pointer-events: none; }
 
 /* =========================
-   3. Header & Hamburger (The X Fix)
+   3. Header & Hamburger (The "X" Animation)
    ========================= */
 .site-header {
   position: fixed; 
@@ -82,7 +87,7 @@ body {
 }
 
 .site-title { font-size: 1.35rem; font-weight: 200; color: white; text-decoration: none; }
-.site-title .ohm { font-weight: 600; text-transform: uppercase; }
+.site-title .ohm { font-weight: 600; }
 
 .nav-link {
   display: flex;
@@ -90,18 +95,18 @@ body {
   gap: 12px;
   text-decoration: none;
   color: white; 
-  cursor: pointer;
 }
 
 .hamburger-icon { width: 20px; height: 12px; display: flex; flex-direction: column; justify-content: space-between; }
-.hamburger-icon span { display: block; height: 2px; width: 100%; background-color: currentColor; transition: all 0.3s ease; }
+.hamburger-icon span { display: block; height: 2px; width: 100%; background-color: currentColor; transition: 0.3s ease; }
 
+/* The X Transformation */
 .nav-link.active .hamburger-icon span:nth-child(1) { transform: translateY(5px) rotate(45deg); }
 .nav-link.active .hamburger-icon span:nth-child(2) { opacity: 0; }
 .nav-link.active .hamburger-icon span:nth-child(3) { transform: translateY(-5px) rotate(-45deg); }
 
 /* =========================
-   4. About Overlay & Social Icons (REBUILT)
+   4. About Overlay & Rebuilt Socials
    ========================= */
 #about-panel {
   position: fixed;
@@ -110,10 +115,10 @@ body {
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
   transform: translateY(-100%);
-  transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
   z-index: 10000;
   overflow-y: auto;
-  color: #111; /* Locked dark text for contrast on white matte */
+  color: #111; /* Always dark for contrast */
 }
 
 #about-panel.open { transform: translateY(0); }
@@ -121,35 +126,19 @@ body {
 .about-content { max-width: 48rem; margin: 8rem auto; padding: 0 1.5rem; }
 .about-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 4rem; }
 
-.side-links {
-  display: flex;
-  align-items: center; 
-  gap: 20px;
-  margin-top: 1rem;
-}
+.side-links { display: flex; align-items: center; gap: 20px; margin-top: 1rem; }
+.side-links a { display: flex; align-items: center; width: 22px; height: 22px; }
 
-.side-links a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
+.social-icon { 
+  width: 100%; 
+  filter: brightness(0); 
+  opacity: 0.6; 
+  transition: opacity 0.3s ease; 
 }
-
-.social-icon {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  opacity: 0.7;
-  transition: opacity 0.2s ease;
-  filter: brightness(0); /* Forces icons to be black in the white about panel */
-}
-
-.instagram-link .social-icon { width: 19px; } /* Optical adjustment */
 .social-icon:hover { opacity: 1; }
 
 /* =========================
-   5. Project Hub (The "Wild" Gallery)
+   5. Project Hub (The Wild Grid)
    ========================= */
 .project-hub {
   display: grid;
@@ -161,22 +150,26 @@ body {
   margin: 0 auto;
 }
 
-.project-hub a { display: block; position: relative; overflow: hidden; border-radius: 5px; }
-.project-hub video, .video-preview { pointer-events: none; } /* FIXED: Click passes through to Link */
+.project-hub a { display: block; position: relative; overflow: hidden; border-radius: 4px; }
+.project-hub video { pointer-events: none; } /* Clicks pass to the link */
 
 .project-hub img, .project-hub video {
   width: 100%; height: 100%; object-fit: cover;
   filter: grayscale(100%);
-  transition: filter 1s ease, transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: filter 1.2s ease, transform 0.8s ease;
 }
 
-.project-hub a:hover img, .project-hub a:hover video { filter: grayscale(0%); transform: scale(1.02); }
+.project-hub a:hover img, .project-hub a:hover video { 
+  filter: grayscale(0%); 
+  transform: scale(1.03); 
+}
+
 .project-hub a.featured { grid-row: span 2; }
 .project-hub a.wide { grid-column: span 2; }
 .project-hub a:nth-child(even) { transform: translateY(4rem); }
 
 /* =========================
-   6. Footer, Eye & Toggles
+   6. Footer & The Twitchy Eye
    ========================= */
 .smart-footer {
   position: fixed;
@@ -196,33 +189,22 @@ body {
   animation: blink 5s infinite;
 }
 
-.pupil { width: 10px; height: 10px; background: black; border-radius: 50%; animation: saccadeLook 12s infinite; }
+.pupil { width: 10px; height: 10px; background: black; border-radius: 50%; animation: saccadeLook 10s infinite; }
 
-.floating-toggle { background: transparent; border: none; color: white; cursor: pointer; transition: transform 0.8s ease; }
-.floating-toggle svg { width: 24px; height: 24px; }
-.floating-toggle:hover { transform: scale(1.2) rotate(15deg); }
-
-/* =========================
-   7. Glightbox: Luxury Matte
-   ========================= */
-.gslide-image, .gslide-video {
-  background: #ffffff !important;
-  padding: 30px !important;
-  border: 1px solid rgba(0,0,0,0.08);
-}
-.gnext, .gprev, .gclose, .plyr__controls { display: none !important; }
+.floating-toggle { background: transparent; border: none; color: white; cursor: pointer; transition: transform 0.5s ease; }
+.floating-toggle:hover { transform: scale(1.2) rotate(10deg); }
 
 /* =========================
-   8. Animations & Spacers
+   7. Animations
    ========================= */
 @keyframes blink { 0%, 90%, 100% { transform: scaleY(1); } 93% { transform: scaleY(0.1); } 96% { transform: scaleY(1); } 98% { transform: scaleY(0.1); } }
 @keyframes saccadeLook {
-  0%, 15%, 100% { transform: translate(0, 0); }
-  17% { transform: translate(5px, -1px); }
-  37% { transform: translate(-3px, -2px); }
-  57% { transform: translate(0, 3px); }
-  77% { transform: translate(4px, 2px); }
+  0%, 20%, 100% { transform: translate(0, 0); }
+  22% { transform: translate(4px, -2px); }
+  45% { transform: translate(4px, -2px); }
+  47% { transform: translate(-3px, 1px); }
+  70% { transform: translate(-3px, 1px); }
+  72% { transform: translate(0, 3px); }
 }
 
 .spacer-md { height: 40vh; }
-.spacer-lg { height: 70vh; }
