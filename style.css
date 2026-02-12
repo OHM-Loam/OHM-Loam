@@ -602,7 +602,7 @@ body {
   width: 100%;
 }
 
-/* Animations */
+/* 1. The Blink: Keep this, it’s a classic */
 @keyframes blink {
   0%, 90%, 100% { transform: scaleY(1); }
   93% { transform: scaleY(0.1); }
@@ -610,8 +610,27 @@ body {
   98% { transform: scaleY(0.1); }
 }
 
-@keyframes subtleLook {
-  0%, 100% { transform: translate(0, 0); }
-  25% { transform: translate(3px, 0); }
-  75% { transform: translate(-3px, 0); }
+/* 2. The Saccade Look: Jerky, realistic eye movements */
+@keyframes saccadeLook {
+  0%, 15%, 100% { transform: translate(0, 0); } /* Center Hold */
+  17% { transform: translate(5px, -1px); }      /* Sharp dart right */
+  35% { transform: translate(5px, -1px); }      /* Hold */
+  37% { transform: translate(-3px, -2px); }     /* Sharp dart up-left */
+  55% { transform: translate(-3px, -2px); }     /* Hold */
+  57% { transform: translate(0, 3px); }         /* Dart down */
+  75% { transform: translate(0, 3px); }         /* Hold */
+  77% { transform: translate(4px, 2px); }       /* Dart bottom-right */
+}
+
+/* Update your pupil class to use the new animation */
+.pupil {
+  width: 10px;
+  height: 10px;
+  background: black;
+  border-radius: 50%;
+  animation: saccadeLook 12s infinite; /* Longer duration for a more 'natural' feel */
+}
+.eye-wrapper:hover .pupil {
+  transform: scale(1.5);
+  transition: transform 0.2s ease;
 }
