@@ -32,42 +32,44 @@ body {
 /* =========================
    2. THE GATE (Landing Logic)
    ========================= */
-.site-header, .smart-footer, main {
+
+/* Hide ONLY the UI, specifically excluding the landing page */
+body:not(.landing-active) :is(.site-header, .smart-footer, main, #about-panel) {
   opacity: 0;
   pointer-events: none;
-  transition: opacity 1.5s ease;
+  visibility: hidden;
 }
 
-body.landing-active .site-header,
-body.landing-active .smart-footer,
-body.landing-active main {
+/* Reveal the UI when active */
+body.landing-active :is(.site-header, .smart-footer, main) {
   opacity: 1;
   pointer-events: auto;
+  visibility: visible;
 }
 
 #landing-page {
   position: fixed;
   inset: 0;
   background-color: var(--bg-color);
-  z-index: 99999;
+  z-index: 999999; /* Higher than everything else */
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  
+  /* Force visibility regardless of other rules */
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  
   transition: opacity 1.5s ease-in-out, visibility 1.5s;
 }
 
-.landing-title {
-  font-size: 3.5rem;
-  font-weight: 200;
-  letter-spacing: 0.6rem;
-  text-transform: uppercase;
-  color: var(--text-color);
-  transition: letter-spacing 1s ease;
+#landing-page.fade-out {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
-
-#landing-page:hover .landing-title { letter-spacing: 1.2rem; }
-#landing-page.fade-out { opacity: 0; visibility: hidden; pointer-events: none; }
 
 /* =========================
    3. SMART HEADER (Reactive Difference)
