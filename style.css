@@ -257,12 +257,27 @@ body {
 .footer-content { display: flex; justify-content: space-between; align-items: center; }
 
 .eye {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  transform: scaleY(0.9); /* Slightly bored look */
+  width: 28px;
+  height: 16px;
+  background: white !important; /* Force visibility */
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  animation: blink 5s infinite;
+  isolation: isolate; /* FIX: Keeps it from disappearing in 'difference' mode */
 }
 
 .pupil {
-  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Adds a tiny 'bounce' when it moves */
+  width: 10px;
+  height: 10px;
+  background: black !important;
+  border-radius: 50%;
+  position: absolute;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  will-change: transform;
 }
 .floating-toggle { background: transparent; border: none; color: white; cursor: pointer; transition: transform 0.8s ease; }
 .floating-toggle svg { width: 24px; height: 24px; }
