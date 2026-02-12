@@ -23,16 +23,24 @@ body {
 }
 
 /* =========================
-   2. Header & Navigation (Fixed for Dark Mode)
+   2. Header & Navigation (Reactive/Smart Version)
    ========================= */
 .site-header {
-  position: sticky;
+  /* Change: from sticky to fixed so it floats over images */
+  position: fixed; 
   top: 0;
-  background: var(--header-bg); 
-  z-index: 1000;
-  border-bottom: 1px solid rgba(0,0,0,0.07);
-  padding: 1rem 0;
-  transition: background 1.2s ease;
+  width: 100%;
+  
+  /* Change: Remove solid background and border */
+  background: transparent; 
+  border-bottom: none;
+  
+  /* The Magic: This makes all text inside the header react to the scroll */
+  mix-blend-mode: difference; 
+  
+  z-index: 10001; /* High z-index to stay above the gallery */
+  padding: 1.5rem 0; /* Adjusted slightly for a floatier feel */
+  pointer-events: none; /* Let the scroll happen "through" the header */
 }
 
 .header-inner {
@@ -42,17 +50,18 @@ body {
   max-width: 72rem;
   margin: 0 auto;
   padding: 0 1.5rem;
+  /* Change: Re-enable pointer events for the title/links */
+  pointer-events: auto; 
 }
 
 .site-title {
   font-size: 1.35rem;
   font-weight: 200;
   margin: 0;
-  /* CHANGE: Swapped #112 for the variable */
-  color: var(--text-color); 
+  /* Change: Use white so 'difference' can flip it to black on light backgrounds */
+  color: white; 
   text-decoration: none;
   letter-spacing: 0.02em;
-  transition: color 1.2s ease;
 }
 
 .site-title .ohm {
@@ -70,11 +79,11 @@ body {
   align-items: center;
   gap: 12px;
   text-decoration: none;
-  /* CHANGE: Swapped --text-main for --text-color */
-  color: var(--text-color); 
+  /* Change: Use white for the blend mode to work its magic */
+  color: white; 
   font-size: 0.95rem;
   font-weight: 500;
-  transition: opacity 0.3s ease, color 1.2s ease;
+  transition: opacity 0.3s ease;
 }
 
 /* Targeted underline on text only */
@@ -87,12 +96,8 @@ body {
 
 .nav-link:hover .link-text,
 .nav-link.active .link-text {
-  /* CHANGE: Ensure the underline also uses the variable */
-  border-bottom-color: var(--text-color);
-}
-
-.nav-link.dimmed {
-  opacity: 0.3;
+  /* Change: Border should also be white to react with the blend mode */
+  border-bottom-color: white;
 }
 
 /* =========================
