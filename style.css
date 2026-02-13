@@ -278,6 +278,35 @@ body {
   to { opacity: 0; transform: scale(1.02); }
 }
 
+/* Styling the internal scroll of the Lightbox */
+.gallery-scroll-container {
+  display: flex;
+  flex-direction: column;
+  gap: 80px; /* Large space between images in the study */
+  padding: 40px 0;
+  align-items: center;
+}
+
+.gallery-scroll-container img {
+  max-width: 100%;
+  height: auto;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05); /* Subtle shadow for each study item */
+}
+
+.gallery-footer {
+  font-family: serif;
+  font-style: italic;
+  font-size: 0.9rem;
+  color: #999;
+  margin-top: 40px;
+}
+
+/* Ensure the GLightbox allows vertical scrolling for inline content */
+.ginline {
+  overflow-y: auto !important;
+  max-height: 90vh;
+}
+
 /* =========================
    7. Utility & Symbol Spinner
    ========================= */
