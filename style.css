@@ -204,101 +204,39 @@ body {
 }
 
 /* =========================
-   6. Glightbox: Luxury Matte (Restored & Scrollable)
+   6. Glightbox: Standard Luxury Matte
    ========================= */
+.goverlay { background: rgba(242, 239, 235, 0.98) !important; backdrop-filter: blur(10px); }
+.glightbox-container { cursor: crosshair; }
 
-/* THE BACKDROP: Warm Light Museum Mode */
-.goverlay {
-  background: rgba(242, 239, 235, 0.98) !important; 
-  backdrop-filter: blur(10px);
-}
-
-/* THE CONTAINER: Just handling the cursor now */
-.glightbox-container {
-  cursor: crosshair; 
-}
-
-/* THE WHITE MUSEUM FRAME & INLINE CONTENT */
-.gslide-image, 
-.gslide-video, 
-.gslide-inline,
-.ginline {
+.gslide-image, .gslide-video {
   background: #ffffff !important;
   padding: 30px !important;
-  border: 1px solid rgba(0,0,0,0.05);
   box-shadow: 0 20px 50px rgba(0,0,0,0.1) !important;
-  box-sizing: border-box !important; 
   display: flex !important;
-  flex-direction: column;
   align-items: center;
-  justify-content: flex-start; /* Start at top for scrolling */
+  justify-content: center;
 }
 
-/* Specific logic for the Scrollable Study Window */
-.ginline {
-  padding: 0 !important; /* Let the internal container handle padding */
-  overflow-y: auto !important; 
-  max-height: 85vh; 
-  scrollbar-width: thin;
-  scrollbar-color: #ddd transparent;
+.gslide-image img, .gslide-video video {
+  max-height: 80vh !important;
+  object-fit: contain !important;
 }
 
-/* Custom Scrollbar for Chrome/Safari (The Ghost Bar) */
-.ginline::-webkit-scrollbar { width: 4px; }
-.ginline::-webkit-scrollbar-track { background: transparent; }
-.ginline::-webkit-scrollbar-thumb { background: #ddd; border-radius: 10px; }
+.gclose, .gnext, .gprev, .gbtn { display: none !important; }
 
-/* THE INTERNAL STUDY CONTAINER */
-.gallery-scroll-container {
-  display: flex;
-  flex-direction: column;
-  gap: 80px; /* Dramatic editorial spacing */
-  padding: 60px 40px;
-  width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.gallery-scroll-container img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border: 1px solid rgba(0,0,0,0.03); 
-}
-
-.gallery-footer {
-  font-family: serif;
-  font-style: italic;
-  font-size: 0.9rem;
-  color: #999;
-  margin: 60px 0;
-  text-align: center;
-}
-
-/* HIDE UI ELEMENTS */
-.gclose, .gnext, .gprev, .gbtn {
-  display: none !important;
-}
-
-/* ENTRY/EXIT ANIMATIONS */
-.gfadeIn {
-  animation: galleryReveal 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-}
-
-.gfadeOut {
-  animation: galleryHide 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-}
+/* Entry/Exit Animations */
+.gfadeIn { animation: galleryReveal 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; }
+.gfadeOut { animation: galleryHide 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; }
 
 @keyframes galleryReveal {
   from { opacity: 0; transform: scale(0.95) translateY(15px); }
   to { opacity: 1; transform: scale(1) translateY(0); }
 }
-
 @keyframes galleryHide {
   from { opacity: 1; transform: scale(1); }
   to { opacity: 0; transform: scale(1.02); }
 }
-
 /* =========================
    7. Utility & Symbol Spinner
    ========================= */
@@ -407,4 +345,59 @@ body {
   font-weight: 200;
   display: inline-block;
 }
+
+/* =========================
+   11. Project Study Expansion
+   ========================= */
+
+/* The wrapper that ensures the study images don't break the CSS Grid */
+.study-expansion {
+  grid-column: 1 / -1; /* Forces the study to take up the full width of the hub */
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12rem; /* Matches your grid gap for consistency */
+  transition: max-height 1.2s cubic-bezier(0.165, 0.84, 0.44, 1), 
+              opacity 0.8s ease, 
+              margin 1s ease;
+}
+
+/* State when clicked */
+.study-expansion.is-open {
+  max-height: 8000px; /* High enough for many photos */
+  opacity: 1;
+  margin-top: 10rem;
+  margin-bottom: 15rem;
+  padding-bottom: 5rem;
+  border-bottom: 1px solid rgba(0,0,0,0.05); /* Subtle 'end of study' line */
+}
+
+.study-expansion img {
+  width: 100%;
+  max-width: 1100px; /* Editorial width - not too wide, not too small */
+  height: auto;
+  filter: grayscale(100%);
+  transition: filter 1s ease;
+}
+
+.study-expansion img:hover {
+  filter: grayscale(0%);
+}
+
+/* The 'Close' trigger at the bottom */
+.study-close-btn {
+  font-family: serif;
+  font-style: italic;
+  text-decoration: none;
+  color: #000;
+  cursor: pointer;
+  padding: 2rem;
+  opacity: 0.5;
+  transition: opacity 0.3s;
+}
+
+.study-close-btn:hover { opacity: 1; }
 
