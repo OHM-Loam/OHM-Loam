@@ -204,7 +204,7 @@ body {
 }
 
 /* =========================
-   6. Glightbox: Luxury Matte (Restored)
+   6. Glightbox: Luxury Matte (Restored & Scrollable)
    ========================= */
 
 /* THE BACKDROP: Warm Light Museum Mode */
@@ -218,33 +218,61 @@ body {
   cursor: crosshair; 
 }
 
-/* THE WHITE MUSEUM FRAME */
+/* THE WHITE MUSEUM FRAME & INLINE CONTENT */
 .gslide-image, 
 .gslide-video, 
-.gslide-inline {
+.gslide-inline,
+.ginline {
   background: #ffffff !important;
   padding: 30px !important;
   border: 1px solid rgba(0,0,0,0.05);
   box-shadow: 0 20px 50px rgba(0,0,0,0.1) !important;
   box-sizing: border-box !important; 
   display: flex !important;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start; /* Start at top for scrolling */
 }
 
-.gslide-inner-content {
-  max-width: 75vw !important;
-  margin: auto;
-  overflow: visible !important;
+/* Specific logic for the Scrollable Study Window */
+.ginline {
+  padding: 0 !important; /* Let the internal container handle padding */
+  overflow-y: auto !important; 
+  max-height: 85vh; 
+  scrollbar-width: thin;
+  scrollbar-color: #ddd transparent;
 }
 
-.gslide-image img, 
-.gslide-video video {
-  max-height: 80vh !important;
-  width: auto !important;
-  height: auto !important;
-  object-fit: contain !important;
-  cursor: default;
+/* Custom Scrollbar for Chrome/Safari (The Ghost Bar) */
+.ginline::-webkit-scrollbar { width: 4px; }
+.ginline::-webkit-scrollbar-track { background: transparent; }
+.ginline::-webkit-scrollbar-thumb { background: #ddd; border-radius: 10px; }
+
+/* THE INTERNAL STUDY CONTAINER */
+.gallery-scroll-container {
+  display: flex;
+  flex-direction: column;
+  gap: 80px; /* Dramatic editorial spacing */
+  padding: 60px 40px;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.gallery-scroll-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid rgba(0,0,0,0.03); 
+}
+
+.gallery-footer {
+  font-family: serif;
+  font-style: italic;
+  font-size: 0.9rem;
+  color: #999;
+  margin: 60px 0;
+  text-align: center;
 }
 
 /* HIDE UI ELEMENTS */
@@ -255,7 +283,6 @@ body {
 /* ENTRY/EXIT ANIMATIONS */
 .gfadeIn {
   animation: galleryReveal 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-  transform-origin: center;
 }
 
 .gfadeOut {
@@ -263,48 +290,13 @@ body {
 }
 
 @keyframes galleryReveal {
-  from {
-    opacity: 0;
-    transform: scale(0.95) translateY(15px);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
+  from { opacity: 0; transform: scale(0.95) translateY(15px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
 }
 
 @keyframes galleryHide {
   from { opacity: 1; transform: scale(1); }
   to { opacity: 0; transform: scale(1.02); }
-}
-
-/* Styling the internal scroll of the Lightbox */
-.gallery-scroll-container {
-  display: flex;
-  flex-direction: column;
-  gap: 80px; /* Large space between images in the study */
-  padding: 40px 0;
-  align-items: center;
-}
-
-.gallery-scroll-container img {
-  max-width: 100%;
-  height: auto;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05); /* Subtle shadow for each study item */
-}
-
-.gallery-footer {
-  font-family: serif;
-  font-style: italic;
-  font-size: 0.9rem;
-  color: #999;
-  margin-top: 40px;
-}
-
-/* Ensure the GLightbox allows vertical scrolling for inline content */
-.ginline {
-  overflow-y: auto !important;
-  max-height: 90vh;
 }
 
 /* =========================
