@@ -202,10 +202,23 @@ body {
   pointer-events: none !important;
   cursor: default;
 }
+
 /* =========================
    6. Glightbox: Luxury Matte (Restored)
    ========================= */
-/* The White Museum Frame */
+
+/* THE BACKDROP: Warm Light Museum Mode */
+.goverlay {
+  background: rgba(242, 239, 235, 0.98) !important; 
+  backdrop-filter: blur(10px);
+}
+
+/* THE CONTAINER: Just handling the cursor now */
+.glightbox-container {
+  cursor: crosshair; 
+}
+
+/* THE WHITE MUSEUM FRAME */
 .gslide-image, 
 .gslide-video, 
 .gslide-inline {
@@ -213,8 +226,6 @@ body {
   padding: 30px !important;
   border: 1px solid rgba(0,0,0,0.05);
   box-shadow: 0 20px 50px rgba(0,0,0,0.1) !important;
-  
-  /* FIX: Ensures padding is INSIDE the width calculation */
   box-sizing: border-box !important; 
   display: flex !important;
   align-items: center;
@@ -222,9 +233,9 @@ body {
 }
 
 .gslide-inner-content {
-  max-width: 75vw !important; /* Dialed back slightly to give the 'matte' room to breathe */
+  max-width: 75vw !important;
   margin: auto;
-  overflow: visible !important; /* Prevents the shadow from being clipped */
+  overflow: visible !important;
 }
 
 .gslide-image img, 
@@ -236,17 +247,37 @@ body {
   cursor: default;
 }
 
-.glightbox-container {
-  background: rgba(242, 239, 235, 0.98); /* Your warm light mode */
-  cursor: crosshair; /* Or 'zoom-out' - signals that a click exits */
-}
-
-.gclose, 
-.gnext, 
-.gprev, 
-.gbtn {
+/* HIDE UI ELEMENTS */
+.gclose, .gnext, .gprev, .gbtn {
   display: none !important;
 }
+
+/* ENTRY/EXIT ANIMATIONS */
+.gfadeIn {
+  animation: galleryReveal 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  transform-origin: center;
+}
+
+.gfadeOut {
+  animation: galleryHide 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+@keyframes galleryReveal {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes galleryHide {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(1.02); }
+}
+
 /* =========================
    7. Utility & Symbol Spinner
    ========================= */
