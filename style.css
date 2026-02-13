@@ -132,7 +132,7 @@ body {
 .social-icon:hover { opacity: 1; }
 
 /* =========================
-   5. Project Hub (Grid) 
+   5. Project Hub (Stationary) 
    ========================= */
 .project-hub {
   display: grid;
@@ -146,21 +146,33 @@ body {
 
 .project-hub a {
   display: block;
-  /* Shrink the image relative to the 300px cell */
   width: 85%; 
   height: 85%;
-  margin: auto; /* Centers the thumbnail in the large gap */
+  margin: auto; 
   overflow: hidden;
   position: relative;
-  border-radius: 2px; /* Sharper corners feel more 'gallery' */
+  border-radius: 2px;
   pointer-events: auto !important;
+  /* Remove any global transitions here to prevent 'snapping' */
 }
 
-.project-hub a.video-locked {
-  pointer-events: none !important; /* Dead to clicks */
-  cursor: default;                /* No hand icon */
+/* THE STAGGER: Only applied to even items, no hover change */
+.project-hub a:nth-child(even) {
+  transform: translateY(6rem);
 }
 
+/* THE HOVER: We only change the Z-index, NOT the position */
+.project-hub a:hover {
+  z-index: 10;
+  /* No translateY here = No movement */
+}
+
+/* Ensure even items stay at exactly 6rem even when hovered */
+.project-hub a:nth-child(even):hover {
+  transform: translateY(6rem); 
+}
+
+/* MEDIA: The only thing that changes is the filter */
 .project-hub img, 
 .project-hub video,
 .video-preview {
@@ -170,33 +182,25 @@ body {
   display: block;
   pointer-events: none !important; 
   filter: grayscale(100%) contrast(1.1);
-  transition: filter 0.8s ease;
+  transition: filter 0.8s ease; /* Smooth color fade only */
 }
 
 .project-hub a:hover img, 
 .project-hub a:hover video {
   filter: grayscale(0%) contrast(1);
-  transform: none !important; /* Forces no movement */
-}
-.project-hub a:nth-child(even) {
-  transform: translateY(6rem);
-}
-.project-hub a:hover {
-  transform: translateY(-4px);
-  z-index: 10;
+  transform: none !important; /* Explicitly kills any scaling */
 }
 
-.project-hub a:nth-child(even):hover {
-  transform: translateY(6rem); 
-}
-
+/* Grid Modifiers */
 .project-hub a.featured { grid-row: span 2; }
 .project-hub a.wide { grid-column: span 2; }
 .extra-room { margin-top: 15rem; }
 .slim-shift { max-width: 80%; margin-left: auto; }
 
-.project-hub a:nth-child(even) {
-  transform: translateY(4rem);
+/* THE LOCKED VIDEO */
+.project-hub a.video-locked {
+  pointer-events: none !important;
+  cursor: default;
 }
 /* =========================
    6. Glightbox: Luxury Matte (Restored)
