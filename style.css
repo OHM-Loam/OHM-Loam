@@ -352,27 +352,21 @@ body {
 
 /* The wrapper that ensures the study images don't break the CSS Grid */
 .study-expansion {
-  grid-column: 1 / -1; /* Forces the study to take up the full width of the hub */
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  display: flex;
+  grid-column: 1 / -1; /* Take up the whole row */
+  display: none;       /* COMPLETELY remove from grid flow when closed */
   flex-direction: column;
   align-items: center;
-  gap: 12rem; /* Matches your grid gap for consistency */
-  transition: max-height 1.2s cubic-bezier(0.165, 0.84, 0.44, 1), 
-              opacity 0.8s ease, 
-              margin 1s ease;
+  gap: 12rem;
+  opacity: 0;
+  transition: opacity 0.8s ease;
 }
 
 /* State when clicked */
 .study-expansion.is-open {
-  max-height: 8000px; /* High enough for many photos */
+  display: flex;       /* Put it back in the grid flow */
   opacity: 1;
-  margin-top: 10rem;
-  margin-bottom: 15rem;
-  padding-bottom: 5rem;
-  border-bottom: 1px solid rgba(0,0,0,0.05); /* Subtle 'end of study' line */
+  margin: 10rem 0;
+  max-height: none;    /* Let it be as long as it needs to be */
 }
 
 .study-expansion img {
