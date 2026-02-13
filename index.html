@@ -321,26 +321,29 @@ window.addEventListener('load', () => {
   });
 });
   
-  document.querySelectorAll('.study-trigger').forEach(trigger => {
+ // 1. Initialize GLightbox ONLY for the standard images
+const lightbox = GLightbox({
+    selector: '.glightbox', // This ensures it ignores '.study-trigger'
+    touchNavigation: true,
+    loop: false,
+    closeOnOutsideClick: true
+});
+
+// 2. Handle the Study Expansion separately
+document.querySelectorAll('.study-trigger').forEach(trigger => {
   trigger.addEventListener('click', function(e) {
-    const currentExpansion = this.nextElementSibling;
-    const allExpansions = document.querySelectorAll('.study-expansion');
-
-    // 1. Close all other open studies first
-    allExpansions.forEach(exp => {
-      if (exp !== currentExpansion) {
-        exp.classList.remove('is-open');
-      }
-    });
-
-    // 2. Toggle the clicked one
-    currentExpansion.classList.toggle('is-open');
-
-    // 3. If opening, scroll to it smoothly
-    if (currentExpansion.classList.contains('is-open')) {
+    e.preventDefault();
+    e.stopPropagation(); // Stops the click from bubbling up to other scripts
+    
+    const expansion = this.nextElementSibling;
+    
+    // Toggle the expansion
+    expansion.classList.toggle('is-open');
+    
+    if (expansion.classList.contains('is-open')) {
       setTimeout(() => {
-        currentExpansion.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }, 500);
+        expansion.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 400);
     }
   });
 });
