@@ -180,7 +180,7 @@ body {
 .project-hub a:hover img, 
 .project-hub a:hover video {
   filter: grayscale(0%);
-  transform: scale(1.02); /* Slightly more scale since thumbs are smaller */
+  transform: scale(1.01); /* Slightly more scale since thumbs are smaller */
 }
 .project-hub a:nth-child(even) {
   transform: translateY(6rem);
