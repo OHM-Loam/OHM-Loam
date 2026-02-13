@@ -77,49 +77,52 @@
 </div>
 
   <main>
-    <section class="project-hub">
-  <a href="#water-study-content" class="glightbox featured" data-type="inline">
-  <img src="images/IMG_4112_2026_01_04.jpg" alt="Bambo">
-</a>
-
-  <div id="water-study-content" style="display:none;">
-    <div class="gallery-scroll-container">
-       <img src="images/IMG_4112_2026_01_04.jpg" alt="Main">
+  <section class="project-hub">
+    
+    <a href="javascript:void(0)" class="study-trigger featured">
+      <img src="images/IMG_4112_2026_01_04.jpg" alt="Bambo">
+    </a>
+    
+    <div class="study-expansion">
        <img src="images/AWYL0983.jpeg" alt="Study 1">
        <img src="images/IMG_1596.jpg" alt="Study 2">
        <img src="images/IMG_4022_2026_01_05.jpg" alt="Study 3">
-       <div class="gallery-footer">— End of Study —</div>
+       <div class="study-close-btn">— Close Study —</div>
     </div>
-  </div>
-      <a href="images/10590655_10154537121640088_1832706945196585128_n_no.jpg" class="glightbox gallery-item">
-        <img src="images/10590655_10154537121640088_1832706945196585128_n_no.jpg" alt="Me">
-      </a>
 
-      <a href="images/IMG_4283_Jan17_2026.webp" class="glightbox gallery-item">
-        <img src="images/IMG_4283_Jan17_2026.webp" alt="Mallow">
-      </a>
-      
- <a href="images/Water_Test_2_2026_01_11.mp4" class="glightbox gallery-item wide video-locked">
-  <video autoplay loop muted playsinline class="video-preview">
-    <source src="images/Water_Test_2_2026_01_11.mp4" type="video/mp4">
-  </video>
-</a>
-      <div class="spacer" style="grid-column: span 1;"></div>
+    <a href="images/10590655_10154537121640088_1832706945196585128_n_no.jpg" class="glightbox gallery-item">
+      <img src="images/10590655_10154537121640088_1832706945196585128_n_no.jpg" alt="Me">
+    </a>
 
-      <a href="images/img_5005_blogger_edit_2020_01_11.webp" class="glightbox gallery-item featured">
-        <img src="images/img_5005_blogger_edit_2020_01_11.webp" alt="Bobbins" Loading="lazy">
-      </a> 
-     <a href="images/IMG_1834_edit_2026_01_11.webp" class="glightbox gallery-item featured">
-        <img src="images/IMG_1834_edit_2026_01_11.webp" alt="Roller" Loading="lazy">
-      </a> 
-      <a href="images/4600730672_57847acdf5_b_2026_01_11.webp" class="glightbox gallery-item nudge-up">
-        <img src="images/4600730672_57847acdf5_b_2026_01_11.webp" alt="Wool" Loading="lazy">
-      </a> 
-      <a href="images/IMG_4022_2026_01_05.jpg" class="glightbox gallery-item wide slim-shift">
-        <img src="images/IMG_4022_2026_01_05.jpg" alt="Fader" Loading="lazy">
-      </a>   
-    </section>
-  </main>
+    <a href="images/IMG_4283_Jan17_2026.webp" class="glightbox gallery-item">
+      <img src="images/IMG_4283_Jan17_2026.webp" alt="Mallow">
+    </a>
+    
+    <a href="images/Water_Test_2_2026_01_11.mp4" class="glightbox gallery-item wide video-locked">
+      <video autoplay loop muted playsinline class="video-preview">
+        <source src="images/Water_Test_2_2026_01_11.mp4" type="video/mp4">
+      </video>
+    </a>
+
+    <div class="spacer" style="grid-column: span 1;"></div>
+
+    <a href="images/img_5005_blogger_edit_2020_01_11.webp" class="glightbox gallery-item featured">
+      <img src="images/img_5005_blogger_edit_2020_01_11.webp" alt="Bobbins" loading="lazy">
+    </a> 
+
+    <a href="images/IMG_1834_edit_2026_01_11.webp" class="glightbox gallery-item featured">
+      <img src="images/IMG_1834_edit_2026_01_11.webp" alt="Roller" loading="lazy">
+    </a> 
+
+    <a href="images/4600730672_57847acdf5_b_2026_01_11.webp" class="glightbox gallery-item nudge-up">
+      <img src="images/4600730672_57847acdf5_b_2026_01_11.webp" alt="Wool" loading="lazy">
+    </a> 
+
+    <a href="images/IMG_4022_2026_01_05.jpg" class="glightbox gallery-item wide slim-shift">
+      <img src="images/IMG_4022_2026_01_05.jpg" alt="Fader" loading="lazy">
+    </a>    
+  </section>
+</main>
 
 <footer class="smart-footer">
   <div class="footer-content">
@@ -315,6 +318,30 @@ window.addEventListener('load', () => {
       // Pupil returns to normal size via CSS transitions
       pupil.style.transform = `translate(0, 0) scale(1)`;
     }, 800);
+  });
+});
+  
+  document.querySelectorAll('.study-trigger').forEach(trigger => {
+  trigger.addEventListener('click', function(e) {
+    const currentExpansion = this.nextElementSibling;
+    const allExpansions = document.querySelectorAll('.study-expansion');
+
+    // 1. Close all other open studies first
+    allExpansions.forEach(exp => {
+      if (exp !== currentExpansion) {
+        exp.classList.remove('is-open');
+      }
+    });
+
+    // 2. Toggle the clicked one
+    currentExpansion.classList.toggle('is-open');
+
+    // 3. If opening, scroll to it smoothly
+    if (currentExpansion.classList.contains('is-open')) {
+      setTimeout(() => {
+        currentExpansion.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 500);
+    }
   });
 });
 </script>
