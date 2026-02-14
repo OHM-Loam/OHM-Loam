@@ -321,32 +321,28 @@ window.addEventListener('load', () => {
 });
   
 /* =========================
-   TJ Logic
+   TJ Logic (Refined)
    ========================= */
 const lightbox = GLightbox({
   selector: '.glightbox',
   loop: false,
   zoomable: false,
-  closeOnOutsideClick: false, // Prevents accidental closing
+  closeOnOutsideClick: false, 
   touchNavigation: true,
-  draggable: false // Keeps the cursor logic clean
+  draggable: false 
 });
 
-// Create the vertical counter list when the gallery opens
 lightbox.on('open', () => {
   const container = document.querySelector('.glightbox-container');
   
-  // Clean up any old counters first
   const oldCounter = document.querySelector('.custom-gcounter');
   if (oldCounter) oldCounter.remove();
 
   const counterDiv = document.createElement('div');
   counterDiv.className = 'custom-gcounter';
   
-  // Get total images in the current active gallery
   const total = lightbox.elements.length;
   
-  // Only show numbers if there's more than 1 image (a 'study')
   if (total > 1) {
     for (let i = 0; i < total; i++) {
       const num = document.createElement('span');
@@ -354,14 +350,16 @@ lightbox.on('open', () => {
       num.innerText = (i + 1).toString().padStart(2, '0');
       if (i === 0) num.classList.add('active');
       
-      num.onclick = () => lightbox.goToSlide(i);
+      num.onclick = (e) => {
+        e.stopPropagation(); // Prevents the 'next/prev' cursor area from firing
+        lightbox.goToSlide(i);
+      };
       counterDiv.appendChild(num);
     }
     container.appendChild(counterDiv);
   }
 });
 
-// Update which number is 'active' as you navigate
 lightbox.on('slide_changed', ({ current }) => {
   const nums = document.querySelectorAll('.gcount-num');
   nums.forEach(n => n.classList.remove('active'));
