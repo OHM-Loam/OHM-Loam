@@ -277,26 +277,29 @@ body.glightbox-is-active footer {
     align-items: center !important;
     justify-content: center !important;
     position: fixed !important;
-    top: 35px !important; 
-    right: 35px !important;
-    width: 44px !important;
-    height: 44px !important;
-    border: 1px solid currentColor !important; /* Adapts to text color */
+    top: 30px !important;
+    right: 30px !important;
+    /* Reduced from 44px to 32px for a sleeker look */
+    width: 32px !important;
+    height: 32px !important;
+    border: 1px solid #000 !important;
     border-radius: 50% !important;
-    background: white !important; /* Pure white background for the X button */
-    color: black !important;
+    background: #fff !important;
     cursor: pointer !important;
-    z-index: 1000002 !important;
+    z-index: 20000 !important;
 }
 
 .gclose svg {
-    width: 12px !important;
-    height: 12px !important;
+    width: 14px !important;
+    height: 14px !important;
 }
 
 .gclose svg path {
   stroke: #000 !important;
   stroke-width: 1.2px !important; /* Balanced thinness */
+}
+glightbox {
+    cursor: cell !important; 
 }
 /* =========================
    7. Utility & Symbol Spinner
