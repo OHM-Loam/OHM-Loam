@@ -459,25 +459,22 @@ glightbox {
   position: fixed;
   top: 0;
   left: 0;
-  width: 40px;
-  height: 40px;
-  pointer-events: none; /* Crucial: clicks go THROUGH this to the image */
-  z-index: 10000;
+  width: 44px; /* Matches the size in your screenshot */
+  height: 44px;
+  pointer-events: none; 
+  /* Seat this higher than the GLightbox (1000000) */
+  z-index: 2000000 !important; 
   opacity: 0;
-  transition: opacity 0.3s ease;
-  transform: translate(-50%, -50%); /* Centers the circle on the mouse tip */
   display: flex;
   align-items: center;
   justify-content: center;
+  /* Use 'transform' for movement, not top/left, for better performance */
+  transition: opacity 0.2s ease;
+  will-change: transform; 
 }
 
 /* Hide the default cursor when hovering over the gallery images */
-.glightbox, .gslide-image {
+.glightbox, .gslide-image img, .gslide-image {
   cursor: none !important;
 }
 
-/* Show our custom cursor only when hovering over images */
-.glightbox:hover ~ #custom-cursor,
-.glightbox:hover #custom-cursor {
-  opacity: 1;
-}
