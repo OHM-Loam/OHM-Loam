@@ -2,21 +2,9 @@
    1. Base Reset & Colors
    ========================= */
 :root {
-  --bg-warm: #f2efeb;
-  --text-main: #111;
-  --text-muted: #888;
-  --text-light: #999;
-  --white-overlay: rgba(255, 255, 255, 0.8);
-  --glass-blur: blur(10px);
-  --bg-color: #f2efeb;      
-  --text-color: #1a1a1a;
-}
-
-body.dark-mode {
-  --bg-color: #1a1a1a;      
-  --text-color: #f2efeb;
-  --bg-warm: #1a1a1a;
-  --text-main: #f2efeb;
+  --bg-color: #ffffff;      /* Pure white background */
+  --text-main: #000000;     /* Sharp black text */
+  --text-muted: #999999;    /* For the 01, 02 numbering */
 }
 
 * { box-sizing: border-box; }
@@ -26,12 +14,11 @@ body {
   padding: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   color: var(--text-main);
-  background-color: var(--bg-warm);
-  transition: background-color 1.2s cubic-bezier(0.4, 0, 0.2, 1), color 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  background-color: var(--bg-color); /* Now stays white */
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  /* Transitions removed so the site feels instant and museum-grade */
 }
-
 body.glightbox-is-active header, 
 body.glightbox-is-active footer {
     z-index: 999999 !important;
