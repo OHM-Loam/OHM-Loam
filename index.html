@@ -321,76 +321,51 @@ window.addEventListener('load', () => {
 });
   
 /* =========================
-   TJ Logic (Refined with UI Guard)
+   TJ Logic: Absolute Override
    ========================= */
 const lightbox = GLightbox({
-  selector: '.glightbox',
-  loop: false,
-  zoomable: false,
-  closeOnOutsideClick: false, 
-  touchNavigation: true,
-  draggable: false,
-  /* ADDED: This prevents GLightbox from fighting your page layout */
-  bodyClass: 'glightbox-open', 
-  autofocus: false
+    selector: '.glightbox',
+    loop: false,
+    zoomable: false,
+    draggable: false,
+    closeOnOutsideClick: false,
+    /* This forces the X into the circle immediately */
+    svg: {
+        close: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>'
+    }
 });
 
 lightbox.on('open', () => {
-  const container = document.querySelector('.glightbox-container');
-  
-  // 1. UI GUARD: Force Header/Footer to the front
-  const header = document.querySelector('header');
-  const footer = document.querySelector('footer');
-  if (header) {
-      header.style.zIndex = '10002';
-      header.style.position = 'fixed'; // Ensure it's not 'static'
-  }
-  if (footer) {
-      footer.style.zIndex = '10002';
-      footer.style.position = 'fixed';
-  }
+    document.body.classList.add('glightbox-is-active');
+    
+    // Force the Header/Footer to stay visible regardless of theme
+    const header = document.querySelector('header');
+    const footer = document.querySelector('footer');
+    if (header) header.style.zIndex = '1000000';
+    if (footer) footer.style.zIndex = '1000000';
 
-  // 2. COUNTER LOGIC:
-  const oldCounter = document.querySelector('.custom-gcounter');
-  if (oldCounter) oldCounter.remove();
-
-  const counterDiv = document.createElement('div');
-  counterDiv.className = 'custom-gcounter';
-  
-  const total = lightbox.elements.length;
-  
-  if (total > 1) {
-    for (let i = 0; i < total; i++) {
-      const num = document.createElement('span');
-      num.className = 'gcount-num';
-      num.innerText = (i + 1).toString().padStart(2, '0');
-      if (i === 0) num.classList.add('active');
-      
-      num.onclick = (e) => {
-        e.stopPropagation(); 
-        lightbox.goToSlide(i);
-      };
-      counterDiv.appendChild(num);
+    // Vertical Counter Logic
+    const container = document.querySelector('.glightbox-container');
+    const oldCounter = document.querySelector('.custom-gcounter');
+    if (oldCounter) oldCounter.remove();
+    const counterDiv = document.createElement('div');
+    counterDiv.className = 'custom-gcounter';
+    const total = lightbox.elements.length;
+    if (total > 1) {
+        for (let i = 0; i < total; i++) {
+            const num = document.createElement('span');
+            num.className = 'gcount-num';
+            num.innerText = (i + 1).toString().padStart(2, '0');
+            if (i === 0) num.classList.add('active');
+            num.onclick = (e) => { e.stopPropagation(); lightbox.goToSlide(i); };
+            counterDiv.appendChild(num);
+        }
+        container.appendChild(counterDiv);
     }
-    container.appendChild(counterDiv);
-  }
 });
 
-// Reset Header/Footer when gallery closes
 lightbox.on('close', () => {
-  const header = document.querySelector('header');
-  const footer = document.querySelector('footer');
-  if (header) header.style.zIndex = ''; 
-  if (footer) footer.style.zIndex = '';
-  
-  // Force body back to normal to prevent scroll-lock bugs
-  document.body.style.overflow = 'auto';
-});
-
-lightbox.on('slide_changed', ({ current }) => {
-  const nums = document.querySelectorAll('.gcount-num');
-  nums.forEach(n => n.classList.remove('active'));
-  if (nums[current.index]) nums[current.index].classList.add('active');
+    document.body.classList.remove('glightbox-is-active');
 });
 
 </script>
