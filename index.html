@@ -367,13 +367,15 @@ lightbox.on('close', () => {
 const cursor = document.getElementById('custom-cursor');
 
 document.addEventListener('mousemove', (e) => {
-    // 1. Move using translate3d (Uses GPU, much smoother on your Mac Mini/MBP)
-    // The translate(-50%, -50%) ensures the 'plus' stays centered on the tip
+    // 1. Move the cursor using the GPU for smoothness
     cursor.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`;
 
-    // 2. Dynamic Show/Hide
-    // We check what the mouse is touching. If it's a gallery item, we show the circle.
-    if (e.target.closest('.glightbox') || e.target.closest('.gslide-image')) {
+    // 2. Check if the element under the mouse is a gallery trigger or the open lightbox
+    const isOverGallery = e.target.closest('.glightbox') || 
+                         e.target.closest('.gslide-image') || 
+                         e.target.classList.contains('gslide-image');
+
+    if (isOverGallery) {
         cursor.style.opacity = '1';
     } else {
         cursor.style.opacity = '0';
@@ -381,11 +383,11 @@ document.addEventListener('mousemove', (e) => {
 });
 
 </script>
-  <div id="custom-cursor">
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
-    <circle cx="12" cy="12" r="10" fill="rgba(0,0,0,0.6)" stroke="none"/>
-    <line x1="12" y1="8" x2="12" y2="16"></line>
-    <line x1="8" y1="12" x2="16" y2="12"></line>
+ <div id="custom-cursor">
+  <svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke="white" stroke-width="1.5">
+    <circle cx="22" cy="22" r="18" fill="rgba(0,0,0,0.7)" stroke="none"/>
+    <line x1="22" y1="14" x2="22" y2="30"></line>
+    <line x1="14" y1="22" x2="30" y2="22"></line>
   </svg>
 </div>
 </body>
