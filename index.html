@@ -76,18 +76,18 @@
   </div>
 </div>
 
- <main>
+<main>
   <section class="project-hub">
     
-    <a href="#water-study-deck" class="glightbox featured" data-type="inline">
+    <a href="images/IMG_4112_2026_01_04.jpg" class="glightbox featured" data-gallery="water">
       <img src="images/IMG_4112_2026_01_04.jpg" alt="Bambo">
     </a>
 
-    <a href="images/10590655_10154537121640088_1832706945196585128_n_no.jpg" class="glightbox gallery-item">
+    <a href="images/10590655_10154537121640088_1832706945196585128_n_no.jpg" class="glightbox gallery-item" data-gallery="single">
       <img src="images/10590655_10154537121640088_1832706945196585128_n_no.jpg" alt="Me">
     </a>
 
-    <a href="images/IMG_4283_Jan17_2026.webp" class="glightbox gallery-item">
+    <a href="images/IMG_4283_Jan17_2026.webp" class="glightbox gallery-item" data-gallery="single">
       <img src="images/IMG_4283_Jan17_2026.webp" alt="Mallow">
     </a>
     
@@ -99,32 +99,28 @@
 
     <div class="spacer" style="grid-column: span 1;"></div>
 
-    <a href="images/img_5005_blogger_edit_2020_01_11.webp" class="glightbox gallery-item featured">
+    <a href="images/img_5005_blogger_edit_2020_01_11.webp" class="glightbox gallery-item featured" data-gallery="single">
       <img src="images/img_5005_blogger_edit_2020_01_11.webp" alt="Bobbins" loading="lazy">
     </a> 
 
-    <a href="images/IMG_1834_edit_2026_01_11.webp" class="glightbox gallery-item featured">
+    <a href="images/IMG_1834_edit_2026_01_11.webp" class="glightbox gallery-item featured" data-gallery="single">
       <img src="images/IMG_1834_edit_2026_01_11.webp" alt="Roller" loading="lazy">
     </a> 
 
-    <a href="images/4600730672_57847acdf5_b_2026_01_11.webp" class="glightbox gallery-item nudge-up">
+    <a href="images/4600730672_57847acdf5_b_2026_01_11.webp" class="glightbox gallery-item nudge-up" data-gallery="single">
       <img src="images/4600730672_57847acdf5_b_2026_01_11.webp" alt="Wool" loading="lazy">
     </a> 
 
-    <a href="images/IMG_4022_2026_01_05.jpg" class="glightbox gallery-item wide slim-shift">
+    <a href="images/IMG_4022_2026_01_05.jpg" class="glightbox gallery-item wide slim-shift" data-gallery="single">
       <img src="images/IMG_4022_2026_01_05.jpg" alt="Fader" loading="lazy">
     </a>    
   </section>
 </main>
 
-<div id="water-study-deck" style="display:none;">
-  <div class="deck-wrapper">
-     <div class="deck-card"><img src="images/IMG_4112_2026_01_04.jpg"></div>
-     <div class="deck-card"><img src="images/AWYL0983.jpeg"></div>
-     <div class="deck-card"><img src="images/IMG_1596.jpg"></div>
-     <div class="deck-card"><img src="images/IMG_4022_2026_01_05.jpg"></div>
-     <div class="deck-instruction">Click image to shuffle</div>
-  </div>
+<div style="display:none;">
+  <a href="images/AWYL0983.jpeg" class="glightbox" data-gallery="water"></a>
+  <a href="images/IMG_1596.jpg" class="glightbox" data-gallery="water"></a>
+  <a href="images/IMG_4022_2026_01_05.jpg" class="glightbox" data-gallery="water"></a>
 </div>
 
 <footer class="smart-footer">
@@ -325,31 +321,48 @@ window.addEventListener('load', () => {
 });
   
 /* =========================
-   Shuffle Deck Logic
+   TJ Logic
    ========================= */
-document.addEventListener('click', function (e) {
-  // 1. Identify if the clicked element is a card (or inside one)
-  const card = e.target.closest('.deck-card');
-  if (!card) return;
+const lightbox = GLightbox({
+  selector: '.glightbox',
+  loop: false,
+  zoomable: false
+});
 
-  const wrapper = card.parentElement;
+// Create the vertical counter list when the gallery opens
+lightbox.on('open', () => {
+  const container = document.querySelector('.glightbox-container');
   
-  // 2. Trigger the 'Toss' animation
-  card.classList.add('toss');
+  // Clean up any old counters first
+  const oldCounter = document.querySelector('.custom-gcounter');
+  if (oldCounter) oldCounter.remove();
 
-  // 3. Move to bottom after animation finishes
-  setTimeout(() => {
-    card.classList.remove('toss');
-    
-    // Moves the top card to the back of the stack
-    wrapper.prepend(card);
-    
-    // 4. Update Z-Indices so the new front card is on top
-    const allCards = wrapper.querySelectorAll('.deck-card');
-    allCards.forEach((c, index) => {
-      c.style.zIndex = index;
-    });
-  }, 700); // Matches the 0.7s transition in your CSS
+  const counterDiv = document.createElement('div');
+  counterDiv.className = 'custom-gcounter';
+  
+  // Get total images in the current active gallery
+  const total = lightbox.elements.length;
+  
+  // Only show numbers if there's more than 1 image (a 'study')
+  if (total > 1) {
+    for (let i = 0; i < total; i++) {
+      const num = document.createElement('span');
+      num.className = 'gcount-num';
+      num.innerText = (i + 1).toString().padStart(2, '0');
+      if (i === 0) num.classList.add('active');
+      
+      num.onclick = () => lightbox.goToSlide(i);
+      counterDiv.appendChild(num);
+    }
+    container.appendChild(counterDiv);
+  }
+});
+
+// Update which number is 'active' as you navigate
+lightbox.on('slide_changed', ({ current }) => {
+  const nums = document.querySelectorAll('.gcount-num');
+  nums.forEach(n => n.classList.remove('active'));
+  if (nums[current.index]) nums[current.index].classList.add('active');
 });
 
 </script>
