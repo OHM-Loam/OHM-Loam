@@ -209,7 +209,10 @@ body {
 
 /* 1. The Full Page Whiteout - Lowered z-index to stay under Header/Footer */
 .glightbox-container {
-  z-index: 999 !important; /* Standard headers are usually 1000+ */
+    top: 80px !important;    /* Adjust this to your Header Height */
+    bottom: 60px !important; /* Adjust this to your Footer Height */
+    height: calc(100vh - 140px) !important;
+    z-index: 500 !important;
 }
 
 .goverlay { 
@@ -242,38 +245,50 @@ body {
 
 /* 3. The Slide - Forced Color & No Shadow */
 .gslide-image, .gslide-video {
-  background: transparent !important;
-  box-shadow: none !important;
-  padding: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
 }
 
 .gslide-image img {
-  max-height: 82vh !important; /* Shrunk slightly to make room for header/footer */
-  max-width: 85vw !important;
-  filter: grayscale(0%) !important; /* FIX: Force color inside the gallery */
-  transition: opacity 0.5s ease;
+    /* Forced Color: Overrides the Hub's grayscale */
+    filter: grayscale(0%) !important;
+    -webkit-filter: grayscale(0%) !important;
+    
+    /* Sizing: Keeps it from hitting your Header/Footer */
+    max-height: 80vh !important; 
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain;
+    
+    /* Smooth reveal */
+    transition: opacity 0.5s ease;
 }
 
 /* 4. THE CIRCULAR CLOSE BUTTON (Refined) */
 .gclose {
-  display: flex !important;
-  align-items: center;
-  justify-content: center;
-  top: 35px !important;
-  right: 35px !important;
-  width: 40px !important;
-  height: 40px !important;
-  border: 1px solid #000 !important;
-  border-radius: 50% !important;
-  background: #fff !important;
-  opacity: 1 !important;
-  z-index: 10005 !important;
-  transition: transform 0.2s ease;
+    all: unset !important; /* This is the 'Magic' line to fix the weirdness */
+    display: flex !important;
+    position: fixed !important;
+    top: 100px !important; /* Moves it below your Header */
+    right: 40px !important;
+    width: 44px !important;
+    height: 44px !important;
+    border: 1px solid #000 !important;
+    border-radius: 50% !important;
+    background: #fff !important;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer !important;
+    z-index: 99999 !important;
 }
 
 .gclose svg {
-  width: 14px !important; /* Slightly smaller for elegance */
-  height: 14px !important;
+    width: 12px !important;
+    height: 12px !important;
 }
 
 .gclose svg path {
@@ -393,7 +408,10 @@ body {
    11. Jamieson Whiteout
    ========================= */
 
-.goverlay { background: #ffffff !important; opacity: 1 !important; }
+.goverlay {
+    background: #ffffff !important;
+    opacity: 1 !important;
+}
 
 /* Thin Circular Close Button */
 .gclose { top: 30px !important; right: 30px !important; }
