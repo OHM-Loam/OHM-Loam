@@ -326,7 +326,10 @@ window.addEventListener('load', () => {
 const lightbox = GLightbox({
   selector: '.glightbox',
   loop: false,
-  zoomable: false
+  zoomable: false,
+  closeOnOutsideClick: false, // Prevents accidental closing
+  touchNavigation: true,
+  draggable: false // Keeps the cursor logic clean
 });
 
 // Create the vertical counter list when the gallery opens
