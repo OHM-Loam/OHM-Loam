@@ -452,3 +452,32 @@ glightbox {
 .gcount-num.active {
   color: #000; /* Dark active number */
 }
+/* =========================
+  12. Custom Hover Cursor
+   ========================= */
+#custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  pointer-events: none; /* Crucial: clicks go THROUGH this to the image */
+  z-index: 10000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  transform: translate(-50%, -50%); /* Centers the circle on the mouse tip */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hide the default cursor when hovering over the gallery images */
+.glightbox, .gslide-image {
+  cursor: none !important;
+}
+
+/* Show our custom cursor only when hovering over images */
+.glightbox:hover ~ #custom-cursor,
+.glightbox:hover #custom-cursor {
+  opacity: 1;
+}
