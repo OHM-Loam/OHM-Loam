@@ -459,25 +459,29 @@ glightbox {
   position: fixed;
   top: 0;
   left: 0;
-  width: 44px; /* Matches the size in your screenshot */
+  width: 44px;
   height: 44px;
-  pointer-events: none; 
-  /* Seat this higher than the GLightbox (1000000) */
-  z-index: 2000000 !important; 
+  pointer-events: none; /* Allows you to click the image through the circle */
+  
+  /* Use an absurdly high z-index to beat GLightbox's internal layers */
+  z-index: 999999999 !important; 
+  
   opacity: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Use 'transform' for movement, not top/left, for better performance */
+  
+  /* hardware acceleration for your MacBook Pro/Mac Mini */
   transition: opacity 0.2s ease;
-  will-change: transform; 
+  will-change: transform;
 }
 
-/* Hide the default cursor when hovering over the gallery images */
-.glightbox, .gslide-image img, .gslide-image {
+.glightbox-container, 
+.gslide-image, 
+.gslide-image img, 
+.glightbox {
   cursor: none !important;
 }
-
 #custom-cursor.visible {
   opacity: 1;
 }
