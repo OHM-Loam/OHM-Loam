@@ -128,7 +128,7 @@ body.glightbox-is-active footer {
 .side-links { 
   display: flex; 
   align-items: center; 
-  gap: 20px; 
+  gap: 10px; 
   margin-top: 1rem; 
 }
 
