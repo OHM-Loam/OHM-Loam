@@ -207,7 +207,11 @@ body {
    6. Glightbox: Jamieson Minimalist
    ========================= */
 
-/* 1. The Full Page Whiteout */
+/* 1. The Full Page Whiteout - Lowered z-index to stay under Header/Footer */
+.glightbox-container {
+  z-index: 999 !important; /* Standard headers are usually 1000+ */
+}
+
 .goverlay { 
   background: #ffffff !important; 
   backdrop-filter: none !important; 
@@ -215,93 +219,67 @@ body {
 }
 
 /* 2. The Smart Cursor Navigation */
-/* Left Side = Back Arrow */
-.gprev {
+.gprev, .gnext {
   display: flex !important;
   width: 50vw !important;
   height: 100vh !important;
   top: 0 !important;
-  left: 0 !important;
   background: none !important;
+  z-index: 10001 !important;
+}
+
+.gprev { 
+  left: 0 !important; 
   cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>'), pointer !important;
 }
 
-/* Right Side = Next Arrow */
-.gnext {
-  display: flex !important;
-  width: 50vw !important;
-  height: 100vh !important;
-  top: 0 !important;
-  right: 0 !important;
-  background: none !important;
+.gnext { 
+  right: 0 !important; 
   cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>'), pointer !important;
 }
 
-/* Hide default icons since the mouse is now the icon */
 .gnext svg, .gprev svg { display: none !important; }
 
-/* 3. The Slide (Clean, No Shadow) */
+/* 3. The Slide - Forced Color & No Shadow */
 .gslide-image, .gslide-video {
   background: transparent !important;
-  box-shadow: none !important; /* Jamieson look is flat */
+  box-shadow: none !important;
   padding: 0 !important;
 }
 
 .gslide-image img {
-  max-height: 85vh !important;
+  max-height: 82vh !important; /* Shrunk slightly to make room for header/footer */
   max-width: 85vw !important;
-  /* Slight grayscale to color transition to match your hub */
-  filter: grayscale(100%);
-  transition: filter 1s ease;
+  filter: grayscale(0%) !important; /* FIX: Force color inside the gallery */
+  transition: opacity 0.5s ease;
 }
 
-.gslide-image:hover img { filter: grayscale(0%); }
-
-/* THE CIRCULAR CLOSE BUTTON (Refined) */
+/* 4. THE CIRCULAR CLOSE BUTTON (Refined) */
 .gclose {
   display: flex !important;
   align-items: center;
   justify-content: center;
-  top: 30px !important;
-  right: 30px !important;
-  width: 44px !important;
-  height: 44px !important;
+  top: 35px !important;
+  right: 35px !important;
+  width: 40px !important;
+  height: 40px !important;
   border: 1px solid #000 !important;
   border-radius: 50% !important;
   background: #fff !important;
   opacity: 1 !important;
-  cursor: pointer !important;
-  /* Sitting above the invisible side-navigation */
-  z-index: 10005 !important; 
+  z-index: 10005 !important;
   transition: transform 0.2s ease;
 }
 
-.gclose:hover {
-  transform: scale(1.05);
-}
-
-/* The X lines inside the circle */
 .gclose svg {
-  width: 16px !important;
-  height: 16px !important;
+  width: 14px !important; /* Slightly smaller for elegance */
+  height: 14px !important;
 }
 
 .gclose svg path {
   stroke: #000 !important;
-  stroke-width: 1px !important; /* Thin line from screenshot */
+  stroke-width: 1.2px !important; /* Balanced thinness */
 }
-
-/* Ensure the navigation areas don't cover the close button */
-.gnext {
-  z-index: 10001 !important;
-  /* Push the hit area down slightly if needed, 
-     but z-index usually solves it */
-}
-
-.gclose {
-  z-index: 10005 !important;
-}
-
 /* =========================
    7. Utility & Symbol Spinner
    ========================= */
