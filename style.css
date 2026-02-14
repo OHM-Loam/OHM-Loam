@@ -347,68 +347,41 @@ body {
 }
 
 /* =========================
-   11. Shuffle Deck Gallery (Luxury)
+   11. Jamieson Whiteout
    ========================= */
 
-/* The overall container within GLightbox */
-.deck-wrapper {
-  position: relative;
-  width: 70vw;
-  height: 80vh;
+.goverlay { background: #ffffff !important; opacity: 1 !important; }
+
+/* Thin Circular Close Button */
+.gclose { top: 30px !important; right: 30px !important; }
+.gclose svg { width: 32px !important; height: 32px !important; stroke-width: 1px !important; }
+
+/* Thin Arrows */
+.gnext svg, .gprev svg { width: 30px !important; stroke-width: 1px !important; }
+.gnext svg path, .gprev svg path { fill: none; stroke: #000; }
+
+/* Vertical Counter Logic */
+.custom-gcounter {
+  position: fixed;
+  right: 50px;
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
-  align-items: center;
-  justify-content: center;
-  perspective: 1200px; /* Essential for the 3D 'toss' effect */
+  flex-direction: column;
+  gap: 8px;
+  z-index: 10000;
+  text-align: right;
 }
 
-/* The individual 'Prints' */
-.deck-card {
-  position: absolute;
-  width: auto;
-  max-height: 100%;
-  background: #ffffff;
-  padding: 20px;
-  box-shadow: 0 15px 45px rgba(0,0,0,0.1);
-  transition: transform 0.7s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.5s ease;
+.gcount-num {
+  font-family: 'Helvetica', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: #d1d1d1; /* Faded numbers like the screenshot */
   cursor: pointer;
-  user-select: none;
-  /* Ensure the white frame is consistent */
-  border: 1px solid rgba(0,0,0,0.03);
+  transition: color 0.3s ease;
 }
 
-.deck-card img {
-  max-height: 65vh;
-  width: auto;
-  display: block;
-  /* Keep the grayscale/color transition consistent with your hub */
-  filter: grayscale(100%);
-  transition: filter 0.8s ease;
-}
-
-.deck-card:hover img {
-  filter: grayscale(0%);
-}
-
-/* Organic stack rotations */
-.deck-card:nth-child(1) { transform: rotate(-1.5deg); z-index: 5; }
-.deck-card:nth-child(2) { transform: rotate(1.2deg); z-index: 4; }
-.deck-card:nth-child(3) { transform: rotate(-2.2deg); z-index: 3; }
-.deck-card:nth-child(4) { transform: rotate(1.8deg); z-index: 2; }
-
-/* The 'Toss' animation triggered by JS */
-.deck-card.toss {
-  transform: translateX(140%) translateY(-15%) rotate(25deg) !important;
-  opacity: 0;
-}
-
-/* Minimalist instruction text */
-.deck-instruction {
-  position: absolute;
-  bottom: -60px;
-  font-family: serif;
-  font-style: italic;
-  font-size: 0.85rem;
-  color: #999;
-  letter-spacing: 0.1rem;
-  text-transform: uppercase;
+.gcount-num.active {
+  color: #000; /* Dark active number */
 }
