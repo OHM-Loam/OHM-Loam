@@ -364,19 +364,20 @@ lightbox.on('close', () => {
     document.body.classList.remove('glightbox-is-active');
 });
 
-  const customCursor = document.getElementById('custom-cursor');
-const galleryImages = document.querySelectorAll('.glightbox');
+const cursor = document.getElementById('custom-cursor');
 
 document.addEventListener('mousemove', (e) => {
-  // Move the custom circle to the mouse position
-  customCursor.style.left = e.clientX + 'px';
-  customCursor.style.top = e.clientY + 'px';
-});
+    // 1. Move using translate3d (Uses GPU, much smoother on your Mac Mini/MBP)
+    // The translate(-50%, -50%) ensures the 'plus' stays centered on the tip
+    cursor.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`;
 
-// Show/Hide logic
-galleryImages.forEach(img => {
-  img.addEventListener('mouseenter', () => customCursor.style.opacity = '1');
-  img.addEventListener('mouseleave', () => customCursor.style.opacity = '0');
+    // 2. Dynamic Show/Hide
+    // We check what the mouse is touching. If it's a gallery item, we show the circle.
+    if (e.target.closest('.glightbox') || e.target.closest('.gslide-image')) {
+        cursor.style.opacity = '1';
+    } else {
+        cursor.style.opacity = '0';
+    }
 });
 
 </script>
