@@ -204,38 +204,84 @@ body {
 }
 
 /* =========================
-   6. Glightbox: Standard Luxury Matte
+   6. Glightbox: Jamieson Minimalist
    ========================= */
-.goverlay { background: rgba(242, 239, 235, 0.98) !important; backdrop-filter: blur(10px); }
-.glightbox-container { cursor: crosshair; }
 
-.gslide-image, .gslide-video {
-  background: #ffffff !important;
-  padding: 30px !important;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.1) !important;
+/* 1. The Full Page Whiteout */
+.goverlay { 
+  background: #ffffff !important; 
+  backdrop-filter: none !important; 
+  opacity: 1 !important; 
+}
+
+/* 2. The Smart Cursor Navigation */
+/* Left Side = Back Arrow */
+.gprev {
   display: flex !important;
-  align-items: center;
+  width: 50vw !important;
+  height: 100vh !important;
+  top: 0 !important;
+  left: 0 !important;
+  background: none !important;
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>'), pointer !important;
+}
+
+/* Right Side = Next Arrow */
+.gnext {
+  display: flex !important;
+  width: 50vw !important;
+  height: 100vh !important;
+  top: 0 !important;
+  right: 0 !important;
+  background: none !important;
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>'), pointer !important;
+}
+
+/* Hide default icons since the mouse is now the icon */
+.gnext svg, .gprev svg { display: none !important; }
+
+/* 3. The Slide (Clean, No Shadow) */
+.gslide-image, .gslide-video {
+  background: transparent !important;
+  box-shadow: none !important; /* Jamieson look is flat */
+  padding: 0 !important;
+}
+
+.gslide-image img {
+  max-height: 85vh !important;
+  max-width: 85vw !important;
+  /* Slight grayscale to color transition to match your hub */
+  filter: grayscale(100%);
+  transition: filter 1s ease;
+}
+
+.gslide-image:hover img { filter: grayscale(0%); }
+
+/* 4. The Clever Close Button (Top Right Circle) */
+.gclose {
+  display: flex !important;
+  top: 40px !important;
+  right: 40px !important;
+  width: 44px !important;
+  height: 44px !important;
+  border: 1px solid #000 !important;
+  border-radius: 50% !important;
+  background: #fff !important;
+  opacity: 1 !important;
   justify-content: center;
+  align-items: center;
+  cursor: pointer !important;
+  z-index: 10002 !important;
 }
 
-.gslide-image img, .gslide-video video {
-  max-height: 80vh !important;
-  object-fit: contain !important;
+.gclose svg { 
+    width: 18px !important; 
+    height: 18px !important; 
 }
 
-.gclose, .gnext, .gprev, .gbtn { display: none !important; }
-
-/* Entry/Exit Animations */
-.gfadeIn { animation: galleryReveal 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; }
-.gfadeOut { animation: galleryHide 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; }
-
-@keyframes galleryReveal {
-  from { opacity: 0; transform: scale(0.95) translateY(15px); }
-  to { opacity: 1; transform: scale(1) translateY(0); }
-}
-@keyframes galleryHide {
-  from { opacity: 1; transform: scale(1); }
-  to { opacity: 0; transform: scale(1.02); }
+.gclose svg path { 
+    stroke: #000 !important; 
+    stroke-width: 1px !important; 
 }
 /* =========================
    7. Utility & Symbol Spinner
