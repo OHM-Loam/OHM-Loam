@@ -409,13 +409,13 @@ body {
    ========================= */
 
 .goverlay {
-    background: #ffffff !important;
-    opacity: 1 !important;
+    background: #f2efeb !important;
+    opacity: 5 !important;
 }
 
 /* Thin Circular Close Button */
 .gclose { top: 30px !important; right: 30px !important; }
-.gclose svg { width: 32px !important; height: 32px !important; stroke-width: 1px !important; }
+.gclose svg { width: 25px !important; height: 32px !important; stroke-width: 1px !important; }
 
 /* Thin Arrows */
 .gnext svg, .gprev svg { width: 30px !important; stroke-width: 1px !important; }
