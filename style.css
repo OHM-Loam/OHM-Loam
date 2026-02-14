@@ -478,3 +478,7 @@ glightbox {
   cursor: none !important;
 }
 
+#custom-cursor.visible {
+  opacity: 1;
+}
+
