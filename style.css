@@ -347,51 +347,68 @@ body {
 }
 
 /* =========================
-   11. Project Study Expansion
+   11. Shuffle Deck Gallery (Luxury)
    ========================= */
 
-/* The wrapper that ensures the study images don't break the CSS Grid */
-.study-expansion {
-  grid-column: 1 / -1; /* Take up the whole row */
-  display: none;       /* COMPLETELY remove from grid flow when closed */
-  flex-direction: column;
+/* The overall container within GLightbox */
+.deck-wrapper {
+  position: relative;
+  width: 70vw;
+  height: 80vh;
+  display: flex;
   align-items: center;
-  gap: 12rem;
-  opacity: 0;
-  transition: opacity 0.8s ease;
+  justify-content: center;
+  perspective: 1200px; /* Essential for the 3D 'toss' effect */
 }
 
-/* State when clicked */
-.study-expansion.is-open {
-  display: flex;       /* Put it back in the grid flow */
-  opacity: 1;
-  margin: 10rem 0;
-  max-height: none;    /* Let it be as long as it needs to be */
+/* The individual 'Prints' */
+.deck-card {
+  position: absolute;
+  width: auto;
+  max-height: 100%;
+  background: #ffffff;
+  padding: 20px;
+  box-shadow: 0 15px 45px rgba(0,0,0,0.1);
+  transition: transform 0.7s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.5s ease;
+  cursor: pointer;
+  user-select: none;
+  /* Ensure the white frame is consistent */
+  border: 1px solid rgba(0,0,0,0.03);
 }
 
-.study-expansion img {
-  width: 100%;
-  max-width: 1100px; /* Editorial width - not too wide, not too small */
-  height: auto;
+.deck-card img {
+  max-height: 65vh;
+  width: auto;
+  display: block;
+  /* Keep the grayscale/color transition consistent with your hub */
   filter: grayscale(100%);
-  transition: filter 1s ease;
+  transition: filter 0.8s ease;
 }
 
-.study-expansion img:hover {
+.deck-card:hover img {
   filter: grayscale(0%);
 }
 
-/* The 'Close' trigger at the bottom */
-.study-close-btn {
-  font-family: serif;
-  font-style: italic;
-  text-decoration: none;
-  color: #000;
-  cursor: pointer;
-  padding: 2rem;
-  opacity: 0.5;
-  transition: opacity 0.3s;
+/* Organic stack rotations */
+.deck-card:nth-child(1) { transform: rotate(-1.5deg); z-index: 5; }
+.deck-card:nth-child(2) { transform: rotate(1.2deg); z-index: 4; }
+.deck-card:nth-child(3) { transform: rotate(-2.2deg); z-index: 3; }
+.deck-card:nth-child(4) { transform: rotate(1.8deg); z-index: 2; }
+
+/* The 'Toss' animation triggered by JS */
+.deck-card.toss {
+  transform: translateX(140%) translateY(-15%) rotate(25deg) !important;
+  opacity: 0;
 }
 
-.study-close-btn:hover { opacity: 1; }
-
+/* Minimalist instruction text */
+.deck-instruction {
+  position: absolute;
+  bottom: -60px;
+  font-family: serif;
+  font-style: italic;
+  font-size: 0.85rem;
+  color: #999;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+}
