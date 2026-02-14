@@ -329,17 +329,26 @@ const lightbox = GLightbox({
   zoomable: false,
   closeOnOutsideClick: false, 
   touchNavigation: true,
-  draggable: false 
+  draggable: false,
+  /* ADDED: This prevents GLightbox from fighting your page layout */
+  bodyClass: 'glightbox-open', 
+  autofocus: false
 });
 
 lightbox.on('open', () => {
   const container = document.querySelector('.glightbox-container');
   
-  // 1. UI GUARD: Keep Header & Footer on top of the gallery
+  // 1. UI GUARD: Force Header/Footer to the front
   const header = document.querySelector('header');
   const footer = document.querySelector('footer');
-  if (header) header.style.zIndex = '10002'; 
-  if (footer) footer.style.zIndex = '10002';
+  if (header) {
+      header.style.zIndex = '10002';
+      header.style.position = 'fixed'; // Ensure it's not 'static'
+  }
+  if (footer) {
+      footer.style.zIndex = '10002';
+      footer.style.position = 'fixed';
+  }
 
   // 2. COUNTER LOGIC:
   const oldCounter = document.querySelector('.custom-gcounter');
@@ -373,6 +382,9 @@ lightbox.on('close', () => {
   const footer = document.querySelector('footer');
   if (header) header.style.zIndex = ''; 
   if (footer) footer.style.zIndex = '';
+  
+  // Force body back to normal to prevent scroll-lock bugs
+  document.body.style.overflow = 'auto';
 });
 
 lightbox.on('slide_changed', ({ current }) => {
