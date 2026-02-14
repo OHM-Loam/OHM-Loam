@@ -364,6 +364,21 @@ lightbox.on('close', () => {
     document.body.classList.remove('glightbox-is-active');
 });
 
+  const customCursor = document.getElementById('custom-cursor');
+const galleryImages = document.querySelectorAll('.glightbox');
+
+document.addEventListener('mousemove', (e) => {
+  // Move the custom circle to the mouse position
+  customCursor.style.left = e.clientX + 'px';
+  customCursor.style.top = e.clientY + 'px';
+});
+
+// Show/Hide logic
+galleryImages.forEach(img => {
+  img.addEventListener('mouseenter', () => customCursor.style.opacity = '1');
+  img.addEventListener('mouseleave', () => customCursor.style.opacity = '0');
+});
+
 </script>
 </body>
 </html>
