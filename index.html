@@ -258,19 +258,6 @@ if (typeof GLightbox !== 'undefined') {
   })();
 
 });
-const themeBtn = document.querySelector('#theme-toggle');
-const themeText = document.querySelector('.toggle-text');
-
-themeBtn.addEventListener('click', () => {
-  document.body.classList.toggle('dark-mode');
-  
-  // Update the button label based on the current state
-  if (document.body.classList.contains('dark-mode')) {
-    themeText.innerText = "LIGHT";
-  } else {
-    themeText.innerText = "DARK";
-  }
-});
 
 window.addEventListener('load', () => {
   let isPayingAttention = false;
@@ -321,7 +308,7 @@ window.addEventListener('load', () => {
 });
   
 /* =========================
-   TJ Logic: Absolute Override
+   TJ Logic: Absolute Override (Final Sync)
    ========================= */
 const lightbox = GLightbox({
     selector: '.glightbox',
@@ -329,38 +316,54 @@ const lightbox = GLightbox({
     zoomable: false,
     draggable: false,
     closeOnOutsideClick: false,
-    /* This forces the X into the circle immediately */
     svg: {
-        close: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>'
+        close: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>'
     }
 });
 
 lightbox.on('open', () => {
     document.body.classList.add('glightbox-is-active');
     
-    // Force the Header/Footer to stay visible regardless of theme
     const header = document.querySelector('header');
     const footer = document.querySelector('footer');
     if (header) header.style.zIndex = '1000000';
     if (footer) footer.style.zIndex = '1000000';
 
-    // Vertical Counter Logic
     const container = document.querySelector('.glightbox-container');
     const oldCounter = document.querySelector('.custom-gcounter');
     if (oldCounter) oldCounter.remove();
+    
     const counterDiv = document.createElement('div');
     counterDiv.className = 'custom-gcounter';
     const total = lightbox.elements.length;
+
     if (total > 1) {
         for (let i = 0; i < total; i++) {
             const num = document.createElement('span');
             num.className = 'gcount-num';
             num.innerText = (i + 1).toString().padStart(2, '0');
+            // Initial active state for 01
             if (i === 0) num.classList.add('active');
-            num.onclick = (e) => { e.stopPropagation(); lightbox.goToSlide(i); };
+            
+            num.onclick = (e) => { 
+                e.stopPropagation(); 
+                lightbox.goToSlide(i); 
+            };
             counterDiv.appendChild(num);
         }
         container.appendChild(counterDiv);
+    }
+});
+
+// THE FIX: This listener tracks the slide change and updates the numbers
+lightbox.on('slide_changed', ({ current }) => {
+    const nums = document.querySelectorAll('.gcount-num');
+    if (nums.length > 0) {
+        nums.forEach(n => n.classList.remove('active'));
+        // 'current.index' is the key property to sync with the spans
+        if (nums[current.index]) {
+            nums[current.index].classList.add('active');
+        }
     }
 });
 
