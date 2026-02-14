@@ -257,32 +257,51 @@ body {
 
 .gslide-image:hover img { filter: grayscale(0%); }
 
-/* 4. The Clever Close Button (Top Right Circle) */
+/* THE CIRCULAR CLOSE BUTTON (Refined) */
 .gclose {
   display: flex !important;
-  top: 40px !important;
-  right: 40px !important;
+  align-items: center;
+  justify-content: center;
+  top: 30px !important;
+  right: 30px !important;
   width: 44px !important;
   height: 44px !important;
   border: 1px solid #000 !important;
   border-radius: 50% !important;
   background: #fff !important;
   opacity: 1 !important;
-  justify-content: center;
-  align-items: center;
   cursor: pointer !important;
-  z-index: 10002 !important;
+  /* Sitting above the invisible side-navigation */
+  z-index: 10005 !important; 
+  transition: transform 0.2s ease;
 }
 
-.gclose svg { 
-    width: 18px !important; 
-    height: 18px !important; 
+.gclose:hover {
+  transform: scale(1.05);
 }
 
-.gclose svg path { 
-    stroke: #000 !important; 
-    stroke-width: 1px !important; 
+/* The X lines inside the circle */
+.gclose svg {
+  width: 16px !important;
+  height: 16px !important;
 }
+
+.gclose svg path {
+  stroke: #000 !important;
+  stroke-width: 1px !important; /* Thin line from screenshot */
+}
+
+/* Ensure the navigation areas don't cover the close button */
+.gnext {
+  z-index: 10001 !important;
+  /* Push the hit area down slightly if needed, 
+     but z-index usually solves it */
+}
+
+.gclose {
+  z-index: 10005 !important;
+}
+
 /* =========================
    7. Utility & Symbol Spinner
    ========================= */
