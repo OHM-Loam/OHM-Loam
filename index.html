@@ -180,12 +180,12 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-// --- 3. GLIGHTBOX INITIALIZATION (Restored Solo Mode) ---
+/* =========================
+   TJ Logic: Baseline Stable Build
+   ========================= */
 if (typeof GLightbox !== 'undefined') {
-  
-  // Instance 1: The Main Gallery (Linked)
-  const lightboxMain = GLightbox({
-    selector: '.glightbox[data-gallery="main-set"]', 
+  const lightbox = GLightbox({
+    selector: '.glightbox', // Targets everything again for stability
     loop: false,
     zoomable: false,
     draggable: false,
@@ -202,27 +202,25 @@ if (typeof GLightbox !== 'undefined') {
       }
     }
   });
-  
-  // Instance 2: Standalone Images (Unlinked)
-  const lightboxSingles = GLightbox({
-    selector: '.glightbox:not([data-gallery="main-set"])',
-    loop: false,
-    zoomable: false,
-    draggable: false,
-    closeOnOutsideClick: true
-    // This handles any image labeled "single" or with no gallery tag
-  });
-}
 
-  // Click-anywhere-to-close logic
+  // The "Clean" Event Logic
   lightbox.on('open', () => {
     const container = document.querySelector('.glightbox-container');
+    
+    // 1. Click-anywhere-to-close (Safe Version)
     container.addEventListener('click', (e) => {
-      // Only close if we didn't click the video controls themselves
-      if (!e.target.closest('.plyr__controls')) {
+      if (!e.target.closest('.plyr__controls') && !e.target.closest('.gslide-description')) {
         lightbox.close();
       }
-    }, { once: true });
+    });
+
+    // 2. Counter Logic (Only if it's the main gallery)
+    // We check the trigger element of the current slide
+    const currentTrigger = lightbox.activeSlide.querySelector('.gslide-content'); 
+    // Or more reliably, check the total number of items in the current set
+    if (lightbox.elements.length > 1) {
+       // Your 01 / 02 counter code goes here
+    }
   });
 }
 
