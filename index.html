@@ -182,25 +182,37 @@ window.addEventListener('DOMContentLoaded', () => {
 
 // --- 3. GLIGHTBOX INITIALIZATION (Restored Solo Mode) ---
 if (typeof GLightbox !== 'undefined') {
-  const lightbox = GLightbox({
-    selector: '.glightbox',
+  
+  // Instance 1: The Main Gallery (Linked)
+  const lightboxMain = GLightbox({
+    selector: '.glightbox[data-gallery="main-set"]', 
     loop: false,
     zoomable: false,
     draggable: false,
     touchNavigation: false,
     keyboardNavigation: false,
     closeOnOutsideClick: true,
-    // Restore video settings
     autoplayVideos: true,
     plyr: {
       config: {
         muted: true,
         hideControls: true,
-        loop: { active: true }, // Fixes the broken loop
+        loop: { active: true },
         clickToPlay: false
       }
     }
   });
+  
+  // Instance 2: Standalone Images (Unlinked)
+  const lightboxSingles = GLightbox({
+    selector: '.glightbox:not([data-gallery="main-set"])',
+    loop: false,
+    zoomable: false,
+    draggable: false,
+    closeOnOutsideClick: true
+    // This handles any image labeled "single" or with no gallery tag
+  });
+}
 
   // Click-anywhere-to-close logic
   lightbox.on('open', () => {
