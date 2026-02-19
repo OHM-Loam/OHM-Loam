@@ -367,19 +367,18 @@ lightbox.on('close', () => {
 const cursor = document.getElementById('custom-cursor');
 
 document.addEventListener('mousemove', (e) => {
-  // Move cursor with GPU acceleration for MBP/Mac Mini smoothness
+  // Move the cursor with GPU acceleration
   cursor.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`;
 
-  // PIERCING DETECTION: Check if the mouse is over any gallery-related element
-  const target = e.target;
-  const isGallery = target.closest('.glightbox') || 
-                    target.closest('.gslide-image') || 
-                    target.closest('.ginner-container');
+  // Detect if the mouse is over the gallery or the open lightbox layers
+  const isGallery = e.target.closest('.glightbox') || 
+                    e.target.closest('.gslide-image') || 
+                    e.target.closest('.ginner-container');
 
   if (isGallery) {
-    cursor.style.opacity = '1';
+    cursor.classList.add('visible'); // Triggers your CSS #custom-cursor.visible
   } else {
-    cursor.style.opacity = '0';
+    cursor.classList.remove('visible');
   }
 });
 
