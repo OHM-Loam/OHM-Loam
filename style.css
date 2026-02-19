@@ -461,27 +461,25 @@ glightbox {
   left: 0;
   width: 44px;
   height: 44px;
-  pointer-events: none; /* Allows you to click the image through the circle */
-  
-  /* Use an absurdly high z-index to beat GLightbox's internal layers */
-  z-index: 999999999 !important; 
-  
+  pointer-events: none; 
+  /* Seat this above the lightbox (1000000) and your header */
+  z-index: 10000000 !important; 
   opacity: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  
-  /* hardware acceleration for your MacBook Pro/Mac Mini */
-  transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease-out;
   will-change: transform;
 }
 
-.glightbox-container, 
+.glightbox, 
 .gslide-image, 
 .gslide-image img, 
-.glightbox {
+.glightbox-container,
+.ginner-container {
   cursor: none !important;
 }
+
 #custom-cursor.visible {
   opacity: 1;
 }
