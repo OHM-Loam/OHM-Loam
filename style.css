@@ -453,30 +453,3 @@ glightbox {
   color: #000; /* Dark active number */
 }
 
-/* --- SECTION 12: GHOST OVERLAY (No Grid Impact) --- */
-
-.gallery-wrapper {
-  position: relative;
-  width: 100%;
-  line-height: 0;
-}
-
-.item-description {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 20px;
-  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none; /* Mouse clicks go through to the image */
-}
-
-.category, .title {
-  color: white !important; /* White text looks better on the image */
-}
-
-.gallery-wrapper:hover .item-description {
-  opacity: 1;
-}
