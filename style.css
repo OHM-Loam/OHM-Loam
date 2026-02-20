@@ -210,8 +210,15 @@ body.glightbox-is-active footer {
 
 /* THE LOCKED VIDEO */
 .project-hub a.video-locked {
+  transform: translate(4rem, 4rem) !important;
   pointer-events: none !important;
   cursor: default;
+  Z-index: 5;
+}
+
+.project-hub a.video-locked:nth-child(even),
+.project-hub a.video-locked:nth-child(even):hover {
+  transform: translate(4rem, 4rem) !important;
 }
 
 /* =========================
