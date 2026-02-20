@@ -2,8 +2,8 @@
    1. Base Reset & Colors
    ========================= */
 :root {
-  --bg-color: #ffffff;      /* Pure white background */
-  --text-main: #000000;     /* Sharp black text */
+  --bg-color: #f4f4f1;      /* Pure white background */
+  --text-main: #1a1a1a;     /* Sharp black text */
   --text-muted: #999999;    /* For the 01, 02 numbering */
 }
 
