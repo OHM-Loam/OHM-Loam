@@ -234,7 +234,7 @@ body.glightbox-is-active footer {
 }
 
 .goverlay { 
-  background: #ffffff !important; 
+  background: #f4f4f1 !important; 
   backdrop-filter: none !important; 
   opacity: 1 !important; 
 }
@@ -284,14 +284,13 @@ body.glightbox-is-active footer {
     align-items: center !important;
     justify-content: center !important;
     position: fixed !important;
-    top: 30px !important;
-    right: 30px !important;
-    /* Reduced from 44px to 32px for a sleeker look */
+    top: 110px !important; 
+    right: 50px !important; /* Pushed in slightly more for better balance */
     width: 32px !important;
     height: 32px !important;
     border: 1px solid #000 !important;
     border-radius: 50% !important;
-    background: #fff !important;
+    background: #f4f4f1 !important;
     cursor: pointer !important;
     z-index: 20000 !important;
 }
@@ -305,45 +304,9 @@ body.glightbox-is-active footer {
   stroke: #000 !important;
   stroke-width: 1.2px !important; /* Balanced thinness */
 }
-glightbox {
+
+.glightbox {
     cursor: cell !important; 
-}
-.editorial-grid {
-  display: flex;
-  align-items: center; /* Vertically centers the side images */
-  justify-content: center;
-  gap: 40px; /* Space between the photos */
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 50px 20px;
-  background-color: var(--bg-color); /* Uses your #f4f4f1 Gallery White */
-}
-
-.grid-item {
-  flex: 1;
-  transition: transform 0.3s ease;
-}
-
-/* Side images are slightly smaller */
-.grid-item.side {
-  max-width: 25%;
-}
-
-/* Center image is the hero */
-.grid-item.featured {
-  flex: 1.5; /* Makes this column wider */
-  max-width: 40%;
-}
-
-.grid-item img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* Optional: Slight hover effect that is safe for your Mac Hub */
-.grid-item:hover {
-  transform: translateY(-5px);
 }
 
 /* =========================
@@ -498,3 +461,45 @@ glightbox {
   color: #000; /* Dark active number */
 }
 
+/* =========================
+   12. Editorial Layouts (Legacy of Wool Style)
+   ========================= */
+
+.editorial-grid {
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+  gap: 4rem; /* Use rem for consistency with your hub */
+  max-width: 1400px;
+  margin: 10rem auto; /* Vertical breathing room */
+  padding: 0 4rem;
+  background-color: var(--bg-color); 
+}
+
+/* Use a unique name to avoid conflict with Section 5 */
+.editorial-item {
+  flex: 1;
+  transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.editorial-item.side {
+  flex: 1;
+  max-width: 25%;
+}
+
+.editorial-item.featured {
+  flex: 1.8; /* Slightly wider for more impact */
+  max-width: 45%;
+}
+
+.editorial-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: grayscale(100%);
+  transition: filter 0.8s ease;
+}
+
+.editorial-item:hover img {
+  filter: grayscale(0%);
+}
