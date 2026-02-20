@@ -490,8 +490,8 @@ body.glightbox-is-active footer {
 }
 
 .grid-item.featured {
-  flex: 1.2; 
-  max-width: 500px;
+  flex: 1.4; 
+  max-width: 420px;
   z-index: 2;
 }
 
