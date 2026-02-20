@@ -466,40 +466,40 @@ body.glightbox-is-active footer {
    ========================= */
 
 .editorial-grid {
-  display: flex;
+  grid-column: 1 / -1 !important; /* Force it to span the whole screen width */
+  display: flex !important;
   align-items: center; 
   justify-content: center;
-  gap: 4rem; /* Use rem for consistency with your hub */
+  gap: 4rem; 
+  width: 100% !important;
   max-width: 1400px;
-  margin: 10rem auto; /* Vertical breathing room */
+  margin: 10rem auto !important; 
   padding: 0 4rem;
-  background-color: var(--bg-color); 
+  /* Ensure it doesn't inherit the 250px row height from Section 5 */
+  height: auto !important; 
 }
 
-/* Use a unique name to avoid conflict with Section 5 */
 .editorial-item {
   flex: 1;
+  /* Overrides the 85% width/height from the project-hub links */
+  width: auto !important; 
+  height: auto !important; 
   transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .editorial-item.side {
   flex: 1;
-  max-width: 25%;
+  max-width: 350px; /* Increased size so they aren't postage stamps */
 }
 
 .editorial-item.featured {
-  flex: 1.8; /* Slightly wider for more impact */
-  max-width: 45%;
+  flex: 2; /* Increased ratio to make the center image much larger */
+  max-width: 650px; 
 }
 
 .editorial-item img {
-  width: 100%;
-  height: auto;
+  width: 100% !important;
+  height: auto !important; /* Forces the image to keep its natural shape */
   display: block;
-  filter: grayscale(100%);
-  transition: filter 0.8s ease;
-}
-
-.editorial-item:hover img {
-  filter: grayscale(0%);
+  object-fit: contain !important;
 }
