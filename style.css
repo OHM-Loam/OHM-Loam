@@ -301,6 +301,44 @@ body.glightbox-is-active footer {
 glightbox {
     cursor: cell !important; 
 }
+.editorial-grid {
+  display: flex;
+  align-items: center; /* Vertically centers the side images */
+  justify-content: center;
+  gap: 40px; /* Space between the photos */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 50px 20px;
+  background-color: var(--bg-color); /* Uses your #f4f4f1 Gallery White */
+}
+
+.grid-item {
+  flex: 1;
+  transition: transform 0.3s ease;
+}
+
+/* Side images are slightly smaller */
+.grid-item.side {
+  max-width: 25%;
+}
+
+/* Center image is the hero */
+.grid-item.featured {
+  flex: 1.5; /* Makes this column wider */
+  max-width: 40%;
+}
+
+.grid-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Optional: Slight hover effect that is safe for your Mac Hub */
+.grid-item:hover {
+  transform: translateY(-5px);
+}
+
 /* =========================
    7. Utility & Symbol Spinner
    ========================= */
