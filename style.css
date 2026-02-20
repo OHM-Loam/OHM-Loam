@@ -467,13 +467,12 @@ body.glightbox-is-active footer {
 }
 
 /* =========================
-   12. Editorial Layout (Earls/Wool Style)
+   13. Editorial Layout (Earls/Wool Style)
    ========================= */
 
 .editorial-grid {
   display: flex;
-  /* THE KEY: This aligns everything to the 'floor' */
-  align-items: flex-end; 
+  align-items: flex-end; /* Keeps them lined up at the bottom */
   justify-content: center;
   gap: 4rem; 
   max-width: 1400px;
@@ -481,22 +480,31 @@ body.glightbox-is-active footer {
   padding: 0 4rem;
 }
 
+.grid-item {
+  flex: 1;
+}
+
 .grid-item.side {
   flex: 1;
-  max-width: 300px;
-  /* Ensures side images are slightly smaller so center can be taller */
+  max-width: 320px;
 }
 
 .grid-item.featured {
-  flex: 1.4; /* Only a 'little' larger than the sides now */
-  max-width: 300px;
+  flex: 1.4; 
+  max-width: 500px;
   z-index: 2;
 }
 
+/* THE HOVER EFFECT: Starts grayscale, fades to color */
 .grid-item img {
   width: 100%;
-  height: auto; /* Maintains original aspect ratio */
+  height: auto;
   display: block;
+  /* Match Section 5 aesthetic */
   filter: grayscale(100%) contrast(1.1);
-  transition: filter 0.8s ease;
+  transition: filter 0.8s ease; /* Same smooth 0.8s fade */
+}
+
+.grid-item:hover img {
+  filter: grayscale(0%) contrast(1);
 }
