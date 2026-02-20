@@ -221,6 +221,11 @@ body.glightbox-is-active footer {
   transform: translate(4rem, 4rem) !important;
 }
 
+.project-hub a.video-locked .video-preview {
+  object-position: 70% 80%; 
+  object-fit: cover;
+}
+
 /* =========================
    6. Glightbox: Jamieson Minimalist
    ========================= */
