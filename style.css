@@ -222,7 +222,7 @@ body.glightbox-is-active footer {
 }
 
 .project-hub a.video-locked .video-preview {
-  object-position: 100% 30%; 
+  object-position: 80% 20%; 
   object-fit: cover;
 }
 
