@@ -478,13 +478,13 @@ body.glightbox-is-active footer {
 
 .grid-item.side {
   flex: 1;
-  max-width: 320px;
+  max-width: 300px;
   /* Ensures side images are slightly smaller so center can be taller */
 }
 
 .grid-item.featured {
   flex: 1.2; /* Only a 'little' larger than the sides now */
-  max-width: 500px;
+  max-width: 300px;
   z-index: 2;
 }
 
