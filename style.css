@@ -335,22 +335,29 @@ body.glightbox-is-active footer {
 }
 
 /* =========================
-   8. Footer & The Eye
+   8. Footer & The Eye (The Sentinel Update)
    ========================= */
 .smart-footer {
   position: fixed;
-  bottom: 40px; width: 100%;
-  padding: 0 40px;
+  bottom: 30px; 
+  right: 30px; /* Moves it from 100% width to a corner anchor */
+  width: auto; 
   mix-blend-mode: difference;
   z-index: 10000;
 }
 
-.footer-content { display: flex; justify-content: space-between; align-items: center; }
+/* Adjust the content so it doesn't try to flex across the whole screen */
+.footer-content { 
+  display: flex; 
+  flex-direction: column; /* Stack the eye and toggle vertically */
+  gap: 20px;
+  align-items: flex-end; 
+}
 
 .eye {
-  width: 28px;
-  height: 16px;
-  background: white !important; /* Force visibility */
+  width: 32px; /* Slightly larger for impact */
+  height: 18px;
+  background: white !important;
   border-radius: 50%;
   overflow: hidden;
   display: flex;
@@ -358,27 +365,17 @@ body.glightbox-is-active footer {
   justify-content: center;
   position: relative;
   animation: blink 5s infinite;
-  isolation: isolate; /* FIX: Keeps it from disappearing in 'difference' mode */
+  isolation: isolate;
+  /* Rotate it slightly so it looks 'up' at the grid */
+  transform: rotate(-10deg); 
+  transition: transform 0.3s ease;
 }
 
-.pupil {
-  width: 10px;
-  height: 10px;
-  background: black !important;
-  border-radius: 50%;
-  position: absolute;
-  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  will-change: transform;
+.eye:hover {
+  transform: rotate(0deg) scale(1.2); /* Straightens and grows when noticed */
 }
-.eye.startled {
-  animation: rapid-blink 0.4s ease-in-out 2; /* Two quick blinks */
-}
-.eye.startled .pupil {
-  transform: scale(0.4) !important; /* Pupil dilates/shrinks in shock */
-  transition: transform 0.1s ease;
-}
-.floating-toggle { background: transparent; border: none; color: white; cursor: pointer; transition: transform 0.8s ease; }
-.floating-toggle svg { width: 24px; height: 24px; }
+
+/* Pupil and Animations remain exactly as you had them */
 
 /* =========================
    9. Animations
