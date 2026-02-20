@@ -462,44 +462,42 @@ body.glightbox-is-active footer {
 }
 
 /* =========================
-   12. Editorial Layouts (Legacy of Wool Style)
+   12. Editorial Layout (Earls/Wool Style)
    ========================= */
 
 .editorial-grid {
-  grid-column: 1 / -1 !important; /* Force it to span the whole screen width */
-  display: flex !important;
+  display: flex;
   align-items: center; 
   justify-content: center;
-  gap: 4rem; 
-  width: 100% !important;
-  max-width: 1400px;
-  margin: 10rem auto !important; 
-  padding: 0 4rem;
-  /* Ensure it doesn't inherit the 250px row height from Section 5 */
-  height: auto !important; 
+  gap: 3rem; /* Space between photos */
+  max-width: 1300px;
+  margin: 10rem auto; /* Large gap from the grid above */
+  padding: 0 2rem;
 }
 
-.editorial-item {
+.grid-item {
   flex: 1;
-  /* Overrides the 85% width/height from the project-hub links */
-  width: auto !important; 
-  height: auto !important; 
-  transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-.editorial-item.side {
+.grid-item.side {
   flex: 1;
-  max-width: 350px; /* Increased size so they aren't postage stamps */
+  max-width: 300px; /* Limits the side images */
 }
 
-.editorial-item.featured {
-  flex: 2; /* Increased ratio to make the center image much larger */
-  max-width: 650px; 
+.grid-item.featured {
+  flex: 2; /* Makes center image twice as large as the sides */
+  max-width: 600px;
 }
 
-.editorial-item img {
-  width: 100% !important;
-  height: auto !important; /* Forces the image to keep its natural shape */
+.grid-item img {
+  width: 100%;
+  height: auto;
   display: block;
-  object-fit: contain !important;
+  /* Match your Section 5 aesthetic */
+  filter: grayscale(100%) contrast(1.1);
+  transition: filter 0.8s ease;
+}
+
+.grid-item:hover img {
+  filter: grayscale(0%) contrast(1);
 }
