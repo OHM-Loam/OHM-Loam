@@ -434,7 +434,7 @@ body.glightbox-is-active footer {
   transition: all 0.8s ease;
 }
 
-red-line { 
+.red-line { 
   stroke: #8b0000; /* Dark Blood Red */
   opacity: 0.35;
   animation-duration: 12s; 
