@@ -386,22 +386,21 @@ body.glightbox-is-active footer {
 .floating-toggle svg { width: 24px; height: 24px; }
 
 .ohm-frequency-container {
-  flex: 1;
+  flex: 1; /* This pushes it to take all available middle space */
   display: flex;
-  justify-content: center;
-  padding: 0 3rem; /* Space between eye and toggle */
-  opacity: 0.2; /* Very faint baseline */
-  transition: opacity 0.5s ease;
+  align-items: center;
+  padding: 0 40px; /* Space so it doesn't touch the eye/toggle */
+  opacity: 0.5;    /* Bumped from 0.2 to be more visible */
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .ohm-line-svg {
-  width: 100%;
-  max-width: 500px;
-  height: 30px;
-  stroke: white; /* Inverts to black via mix-blend-mode */
+  width: 100%;    /* This makes it go 'across the page' */
+  height: 60px;   /* Increased height for a more dramatic 'spike' */
+  stroke: white;  
   fill: none;
-  stroke-width: 0.75px; /* Ultra thin hairline */
-  stroke-linecap: round;
+  stroke-width: 1.5px; /* Slightly thicker for better visibility */
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.3)); /* Subtle 'glow' */
 }
 
 /* Subtle pulse animation for the line */
@@ -417,6 +416,11 @@ body.glightbox-is-active footer {
 
 .smart-footer:hover .ohm-frequency-container {
   opacity: 0.6; /* Wakes up when you mouse over the footer area */
+}
+
+.ohm-frequency-container.active {
+  opacity: 1;
+  transform: scaleY(1.5); /* The line 'stretches' vertically when clicked */
 }
 
 
