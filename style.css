@@ -412,10 +412,9 @@ body.glightbox-is-active footer {
   margin: 0 30px;
   display: flex;
   align-items: center;
-  opacity: 0.7;
-  filter: contrast (1.2);
+  opacity: 0.6; /* Increased base opacity */
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.1)); /* Very subtle 'lift' */
   transition: all 0.5s ease;
-  pointer-events: none;
 }
 
 .ohm-triple-svg {
@@ -433,10 +432,23 @@ body.glightbox-is-active footer {
   transition: all 0.8s ease;
 }
 
-.red-line { stroke: #7b0000; opacity: 0.5; }
-.green-line { stroke: #005a00; opacity: 0.5; }
-.blue-line { stroke: #00007b; opacity: 0.5; }
+.red-line { 
+  stroke: #ff0000; /* Pure Red - 'Difference' will make it look darker/cyan-ish */
+  opacity: 0.7; 
+  animation-duration: 20s; 
+}
 
+.green-line { 
+  stroke: #00ff00; /* Pure Green - provides the 'pop' you were missing */
+  opacity: 0.7; 
+  animation-duration: 15s; 
+}
+
+.blue-line { 
+  stroke: #0000ff; /* Pure Blue */
+  opacity: 0.7; 
+  animation-duration: 8s; 
+}
 @keyframes flow {
   from { stroke-dashoffset: 2000; }
   to { stroke-dashoffset: 0; }
