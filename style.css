@@ -345,7 +345,12 @@ body.glightbox-is-active footer {
   z-index: 10000;
 }
 
-.footer-content { display: flex; justify-content: space-between; align-items: center; }
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
 
 .eye {
   width: 28px;
@@ -381,31 +386,39 @@ body.glightbox-is-active footer {
 .floating-toggle svg { width: 24px; height: 24px; }
 
 .ohm-frequency-container {
-  flex: 1; /* Takes up the middle space */
+  flex: 1;
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding: 0 2rem;
-  /* Fades the left and right edges of the image */
-  -webkit-mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
-  mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
+  padding: 0 3rem; /* Space between eye and toggle */
+  opacity: 0.2; /* Very faint baseline */
+  transition: opacity 0.5s ease;
 }
 
-.ohm-wave {
+.ohm-line-svg {
   width: 100%;
-  max-width: 400px; /* Adjust based on how wide you want the wave */
-  height: 30px;    /* Keep it sleek and low-profile */
-  object-fit: contain;
-  opacity: 0.4;
-  filter: grayscale(100%);
-  transition: all 0.5s ease;
+  max-width: 500px;
+  height: 30px;
+  stroke: white; /* Inverts to black via mix-blend-mode */
+  fill: none;
+  stroke-width: 0.75px; /* Ultra thin hairline */
+  stroke-linecap: round;
 }
 
-/* Subtle 'Active' state when hovering the footer */
-.footer-content:hover .ohm-wave {
-  opacity: 0.7;
-  transform: scaleY(1.1); /* Makes the 'pulse' feel stronger */
+/* Subtle pulse animation for the line */
+.wave-path {
+  stroke-dasharray: 400;
+  animation: flux 8s linear infinite;
 }
+
+@keyframes flux {
+  0% { stroke-dashoffset: 800; }
+  100% { stroke-dashoffset: 0; }
+}
+
+.smart-footer:hover .ohm-frequency-container {
+  opacity: 0.6; /* Wakes up when you mouse over the footer area */
+}
+
 
 /* =========================
    9. Animations
