@@ -427,28 +427,29 @@ body.glightbox-is-active footer {
   stroke-width: 1.4px;
   stroke-dasharray: 2000; 
   stroke-linecap: round;
-  animation: flow 15s linear infinite;  
+  animation: flow 18s linear infinite;  
   will-change: stroke-dashoffset;
   transition: all 0.8s ease;
 }
 
 .red-line { 
-  stroke: #ff0000; /* Pure Red - 'Difference' will make it look darker/cyan-ish */
-  opacity: 0.7; 
+  stroke: #b30000; /* Deep Red -> Results in a moody Teal */
+  opacity: 0.8; 
   animation-duration: 20s; 
 }
 
 .green-line { 
-  stroke: #00ff00; /* Pure Green - provides the 'pop' you were missing */
-  opacity: 0.7; 
+  stroke: #008000; /* Deep Green -> Results in a moody Purple */
+  opacity: 0.8; 
   animation-duration: 15s; 
 }
 
 .blue-line { 
-  stroke: #0000ff; /* Pure Blue */
-  opacity: 0.7; 
+  stroke: #0000b3; /* Deep Blue -> Results in a moody Gold/Bronze */
+  opacity: 0.8; 
   animation-duration: 8s; 
 }
+
 @keyframes flow {
   from { stroke-dashoffset: 2000; }
   to { stroke-dashoffset: 0; }
