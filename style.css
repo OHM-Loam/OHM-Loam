@@ -422,21 +422,33 @@ body.glightbox-is-active footer {
   height: 100%;
 }
 
-/* Red, Green, Blue path styling */
-.red-line { stroke: #ff4d4d; opacity: 0.8; }
-.green-line { stroke: #4dff4d; opacity: 0.8; }
-.blue-line { stroke: #4d4dff; opacity: 0.8; }
+.red-line { 
+  stroke: #ff4d4d; 
+  opacity: 0.8; 
+  animation-duration: 7s; 
+}
+
+.green-line { 
+  stroke: #4dff4d; 
+  opacity: 0.8; 
+  animation-duration: 11s; 
+  animation-direction: reverse; /* Makes the colors 'clash' and blend */
+}
+
+.blue-line { 
+  stroke: #4d4dff; 
+  opacity: 0.8; 
+  animation-duration: 9s; 
+}
 
 .wave-path {
   fill: none;
-  stroke-width: 1.2px;
-  stroke-dasharray: 1000;
-  animation: flow 10s linear infinite;
+  stroke-width: 0.8px; /* Ultra-thin is the key to elegance */
+  stroke-linecap: round;
+  opacity: 0.5;
+  filter: blur(0.3px); /* Softens the digital 'edge' */
+  transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
-
-.red-line { animation-duration: 7s; }
-.green-line { animation-duration: 11s; }
-.blue-line { animation-duration: 9s; }
 
 @keyframes flow {
   from { stroke-dashoffset: 2000; }
