@@ -412,7 +412,7 @@ body.glightbox-is-active footer {
   margin: 0 30px;
   display: flex;
   align-items: center;
-  opacity: 0.3; /* Base state is faint */
+  opacity: 0.5; 
   transition: all 0.5s ease;
   pointer-events: none;
 }
@@ -424,32 +424,32 @@ body.glightbox-is-active footer {
 
 .wave-path {
   fill: none;
-  stroke-width: 0.9px; /* Faint and thin */
+  stroke-width: 1.1px; /* Slightly thicker for visibility */
   stroke-dasharray: 1000;
   stroke-linecap: round;
-  /* Shared animation settings */
   animation-name: flow;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   transition: all 0.8s ease;
+  will-change: stroke-dashoffset;
 }
 
 .red-line { 
-  stroke: #8b0000; /* Dark Blood Red */
-  opacity: 0.35;
+  stroke: #a30000; /* Deep Crimson */
+  opacity: 0.6;    /* Increased from 0.35 */
   animation-duration: 12s; 
 }
 
 .green-line { 
-  stroke: #006400; /* Dark Forest Green */
-  opacity: 0.35; 
+  stroke: #008000; /* Deep Emerald */
+  opacity: 0.6; 
   animation-duration: 18s; 
   animation-direction: reverse;
 }
 
 .blue-line { 
-  stroke: #00008b; /* Deep Navy Blue */
-  opacity: 0.35; 
+  stroke: #0000a3; /* Deep Royal Blue */
+  opacity: 0.6; 
   animation-duration: 15s; 
 }
 
@@ -468,6 +468,11 @@ body.glightbox-is-active footer {
   filter: saturate(2) brightness(1.2);
 }
 
+.ohm-frequency-container.active .wave-path {
+  stroke-width: 2.5px;
+  opacity: 1;
+  filter: saturate(2) brightness(1.5) blur(0px);
+}
 
 /* =========================
    9. Animations
