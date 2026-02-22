@@ -339,10 +339,12 @@ body.glightbox-is-active footer {
    ========================= */
 .smart-footer {
   position: fixed;
-  bottom: 40px; width: 100%;
+  bottom: 40px; 
+  width: 100%;
   padding: 0 40px;
   mix-blend-mode: difference;
   z-index: 10000;
+  pointer-events: none;
 }
 
 .footer-content {
@@ -351,6 +353,7 @@ body.glightbox-is-active footer {
   align-items: center; /* Vertically centers icons and lines */
   justify-content: space-between;
   width: 100%;
+  pointer-events: auto;
 }
 
 .eye {
@@ -365,6 +368,7 @@ body.glightbox-is-active footer {
   position: relative;
   animation: blink 5s infinite;
   isolation: isolate; /* FIX: Keeps it from disappearing in 'difference' mode */
+  flex-shrink: 0;
 }
 
 .pupil {
@@ -383,19 +387,38 @@ body.glightbox-is-active footer {
   transform: scale(0.4) !important; /* Pupil dilates/shrinks in shock */
   transition: transform 0.1s ease;
 }
-.floating-toggle { background: transparent; border: none; color: white; cursor: pointer; transition: transform 0.8s ease; }
-.floating-toggle svg { width: 24px; height: 24px; }
-
-.ohm-frequency-container {
-  flex: 1; /* This tells the lines to take up all available middle space */
-  height: 80px;
-  margin: 0 30px; /* Gives the icons a little room to breathe */
+.floating-toggle {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 0;
   display: flex;
   align-items: center;
+  transition: all 0.3s ease;
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+
+.floating-toggle:hover {
+  opacity: 1;
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+}
+
+.ohm-frequency-container {
+  flex: 1;
+  height: 80px;
+  margin: 0 30px;
+  display: flex;
+  align-items: center;
+  opacity: 0.3; /* Base state is faint */
+  transition: all 0.5s ease;
+  pointer-events: none;
 }
 
 .ohm-triple-svg {
-  width: 100%; /* Stretches the SVG to fill the flex container */
+  width: 100%;
   height: 100%;
 }
 
@@ -403,15 +426,6 @@ body.glightbox-is-active footer {
 .red-line { stroke: #ff4d4d; opacity: 0.8; }
 .green-line { stroke: #4dff4d; opacity: 0.8; }
 .blue-line { stroke: #4d4dff; opacity: 0.8; }
-
-.ohm-line-svg {
-  width: 100%;    /* This makes it go 'across the page' */
-  height: 60px;   /* Increased height for a more dramatic 'spike' */
-  stroke: white;  
-  fill: none;
-  stroke-width: 1.5px; /* Slightly thicker for better visibility */
-  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.3)); /* Subtle 'glow' */
-}
 
 .wave-path {
   fill: none;
@@ -430,12 +444,13 @@ body.glightbox-is-active footer {
 }
 
 .smart-footer:hover .ohm-frequency-container {
-  opacity: 0.6; /* Wakes up when you mouse over the footer area */
+  opacity: 0.7; /* Wakes up when you mouse over the footer area */
 }
 
 .ohm-frequency-container.active {
-  opacity: 1;
-  transform: scaleY(1.5); /* The line 'stretches' vertically when clicked */
+  opacity: 1 !important;
+  transform: scaleY(1.5);
+  filter: saturate(2) brightness(1.2);
 }
 
 
