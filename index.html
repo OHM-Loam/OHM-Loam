@@ -157,12 +157,10 @@
       </svg>
     </div>
 
-     <button class="floating-toggle" id="footer-trigger">
-      <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="1.5" fill="none">
-        <circle cx="12" cy="12" r="9"></circle>
-        <path d="M12 8v8M8 12h8"></path>
-      </svg>
-    </button>
+     <button class="floating-toggle" id="ohm-trigger" aria-label="Trigger Frequency">
+  <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path> </svg>
+</button>
   </div>
 </footer>
   
@@ -404,6 +402,28 @@ lightbox.on('slide_changed', ({ current }) => {
 
 lightbox.on('close', () => {
     document.body.classList.remove('glightbox-is-active');
+});
+
+  /* =========================
+   OHM Line Draft 1
+   ========================= */
+  
+const toggle = document.getElementById('ohm-trigger');
+const freqContainer = document.querySelector('.ohm-frequency-container');
+const eyeEl = document.querySelector('.eye');
+
+toggle.addEventListener('click', () => {
+  // 1. Trigger the Eye 'startle'
+  eyeEl.classList.add('startled');
+  
+  // 2. Trigger the Line 'spike'
+  freqContainer.classList.add('active');
+  
+  // 3. Reset after the 'pulse'
+  setTimeout(() => {
+    eyeEl.classList.remove('startled');
+    freqContainer.classList.remove('active');
+  }, 400); // Duration of the spike
 });
 
 </script>
