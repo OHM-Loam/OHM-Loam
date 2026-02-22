@@ -422,32 +422,35 @@ body.glightbox-is-active footer {
   height: 100%;
 }
 
+.wave-path {
+  fill: none;
+  stroke-width: 0.8px; /* Faint and thin */
+  stroke-dasharray: 1000;
+  stroke-linecap: round;
+  /* Shared animation settings */
+  animation-name: flow;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  transition: all 0.8s ease;
+}
+
 .red-line { 
   stroke: #ff4d4d; 
-  opacity: 0.8; 
-  animation-duration: 7s; 
+  opacity: 0.4;
+  animation-duration: 12s; 
 }
 
 .green-line { 
   stroke: #4dff4d; 
-  opacity: 0.8; 
-  animation-duration: 11s; 
-  animation-direction: reverse; /* Makes the colors 'clash' and blend */
+  opacity: 0.4; 
+  animation-duration: 18s; 
+  animation-direction: reverse;
 }
 
 .blue-line { 
   stroke: #4d4dff; 
-  opacity: 0.8; 
-  animation-duration: 9s; 
-}
-
-.wave-path {
-  fill: none;
-  stroke-width: 0.8px; /* Ultra-thin is the key to elegance */
-  stroke-linecap: round;
-  opacity: 0.5;
-  filter: blur(0.3px); /* Softens the digital 'edge' */
-  transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+  opacity: 0.4; 
+  animation-duration: 15s; 
 }
 
 @keyframes flow {
