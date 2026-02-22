@@ -151,13 +151,18 @@
       <div class="eye">
         <div class="pupil"></div>
       </div>
-      <div class="ohm-frequency-container">
-    <img src="images/test_image_foot.webp" class="ohm-wave" alt="Frequency Baseline">
-  </div>
-
-  <button class="floating-toggle">
-    </button>
+    <div class="ohm-frequency-container">
+        <svg class="ohm-line-svg" viewBox="0 0 400 40" preserveAspectRatio="none">
+        <path class="wave-path" d="M0,20 L150,20 Q175,20 185,10 T200,10 T215,30 T250,20 L400,20" />
+      </svg>
     </div>
+
+     <button class="floating-toggle" id="footer-trigger">
+      <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="1.5" fill="none">
+        <circle cx="12" cy="12" r="9"></circle>
+        <path d="M12 8v8M8 12h8"></path>
+      </svg>
+    </button>
   </div>
 </footer>
   
