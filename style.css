@@ -380,6 +380,33 @@ body.glightbox-is-active footer {
 .floating-toggle { background: transparent; border: none; color: white; cursor: pointer; transition: transform 0.8s ease; }
 .floating-toggle svg { width: 24px; height: 24px; }
 
+.ohm-frequency-container {
+  flex: 1; /* Takes up the middle space */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 2rem;
+  /* Fades the left and right edges of the image */
+  -webkit-mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
+}
+
+.ohm-wave {
+  width: 100%;
+  max-width: 400px; /* Adjust based on how wide you want the wave */
+  height: 30px;    /* Keep it sleek and low-profile */
+  object-fit: contain;
+  opacity: 0.4;
+  filter: grayscale(100%);
+  transition: all 0.5s ease;
+}
+
+/* Subtle 'Active' state when hovering the footer */
+.footer-content:hover .ohm-wave {
+  opacity: 0.7;
+  transform: scaleY(1.1); /* Makes the 'pulse' feel stronger */
+}
+
 /* =========================
    9. Animations
    ========================= */
