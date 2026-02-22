@@ -424,7 +424,7 @@ body.glightbox-is-active footer {
 
 .wave-path {
   fill: none;
-  stroke-width: 0.8px; /* Faint and thin */
+  stroke-width: 0.9px; /* Faint and thin */
   stroke-dasharray: 1000;
   stroke-linecap: round;
   /* Shared animation settings */
@@ -434,22 +434,22 @@ body.glightbox-is-active footer {
   transition: all 0.8s ease;
 }
 
-.red-line { 
-  stroke: #ff4d4d; 
-  opacity: 0.4;
+red-line { 
+  stroke: #8b0000; /* Dark Blood Red */
+  opacity: 0.35;
   animation-duration: 12s; 
 }
 
 .green-line { 
-  stroke: #4dff4d; 
-  opacity: 0.4; 
+  stroke: #006400; /* Dark Forest Green */
+  opacity: 0.35; 
   animation-duration: 18s; 
   animation-direction: reverse;
 }
 
 .blue-line { 
-  stroke: #4d4dff; 
-  opacity: 0.4; 
+  stroke: #00008b; /* Deep Navy Blue */
+  opacity: 0.35; 
   animation-duration: 15s; 
 }
 
