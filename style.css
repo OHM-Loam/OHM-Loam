@@ -347,7 +347,7 @@ body.glightbox-is-active footer {
   width: 100%;
   padding: 0 40px;
   mix-blend-mode: difference;
-  z-index: 1;
+  z-index: 9999;
   pointer-events: none;
 }
 
@@ -381,19 +381,21 @@ body.glightbox-is-active footer {
   /* Ensure the 'shake' happens around the center of the pupil */
   transform-origin: center; 
 }
-/* Overdrive State (Triggered by the Bolt) */
+
 .overclocked .pupil {
-  /* This creates the rainbow iris effect */
-  fill: conic-gradient(
-    red, orange, yellow, green, blue, indigo, violet, red
-  );
-  
-  /* If your pupil is an SVG <circle>, 'fill' won't support gradients directly 
-     unless defined in <defs>. The easiest trick is to use a filter: */
+  fill: #ff0000; 
+  animation: iris-spin 1.5s linear infinite, pupil-throb 0.15s infinite;
+  filter: saturate(8) brightness(1.2);
+  transform-origin: center;
   filter: saturate(2) hue-rotate(0deg);
   animation: iris-spin 2s linear infinite, pupil-throb 0.2s infinite;
 }
-   
+
+.overclocked .eye-lid {
+  animation: none;
+  transform: scaleY(1.2); /* Wide-eyed shock */
+}
+
 .eye.startled {
   animation: rapid-blink 0.4s ease-in-out 2; /* Two quick blinks */
 }
@@ -401,6 +403,11 @@ body.glightbox-is-active footer {
   transform: scale(0.4) !important; /* Pupil dilates/shrinks in shock */
   transition: transform 0.1s ease;
 }
+
+.eye-lid {
+  animation: blink 6s infinite;
+}
+
 .floating-toggle {
   background: none;
   border: none;
@@ -500,14 +507,17 @@ body.glightbox-is-active footer {
 }
 
 @keyframes iris-spin {
-  from { filter: hue-rotate(0deg) saturate(2); }
-  to { filter: hue-rotate(360deg) saturate(2); }
+  from { filter: hue-rotate(0deg) saturate(5) brightness(1.2); }
+  to { filter: hue-rotate(360deg) saturate(5) brightness(1.2); }
 }
 
 /* Make the pupil physically shake from the 'energy' */
 @keyframes pupil-throb {
-  0%, 100% { transform: scale(1.1) translate(0,0); }
-  50% { transform: scale(1.3) translate(1px, -1px); }
+  0%, 100% { transform: scale(1); }
+  20% { transform: scale(1.1) translate(1px, -1px); }
+  40% { transform: scale(0.9) translate(-1px, 1px); }
+  60% { transform: scale(1.05) translate(1px, 1px); }
+  80% { transform: scale(0.95) translate(-1px, -1px); }
 }
 
 .spacer-md { height: 40vh; }
