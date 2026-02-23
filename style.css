@@ -376,14 +376,24 @@ body.glightbox-is-active footer {
 }
 
 .pupil {
-  width: 10px;
-  height: 10px;
-  background: black !important;
-  border-radius: 50%;
-  position: absolute;
-  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  will-change: transform;
+  fill: #000;
+  transition: fill 0.5s ease;
+  /* Ensure the 'shake' happens around the center of the pupil */
+  transform-origin: center; 
 }
+/* Overdrive State (Triggered by the Bolt) */
+.overclocked .pupil {
+  /* This creates the rainbow iris effect */
+  fill: conic-gradient(
+    red, orange, yellow, green, blue, indigo, violet, red
+  );
+  
+  /* If your pupil is an SVG <circle>, 'fill' won't support gradients directly 
+     unless defined in <defs>. The easiest trick is to use a filter: */
+  filter: saturate(2) hue-rotate(0deg);
+  animation: iris-spin 2s linear infinite, pupil-throb 0.2s infinite;
+}
+   
 .eye.startled {
   animation: rapid-blink 0.4s ease-in-out 2; /* Two quick blinks */
 }
@@ -487,6 +497,17 @@ body.glightbox-is-active footer {
 @keyframes rapid-blink {
   0%, 100% { transform: scaleY(1); }
   50% { transform: scaleY(0.1); }
+}
+
+@keyframes iris-spin {
+  from { filter: hue-rotate(0deg) saturate(2); }
+  to { filter: hue-rotate(360deg) saturate(2); }
+}
+
+/* Make the pupil physically shake from the 'energy' */
+@keyframes pupil-throb {
+  0%, 100% { transform: scale(1.1) translate(0,0); }
+  50% { transform: scale(1.3) translate(1px, -1px); }
 }
 
 .spacer-md { height: 40vh; }
