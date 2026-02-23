@@ -563,39 +563,38 @@ body.glightbox-is-active footer {
 
 .editorial-grid {
   display: flex;
-  align-items: flex-end; /* Keeps them lined up at the bottom */
+  align-items: flex-end;
   justify-content: center;
   gap: 4rem; 
   max-width: 1400px;
   margin: 12rem auto;
   padding: 0 4rem;
+  
+  /* Create a new stacking context for the whole grid */
+  position: relative;
+  z-index: 10; 
 }
 
 .grid-item {
   flex: 1;
-}
-
-.grid-item.side {
-  flex: 1;
-  max-width: 320px;
+  position: relative; /* Required for z-index to work */
+  z-index: 11;
 }
 
 .grid-item.featured {
   flex: 1.4; 
   max-width: 400px;
-  z-index: 2;
+  z-index: 12; /* Keep featured items even higher if they overlap */
 }
 
-/* THE HOVER EFFECT: Starts grayscale, fades to color */
+/* THE HOVER EFFECT */
 .grid-item img {
   width: 100%;
   height: auto;
   display: block;
-  /* Match Section 5 aesthetic */
   filter: grayscale(100%) contrast(1.1);
-  transition: filter 0.8s ease; /* Same smooth 0.8s fade */
-}
-
-.grid-item:hover img {
-  filter: grayscale(0%) contrast(1);
+  transition: filter 0.8s ease;
+  
+  /* Ensure the image itself feels solid and opaque */
+  background: #f9f9f7; /* Match your off-white background */
 }
