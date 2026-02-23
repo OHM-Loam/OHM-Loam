@@ -407,26 +407,30 @@ lightbox.on('close', () => {
     document.body.classList.remove('glightbox-is-active');
 });
 
-  /* =========================
-   OHM Line Draft 1
-   ========================= */
-  
-const toggle = document.getElementById('ohm-trigger');
+ const toggle = document.getElementById('ohm-trigger');
 const freqContainer = document.querySelector('.ohm-frequency-container');
 const eyeEl = document.querySelector('.eye');
+const footer = document.querySelector('.smart-footer'); // Assuming this wraps them
 
 toggle.addEventListener('click', () => {
-  // 1. Trigger the Eye 'startle'
+  // 1. Toggle the permanent 'Overclock' state (Rainbow Eye + Fast Waves)
+  // This stays on until you click again.
+  const isOverclocked = footer.classList.toggle('overclocked');
+  
+  // 2. The 'Startle' Pulse (Visual feedback of the click)
   eyeEl.classList.add('startled');
-  
-  // 2. Trigger the Line 'spike'
   freqContainer.classList.add('active');
-  
-  // 3. Reset after the 'pulse'
+
+  // 3. Reset ONLY the pulse, but keep 'overclocked' if it was toggled on
   setTimeout(() => {
     eyeEl.classList.remove('startled');
     freqContainer.classList.remove('active');
-  }, 400); // Duration of the spike
+  }, 400);
+
+  // 4. Console Easter Egg
+  if (isOverclocked) {
+    console.log("SYSTEM STATUS: FREQUENCY OVERLOAD");
+  }
 });
 
 </script>
