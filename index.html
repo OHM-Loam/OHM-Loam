@@ -407,30 +407,23 @@ lightbox.on('close', () => {
     document.body.classList.remove('glightbox-is-active');
 });
 
-let overclockTimeout;
+const toggle = document.getElementById('ohm-trigger');
+const freqContainer = document.querySelector('.ohm-frequency-container');
+const eyeEl = document.getElementById('eye-container');
+const footer = document.querySelector('.smart-footer');
 
 toggle.addEventListener('click', () => {
-  // Clear any existing timer if they click again quickly
-  clearTimeout(overclockTimeout);
-
-  // 1. Toggle the state
-  const isOverclocked = footer.classList.toggle('overclocked');
+  // Permanent Toggle for the Easter Egg
+  footer.classList.toggle('overclocked');
   
-  // 2. Pulse effect (the 'Startle')
+  // Temporary Pulse (The Pulse we set to 400ms)
   eyeEl.classList.add('startled');
   freqContainer.classList.add('active');
+  
   setTimeout(() => {
     eyeEl.classList.remove('startled');
     freqContainer.classList.remove('active');
   }, 400);
-
-  // 3. Auto-Reset Timer (The Easter Egg expires after 5 seconds)
-  if (isOverclocked) {
-    overclockTimeout = setTimeout(() => {
-      footer.classList.remove('overclocked');
-      console.log("SYSTEM STATUS: RE-STABILIZED");
-    }, 5000); // 5000ms = 5 seconds
-  }
 });
 
 </script>
