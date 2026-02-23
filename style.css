@@ -397,6 +397,10 @@ body.glightbox-is-active footer {
   transform: scaleY(1.2); /* Wide-eyed shock */
 }
 
+.pupil, .wave-path {
+  transition: all 0.6s ease-in-out; 
+}
+
 .eye.startled {
   animation: rapid-blink 0.4s ease-in-out 2; /* Two quick blinks */
 }
