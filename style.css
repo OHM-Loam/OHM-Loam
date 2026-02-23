@@ -153,6 +153,8 @@ body.glightbox-is-active footer {
   padding: 10rem 4rem;
   max-width: 1600px;
   margin: 0 auto;
+  position: reletive;
+  z-index: 5;
 }
 
 .project-hub a {
@@ -162,8 +164,10 @@ body.glightbox-is-active footer {
   margin: auto; 
   overflow: hidden;
   position: relative;
+  z-index: 6;
   border-radius: 2px;
   pointer-events: auto !important;
+  background-color: #f9f9f7;
   /* Remove any global transitions here to prevent 'snapping' */
 }
 
@@ -174,7 +178,7 @@ body.glightbox-is-active footer {
 
 /* THE HOVER: We only change the Z-index, NOT the position */
 .project-hub a:hover {
-  z-index: 10;
+  z-index: 15;
   /* No translateY here = No movement */
 }
 
