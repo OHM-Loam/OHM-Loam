@@ -425,28 +425,35 @@ const freqContainer = document.querySelector('.ohm-frequency-container');
 const eyeEl = document.getElementById('eye-container');
 const footer = document.querySelector('.smart-footer');
 
-let overclockTimer;
+let overclockTimer = null; // Initialize as null
 
-toggle.addEventListener('click', () => {
-  // 1. Force the state to ON (instead of toggle)
+toggle.addEventListener('click', (e) => {
+  e.preventDefault(); // Prevent any default button behavior
+
+  // 1. Reset any existing timer immediately
+  if (overclockTimer) {
+    clearTimeout(overclockTimer);
+  }
+
+  // 2. Apply States
   footer.classList.add('overclocked');
-  
-  // 2. The 400ms 'Startle' Pulse (Visual feedback)
   eyeEl.classList.add('startled');
   freqContainer.classList.add('active');
   
+  // 3. The short 'Startle' pulse (400ms)
   setTimeout(() => {
     eyeEl.classList.remove('startled');
     freqContainer.classList.remove('active');
   }, 400);
 
-  // 3. THE RESET LOGIC
-  clearTimeout(overclockTimer); // Stop the previous timer
-
-  // Start a fresh 5-second countdown
+  // 4. The 5-Second Auto-Stabilize
   overclockTimer = setTimeout(() => {
     footer.classList.remove('overclocked');
+    
+    // FORCE-CLEAN: Sometimes browsers need a little nudge 
+    // to stop infinite animations if the class removal is too subtle
     console.log("System Frequency: Stabilized");
+    overclockTimer = null;
   }, 5000); 
 });
 
