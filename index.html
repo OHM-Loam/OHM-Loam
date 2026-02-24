@@ -221,9 +221,138 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
 /* =========================
-   1. GLightbox: Absolute Override
+   TJ Logic: Baseline Stable Build
    ========================= */
-// We use a single instance to prevent memory leaks and counter bugs
+if (typeof GLightbox !== 'undefined') {
+  const lightbox = GLightbox({
+    selector: '.glightbox', // Targets everything again for stability
+    loop: false,
+    zoomable: false,
+    draggable: false,
+    touchNavigation: false,
+    keyboardNavigation: false,
+    closeOnOutsideClick: true,
+    autoplayVideos: true,
+    plyr: {
+      config: {
+        muted: true,
+        hideControls: true,
+        loop: { active: true },
+        clickToPlay: false
+      }
+    }
+  });
+
+  // The "Clean" Event Logic
+  lightbox.on('open', () => {
+    const container = document.querySelector('.glightbox-container');
+    
+    // 1. Click-anywhere-to-close (Safe Version)
+    container.addEventListener('click', (e) => {
+      if (!e.target.closest('.plyr__controls') && !e.target.closest('.gslide-description')) {
+        lightbox.close();
+      }
+    });
+
+    // 2. Counter Logic (Only if it's the main gallery)
+    // We check the trigger element of the current slide
+    const currentTrigger = lightbox.activeSlide.querySelector('.gslide-content'); 
+    // Or more reliably, check the total number of items in the current set
+    if (lightbox.elements.length > 1) {
+       // Your 01 / 02 counter code goes here
+    }
+  });
+}
+
+  // --- 4. VIDEO AUTOPLAY ---
+  document.querySelectorAll('video').forEach(vid => {
+    vid.play().catch(() => {});
+  });
+
+  // --- 5. SYMBOL SPINNER LOGIC ---
+  (function() {
+    let symbolInterval;
+    let symbolIndex = 0;
+    const symbols = ['-', '+', 'Ω', '^', '×',];
+
+    document.addEventListener('mouseover', function(e) {
+      const title = e.target.closest('.site-title');
+      const spinner = title ? title.querySelector('.symbol-spinner') : null;
+      if (spinner && !symbolInterval) {
+        symbolInterval = setInterval(() => {
+          symbolIndex = (symbolIndex + 1) % symbols.length;
+          spinner.textContent = symbols[symbolIndex];
+        }, 120);
+      }
+    });
+
+    document.addEventListener('mouseout', function(e) {
+      const title = e.target.closest('.site-title');
+      if (title && (!e.relatedTarget || !title.contains(e.relatedTarget))) {
+        const spinner = title.querySelector('.symbol-spinner');
+        if (spinner) {
+          clearInterval(symbolInterval);
+          symbolInterval = null;
+          spinner.textContent = '-';
+          symbolIndex = 0;
+        }
+      }
+    });
+  })();
+
+});
+
+window.addEventListener('load', () => {
+  let isPayingAttention = false;
+  const eye = document.querySelector('.eye');
+  const pupil = document.querySelector('.pupil');
+
+  if (!eye || !pupil) return;
+
+  // --- MOUSE MOVE LOGIC ---
+  document.addEventListener('mousemove', (e) => {
+    if (!isPayingAttention && Math.random() < 0.01) {
+      isPayingAttention = true;
+    } else if (isPayingAttention && Math.random() < 0.005) {
+      isPayingAttention = false;
+      pupil.style.transform = `translate(0, 0)`;
+    }
+
+    if (isPayingAttention) {
+      const rect = eye.getBoundingClientRect();
+      const eyeX = rect.left + rect.width / 2;
+      const eyeY = rect.top + rect.height / 2;
+      const angle = Math.atan2(e.clientY - eyeY, e.clientX - eyeX);
+      const moveDist = 4; 
+      const x = Math.cos(angle) * moveDist;
+      const y = Math.sin(angle) * moveDist;
+      pupil.style.transform = `translate(${x}px, ${y}px)`;
+    }
+  });
+
+  // --- ADD THE CLICK LOGIC HERE ---
+  eye.addEventListener('click', () => {
+    // 1. Add the CSS class for the rapid blinks
+    eye.classList.add('startled');
+    
+    // 2. Force the eye to stop tracking immediately
+    isPayingAttention = false;
+    
+    // 3. Shrink the pupil for that "shocked" look
+    pupil.style.transform = `translate(0, 0) scale(0.4)`;
+
+    // 4. Remove the class after the animation finishes (800ms)
+    setTimeout(() => {
+      eye.classList.remove('startled');
+      // Pupil returns to normal size via CSS transitions
+      pupil.style.transform = `translate(0, 0) scale(1)`;
+    }, 800);
+  });
+});
+  
+/* =========================
+   TJ Logic: Absolute Override (Final Sync)
+   ========================= */
 const lightbox = GLightbox({
     selector: '.glightbox',
     loop: false,
@@ -256,6 +385,7 @@ lightbox.on('open', () => {
             const num = document.createElement('span');
             num.className = 'gcount-num';
             num.innerText = (i + 1).toString().padStart(2, '0');
+            // Initial active state for 01
             if (i === 0) num.classList.add('active');
             
             num.onclick = (e) => { 
@@ -268,10 +398,12 @@ lightbox.on('open', () => {
     }
 });
 
+// THE FIX: This listener tracks the slide change and updates the numbers
 lightbox.on('slide_changed', ({ current }) => {
     const nums = document.querySelectorAll('.gcount-num');
     if (nums.length > 0) {
         nums.forEach(n => n.classList.remove('active'));
+        // 'current.index' is the key property to sync with the spans
         if (nums[current.index]) {
             nums[current.index].classList.add('active');
         }
@@ -282,79 +414,44 @@ lightbox.on('close', () => {
     document.body.classList.remove('glightbox-is-active');
 });
 
-/* =========================
-   2. The Eye & Overclock System
-   ========================= */
-window.addEventListener('load', () => {
-    let isPayingAttention = false;
-    const eye = document.querySelector('.eye');
-    const pupil = document.querySelector('.pupil');
-    const toggle = document.getElementById('ohm-trigger');
-    const footer = document.querySelector('.smart-footer');
-    const freqContainer = document.querySelector('.ohm-frequency-container');
-    
-    let overclockTimer = null;
+// Ensure these variables are only declared ONCE in your file
+const toggle = document.getElementById('ohm-trigger');
+const footer = document.querySelector('.smart-footer');
+const eyeEl = document.getElementById('eye-container');
+const freqContainer = document.querySelector('.ohm-frequency-container');
 
-    if (!eye || !pupil || !toggle) return;
+let overclockTimer = null; 
 
-    // --- MOUSE MOVE LOGIC ---
-    document.addEventListener('mousemove', (e) => {
-        // SAFETY: If overclocked, we stop the mouse from overriding the pupil animations
-        if (footer.classList.contains('overclocked')) return;
+toggle.addEventListener('click', () => {
+  // 1. Toggle the class
+  const isOverclocked = footer.classList.toggle('overclocked');
+  
+  // 2. Pulse Visuals
+  eyeEl.classList.add('startled');
+  freqContainer.classList.add('active');
+  setTimeout(() => {
+    eyeEl.classList.remove('startled');
+    freqContainer.classList.remove('active');
+  }, 400);
 
-        if (!isPayingAttention && Math.random() < 0.01) {
-            isPayingAttention = true;
-        } else if (isPayingAttention && Math.random() < 0.005) {
-            isPayingAttention = false;
-            pupil.style.transform = `translate(0, 0)`;
-        }
+  // 3. Reset the Timer
+  if (overclockTimer) {
+    clearTimeout(overclockTimer);
+    overclockTimer = null;
+    console.log("Existing timer cleared.");
+  }
 
-        if (isPayingAttention) {
-            const rect = eye.getBoundingClientRect();
-            const eyeX = rect.left + rect.width / 2;
-            const eyeY = rect.top + rect.height / 2;
-            const angle = Math.atan2(e.clientY - eyeY, e.clientX - eyeX);
-            const moveDist = 4; 
-            const x = Math.cos(angle) * moveDist;
-            const y = Math.sin(angle) * moveDist;
-            pupil.style.transform = `translate(${x}px, ${y}px)`;
-        }
-    });
-
-    // --- OVERCLOCK CLICK LOGIC ---
-    toggle.addEventListener('click', () => {
-        const isNowOverclocked = footer.classList.toggle('overclocked');
-        
-        // 1. Reset 'Inline' Styles: This wipes the mouse position 
-        // so the CSS @keyframes can finally move the pupil
-        pupil.style.transform = ''; 
-
-        // 2. The 'Startle' Pulse
-        eye.classList.add('startled');
-        freqContainer.classList.add('active');
-        
-        setTimeout(() => {
-            eye.classList.remove('startled');
-            freqContainer.classList.remove('active');
-        }, 400);
-
-        // 3. THE TIMEOUT LOGIC
-        if (overclockTimer) {
-            clearTimeout(overclockTimer);
-            overclockTimer = null;
-        }
-
-        if (isNowOverclocked) {
-            console.log("System Surge: 5s Timer Started");
-            overclockTimer = setTimeout(() => {
-                footer.classList.remove('overclocked');
-                overclockTimer = null;
-                console.log("System Frequency: Stabilized");
-            }, 5000); 
-        } else {
-            console.log("Manual Reset: Normal Frequency Restored");
-        }
-    });
+  // 4. Start New Timer if turning ON
+  if (isOverclocked) {
+    console.log("Overclock Active: 5s countdown started...");
+    overclockTimer = setTimeout(() => {
+      footer.classList.remove('overclocked');
+      overclockTimer = null;
+      console.log("Timer Finished: System Stabilized.");
+    }, 5000); 
+  } else {
+    console.log("Manual Shutdown: Overclock disabled.");
+  }
 });
 
 </script>
