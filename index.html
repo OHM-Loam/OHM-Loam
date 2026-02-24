@@ -221,144 +221,15 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
 /* =========================
-   TJ Logic: Baseline Stable Build
-   ========================= */
-if (typeof GLightbox !== 'undefined') {
-  const lightbox = GLightbox({
-    selector: '.glightbox', // Targets everything again for stability
-    loop: false,
-    zoomable: false,
-    draggable: false,
-    touchNavigation: false,
-    keyboardNavigation: false,
-    closeOnOutsideClick: true,
-    autoplayVideos: true,
-    plyr: {
-      config: {
-        muted: true,
-        hideControls: true,
-        loop: { active: true },
-        clickToPlay: false
-      }
-    }
-  });
-
-  // The "Clean" Event Logic
-  lightbox.on('open', () => {
-    const container = document.querySelector('.glightbox-container');
-    
-    // 1. Click-anywhere-to-close (Safe Version)
-    container.addEventListener('click', (e) => {
-      if (!e.target.closest('.plyr__controls') && !e.target.closest('.gslide-description')) {
-        lightbox.close();
-      }
-    });
-
-    // 2. Counter Logic (Only if it's the main gallery)
-    // We check the trigger element of the current slide
-    const currentTrigger = lightbox.activeSlide.querySelector('.gslide-content'); 
-    // Or more reliably, check the total number of items in the current set
-    if (lightbox.elements.length > 1) {
-       // Your 01 / 02 counter code goes here
-    }
-  });
-}
-
-  // --- 4. VIDEO AUTOPLAY ---
-  document.querySelectorAll('video').forEach(vid => {
-    vid.play().catch(() => {});
-  });
-
-  // --- 5. SYMBOL SPINNER LOGIC ---
-  (function() {
-    let symbolInterval;
-    let symbolIndex = 0;
-    const symbols = ['-', '+', 'Ω', '^', '×',];
-
-    document.addEventListener('mouseover', function(e) {
-      const title = e.target.closest('.site-title');
-      const spinner = title ? title.querySelector('.symbol-spinner') : null;
-      if (spinner && !symbolInterval) {
-        symbolInterval = setInterval(() => {
-          symbolIndex = (symbolIndex + 1) % symbols.length;
-          spinner.textContent = symbols[symbolIndex];
-        }, 120);
-      }
-    });
-
-    document.addEventListener('mouseout', function(e) {
-      const title = e.target.closest('.site-title');
-      if (title && (!e.relatedTarget || !title.contains(e.relatedTarget))) {
-        const spinner = title.querySelector('.symbol-spinner');
-        if (spinner) {
-          clearInterval(symbolInterval);
-          symbolInterval = null;
-          spinner.textContent = '-';
-          symbolIndex = 0;
-        }
-      }
-    });
-  })();
-
-});
-
-window.addEventListener('load', () => {
-  let isPayingAttention = false;
-  const eye = document.querySelector('.eye');
-  const pupil = document.querySelector('.pupil');
-
-  if (!eye || !pupil) return;
-
-  // --- MOUSE MOVE LOGIC ---
-  document.addEventListener('mousemove', (e) => {
-    if (!isPayingAttention && Math.random() < 0.01) {
-      isPayingAttention = true;
-    } else if (isPayingAttention && Math.random() < 0.005) {
-      isPayingAttention = false;
-      pupil.style.transform = `translate(0, 0)`;
-    }
-
-    if (isPayingAttention) {
-      const rect = eye.getBoundingClientRect();
-      const eyeX = rect.left + rect.width / 2;
-      const eyeY = rect.top + rect.height / 2;
-      const angle = Math.atan2(e.clientY - eyeY, e.clientX - eyeX);
-      const moveDist = 4; 
-      const x = Math.cos(angle) * moveDist;
-      const y = Math.sin(angle) * moveDist;
-      pupil.style.transform = `translate(${x}px, ${y}px)`;
-    }
-  });
-
-  // --- ADD THE CLICK LOGIC HERE ---
-  eye.addEventListener('click', () => {
-    // 1. Add the CSS class for the rapid blinks
-    eye.classList.add('startled');
-    
-    // 2. Force the eye to stop tracking immediately
-    isPayingAttention = false;
-    
-    // 3. Shrink the pupil for that "shocked" look
-    pupil.style.transform = `translate(0, 0) scale(0.4)`;
-
-    // 4. Remove the class after the animation finishes (800ms)
-    setTimeout(() => {
-      eye.classList.remove('startled');
-      // Pupil returns to normal size via CSS transitions
-      pupil.style.transform = `translate(0, 0) scale(1)`;
-    }, 800);
-  });
-});
-  
-/* =========================
-   TJ Logic: Absolute Override (Final Sync)
+   1. GLightbox: Unified Setup
    ========================= */
 const lightbox = GLightbox({
     selector: '.glightbox',
     loop: false,
     zoomable: false,
     draggable: false,
-    closeOnOutsideClick: false,
+    closeOnOutsideClick: true,
+    autoplayVideos: true,
     svg: {
         close: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>'
     }
@@ -366,47 +237,31 @@ const lightbox = GLightbox({
 
 lightbox.on('open', () => {
     document.body.classList.add('glightbox-is-active');
-    
-    const header = document.querySelector('header');
-    const footer = document.querySelector('footer');
-    if (header) header.style.zIndex = '1000000';
-    if (footer) footer.style.zIndex = '1000000';
-
     const container = document.querySelector('.glightbox-container');
     const oldCounter = document.querySelector('.custom-gcounter');
     if (oldCounter) oldCounter.remove();
     
-    const counterDiv = document.createElement('div');
-    counterDiv.className = 'custom-gcounter';
     const total = lightbox.elements.length;
-
     if (total > 1) {
+        const counterDiv = document.createElement('div');
+        counterDiv.className = 'custom-gcounter';
         for (let i = 0; i < total; i++) {
             const num = document.createElement('span');
             num.className = 'gcount-num';
             num.innerText = (i + 1).toString().padStart(2, '0');
-            // Initial active state for 01
             if (i === 0) num.classList.add('active');
-            
-            num.onclick = (e) => { 
-                e.stopPropagation(); 
-                lightbox.goToSlide(i); 
-            };
+            num.onclick = (e) => { e.stopPropagation(); lightbox.goToSlide(i); };
             counterDiv.appendChild(num);
         }
         container.appendChild(counterDiv);
     }
 });
 
-// THE FIX: This listener tracks the slide change and updates the numbers
 lightbox.on('slide_changed', ({ current }) => {
     const nums = document.querySelectorAll('.gcount-num');
     if (nums.length > 0) {
         nums.forEach(n => n.classList.remove('active'));
-        // 'current.index' is the key property to sync with the spans
-        if (nums[current.index]) {
-            nums[current.index].classList.add('active');
-        }
+        if (nums[current.index]) nums[current.index].classList.add('active');
     }
 });
 
@@ -414,44 +269,100 @@ lightbox.on('close', () => {
     document.body.classList.remove('glightbox-is-active');
 });
 
-// Ensure these variables are only declared ONCE in your file
-const toggle = document.getElementById('ohm-trigger');
-const footer = document.querySelector('.smart-footer');
-const eyeEl = document.getElementById('eye-container');
-const freqContainer = document.querySelector('.ohm-frequency-container');
+/* =========================
+   2. Symbols & Video
+   ========================= */
+document.querySelectorAll('video').forEach(vid => { vid.play().catch(() => {}); });
 
-let overclockTimer = null; 
+(function() {
+    let symbolInterval;
+    let symbolIndex = 0;
+    const symbols = ['-', '+', 'Ω', '^', '×'];
+    document.addEventListener('mouseover', (e) => {
+        const title = e.target.closest('.site-title');
+        const spinner = title ? title.querySelector('.symbol-spinner') : null;
+        if (spinner && !symbolInterval) {
+            symbolInterval = setInterval(() => {
+                symbolIndex = (symbolIndex + 1) % symbols.length;
+                spinner.textContent = symbols[symbolIndex];
+            }, 120);
+        }
+    });
+    document.addEventListener('mouseout', (e) => {
+        const title = e.target.closest('.site-title');
+        if (title && (!e.relatedTarget || !title.contains(e.relatedTarget))) {
+            const spinner = title.querySelector('.symbol-spinner');
+            if (spinner) { clearInterval(symbolInterval); symbolInterval = null; spinner.textContent = '-'; }
+        }
+    });
+})();
 
-toggle.addEventListener('click', () => {
-  // 1. Toggle the class
-  const isOverclocked = footer.classList.toggle('overclocked');
-  
-  // 2. Pulse Visuals
-  eyeEl.classList.add('startled');
-  freqContainer.classList.add('active');
-  setTimeout(() => {
-    eyeEl.classList.remove('startled');
-    freqContainer.classList.remove('active');
-  }, 400);
+/* =========================
+   3. The Eye & Overclock Logic
+   ========================= */
+window.addEventListener('load', () => {
+    let isPayingAttention = false;
+    let overclockTimer = null;
+    const eye = document.querySelector('.eye');
+    const pupil = document.querySelector('.pupil');
+    const toggle = document.getElementById('ohm-trigger');
+    const footer = document.querySelector('.smart-footer');
+    const eyeEl = document.getElementById('eye-container');
+    const freqContainer = document.querySelector('.ohm-frequency-container');
 
-  // 3. Reset the Timer
-  if (overclockTimer) {
-    clearTimeout(overclockTimer);
-    overclockTimer = null;
-    console.log("Existing timer cleared.");
-  }
+    if (!eye || !pupil) return;
 
-  // 4. Start New Timer if turning ON
-  if (isOverclocked) {
-    console.log("Overclock Active: 5s countdown started...");
-    overclockTimer = setTimeout(() => {
-      footer.classList.remove('overclocked');
-      overclockTimer = null;
-      console.log("Timer Finished: System Stabilized.");
-    }, 5000); 
-  } else {
-    console.log("Manual Shutdown: Overclock disabled.");
-  }
+    // --- MOUSE MOVE LOGIC ---
+    document.addEventListener('mousemove', (e) => {
+        // SAFETY GATE: If overclocked, we STOP the mouse from touching the pupil transform
+        if (footer.classList.contains('overclocked')) return;
+
+        if (!isPayingAttention && Math.random() < 0.01) {
+            isPayingAttention = true;
+        } else if (isPayingAttention && Math.random() < 0.005) {
+            isPayingAttention = false;
+            pupil.style.transform = `translate(0, 0)`;
+        }
+
+        if (isPayingAttention) {
+            const rect = eye.getBoundingClientRect();
+            const eyeX = rect.left + rect.width / 2;
+            const eyeY = rect.top + rect.height / 2;
+            const angle = Math.atan2(e.clientY - eyeY, e.clientX - eyeX);
+            const x = Math.cos(angle) * 4;
+            const y = Math.sin(angle) * 4;
+            pupil.style.transform = `translate(${x}px, ${y}px)`;
+        }
+    });
+
+    // --- OVERCLOCK TRIGGER ---
+    toggle.addEventListener('click', () => {
+        const isOverclocked = footer.classList.toggle('overclocked');
+        
+        // RESET: Wipe mouse-coordinates immediately so CSS @keyframes can take over
+        pupil.style.transform = ''; 
+        
+        eyeEl.classList.add('startled');
+        freqContainer.classList.add('active');
+        setTimeout(() => {
+            eyeEl.classList.remove('startled');
+            freqContainer.classList.remove('active');
+        }, 400);
+
+        if (overclockTimer) {
+            clearTimeout(overclockTimer);
+            overclockTimer = null;
+        }
+
+        if (isOverclocked) {
+            console.log("Surge Active: 5s Timer Started");
+            overclockTimer = setTimeout(() => {
+                footer.classList.remove('overclocked');
+                overclockTimer = null;
+                console.log("System Stabilized");
+            }, 5000); 
+        }
+    });
 });
 
 </script>
