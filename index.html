@@ -425,13 +425,13 @@ const footer = document.querySelector('.smart-footer');
 const eyeEl = document.getElementById('eye-container');
 const freqContainer = document.querySelector('.ohm-frequency-container');
 
-let overclockTimer;
+let overclockTimer = null; // Important: initialize outside the listener
 
 toggle.addEventListener('click', () => {
-  // 1. Toggle the state
+  // 1. Toggle the class
   const isOverclocked = footer.classList.toggle('overclocked');
   
-  // 2. Immediate Visual Pulse
+  // 2. Pulse effect
   eyeEl.classList.add('startled');
   freqContainer.classList.add('active');
   setTimeout(() => {
@@ -439,15 +439,18 @@ toggle.addEventListener('click', () => {
     freqContainer.classList.remove('active');
   }, 400);
 
-  // 3. The Timer Logic
-  clearTimeout(overclockTimer); // Kill any existing timer
+  // 3. The Timeout Logic
+  if (overclockTimer) {
+    clearTimeout(overclockTimer); // Kill any existing countdown
+  }
 
   if (isOverclocked) {
-    // If we just turned it ON, set a timer to turn it OFF
+    console.log("Timer Started...");
     overclockTimer = setTimeout(() => {
       footer.classList.remove('overclocked');
-      console.log("System Frequency: Stabilized");
-    }, 5000);
+      overclockTimer = null;
+      console.log("Timer Finished: System Stabilized");
+    }, 5000); // 5 seconds
   }
 });
 
