@@ -223,6 +223,7 @@ window.addEventListener('DOMContentLoaded', () => {
 /* =========================
    1. GLightbox: Absolute Override
    ========================= */
+// We use a single instance to prevent memory leaks and counter bugs
 const lightbox = GLightbox({
     selector: '.glightbox',
     loop: false,
@@ -236,7 +237,16 @@ const lightbox = GLightbox({
 
 lightbox.on('open', () => {
     document.body.classList.add('glightbox-is-active');
+    
+    const header = document.querySelector('header');
+    const footer = document.querySelector('footer');
+    if (header) header.style.zIndex = '1000000';
+    if (footer) footer.style.zIndex = '1000000';
+
     const container = document.querySelector('.glightbox-container');
+    const oldCounter = document.querySelector('.custom-gcounter');
+    if (oldCounter) oldCounter.remove();
+    
     const counterDiv = document.createElement('div');
     counterDiv.className = 'custom-gcounter';
     const total = lightbox.elements.length;
@@ -247,7 +257,11 @@ lightbox.on('open', () => {
             num.className = 'gcount-num';
             num.innerText = (i + 1).toString().padStart(2, '0');
             if (i === 0) num.classList.add('active');
-            num.onclick = (e) => { e.stopPropagation(); lightbox.goToSlide(i); };
+            
+            num.onclick = (e) => { 
+                e.stopPropagation(); 
+                lightbox.goToSlide(i); 
+            };
             counterDiv.appendChild(num);
         }
         container.appendChild(counterDiv);
@@ -258,35 +272,34 @@ lightbox.on('slide_changed', ({ current }) => {
     const nums = document.querySelectorAll('.gcount-num');
     if (nums.length > 0) {
         nums.forEach(n => n.classList.remove('active'));
-        if (nums[current.index]) nums[current.index].classList.add('active');
+        if (nums[current.index]) {
+            nums[current.index].classList.add('active');
+        }
     }
 });
 
 lightbox.on('close', () => {
     document.body.classList.remove('glightbox-is-active');
-    const oldCounter = document.querySelector('.custom-gcounter');
-    if (oldCounter) oldCounter.remove();
 });
 
-
 /* =========================
-   2. The Eye & Overclock Logic
+   2. The Eye & Overclock System
    ========================= */
 window.addEventListener('load', () => {
+    let isPayingAttention = false;
     const eye = document.querySelector('.eye');
     const pupil = document.querySelector('.pupil');
     const toggle = document.getElementById('ohm-trigger');
     const footer = document.querySelector('.smart-footer');
     const freqContainer = document.querySelector('.ohm-frequency-container');
     
-    let isPayingAttention = false;
     let overclockTimer = null;
 
     if (!eye || !pupil || !toggle) return;
 
-    // --- Mouse Tracking ---
+    // --- MOUSE MOVE LOGIC ---
     document.addEventListener('mousemove', (e) => {
-        // FIX: If the eye is vibrating (overclocked), stop the mouse-tracking transform
+        // SAFETY: If overclocked, we stop the mouse from overriding the pupil animations
         if (footer.classList.contains('overclocked')) return;
 
         if (!isPayingAttention && Math.random() < 0.01) {
@@ -308,13 +321,15 @@ window.addEventListener('load', () => {
         }
     });
 
-    // --- The Overclock Trigger ---
+    // --- OVERCLOCK CLICK LOGIC ---
     toggle.addEventListener('click', () => {
-        const isOverclocked = footer.classList.toggle('overclocked');
+        const isNowOverclocked = footer.classList.toggle('overclocked');
         
-        // Clear mouse tracking immediately so CSS can take over
+        // 1. Reset 'Inline' Styles: This wipes the mouse position 
+        // so the CSS @keyframes can finally move the pupil
         pupil.style.transform = ''; 
 
+        // 2. The 'Startle' Pulse
         eye.classList.add('startled');
         freqContainer.classList.add('active');
         
@@ -323,15 +338,21 @@ window.addEventListener('load', () => {
             freqContainer.classList.remove('active');
         }, 400);
 
-        if (overclockTimer) clearTimeout(overclockTimer);
+        // 3. THE TIMEOUT LOGIC
+        if (overclockTimer) {
+            clearTimeout(overclockTimer);
+            overclockTimer = null;
+        }
 
-        if (isOverclocked) {
-            console.log("Surge Detected: 5s Timer Started");
+        if (isNowOverclocked) {
+            console.log("System Surge: 5s Timer Started");
             overclockTimer = setTimeout(() => {
                 footer.classList.remove('overclocked');
                 overclockTimer = null;
-                console.log("System Stabilized");
-            }, 5000);
+                console.log("System Frequency: Stabilized");
+            }, 5000); 
+        } else {
+            console.log("Manual Reset: Normal Frequency Restored");
         }
     });
 });
