@@ -421,40 +421,34 @@ lightbox.on('close', () => {
 });
 
 const toggle = document.getElementById('ohm-trigger');
-const freqContainer = document.querySelector('.ohm-frequency-container');
-const eyeEl = document.getElementById('eye-container');
 const footer = document.querySelector('.smart-footer');
+const eyeEl = document.getElementById('eye-container');
+const freqContainer = document.querySelector('.ohm-frequency-container');
 
-let overclockTimer = null; // Initialize as null
+let overclockTimer;
 
-toggle.addEventListener('click', (e) => {
-  e.preventDefault(); // Prevent any default button behavior
-
-  // 1. Reset any existing timer immediately
-  if (overclockTimer) {
-    clearTimeout(overclockTimer);
-  }
-
-  // 2. Apply States
-  footer.classList.add('overclocked');
+toggle.addEventListener('click', () => {
+  // 1. Toggle the state
+  const isOverclocked = footer.classList.toggle('overclocked');
+  
+  // 2. Immediate Visual Pulse
   eyeEl.classList.add('startled');
   freqContainer.classList.add('active');
-  
-  // 3. The short 'Startle' pulse (400ms)
   setTimeout(() => {
     eyeEl.classList.remove('startled');
     freqContainer.classList.remove('active');
   }, 400);
 
-  // 4. The 5-Second Auto-Stabilize
-  overclockTimer = setTimeout(() => {
-    footer.classList.remove('overclocked');
-    
-    // FORCE-CLEAN: Sometimes browsers need a little nudge 
-    // to stop infinite animations if the class removal is too subtle
-    console.log("System Frequency: Stabilized");
-    overclockTimer = null;
-  }, 5000); 
+  // 3. The Timer Logic
+  clearTimeout(overclockTimer); // Kill any existing timer
+
+  if (isOverclocked) {
+    // If we just turned it ON, set a timer to turn it OFF
+    overclockTimer = setTimeout(() => {
+      footer.classList.remove('overclocked');
+      console.log("System Frequency: Stabilized");
+    }, 5000);
+  }
 });
 
 </script>
