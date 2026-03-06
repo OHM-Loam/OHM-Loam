@@ -343,31 +343,31 @@ body.glightbox-is-active footer {
 }
 
 /* =========================
-   8. Interactive Section (Bottom of Page)
+   8. Footer & The Eye
    ========================= */
-.interactive-section {
-  position: relative;
-  z-index: 5;
+.smart-footer {
+  position: fixed;
+  bottom: 40px; 
   width: 100%;
-  padding: 8rem 4rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4rem;
-  max-width: 1600px;
-  margin: 0 auto;
+  padding: 0 40px;
+  mix-blend-mode: difference;
+  z-index: 1;
+  pointer-events: none;
 }
 
-.eye-container {
+.footer-content {
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
+  pointer-events: auto;
 }
 
 .eye {
   width: 28px;
   height: 16px;
-  background: #1a1a1a;
+  background: white !important;
   border-radius: 50%;
   position: relative;
   overflow: hidden; 
@@ -381,7 +381,7 @@ body.glightbox-is-active footer {
 .pupil {
   width: 10px;
   height: 10px;
-  background: radial-gradient(circle, #fff 30%, #ddd 100%);
+  background: radial-gradient(circle, #000 30%, #222 100%);
   border-radius: 50%;
   position: relative;
   transition: all 0.5s ease;
@@ -425,14 +425,33 @@ body.glightbox-is-active footer {
   animation: blink 6s infinite;
 }
 
-.ohm-frequency-container {
-  width: 100%;
-  height: 80px;
+.floating-toggle {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 0;
   display: flex;
   align-items: center;
-  justify-content: center;
+  transition: all 0.3s ease;
   opacity: 0.6;
-  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.1));
+  flex-shrink: 0;
+}
+
+.floating-toggle:hover {
+  opacity: 1;
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+}
+
+.ohm-frequency-container {
+  flex: 1;
+  height: 80px;
+  margin: 0 30px;
+  display: flex;
+  align-items: center;
+  opacity: 0.6;
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.1));
   transition: all 0.5s ease;
 }
 
@@ -447,67 +466,7 @@ body.glightbox-is-active footer {
   stroke-dasharray: 2000; 
   stroke-linecap: round;
   animation: flow 18s linear infinite;  
-  will-change: stroke-dashoffset;
-  transition: all 0.8s ease;
-  pointer-events: none;
-}
-
-.red-line { 
-  stroke: #b30000;
-  opacity: 0.8; 
-  animation-duration: 20s;
-}
-
-.green-line { 
-  stroke: #008000;
-  opacity: 0.8; 
-  animation-duration: 15s;
-}
-
-.blue-line { 
-  stroke: #0000b3;
-  opacity: 0.8; 
-  animation-duration: 8s;
-}
-
-@keyframes flow {
-  from { stroke-dashoffset: 2000; }
-  to { stroke-dashoffset: 0; }
-}
-
-.interactive-section:hover .ohm-frequency-container {
-  opacity: 0.8;
-}
-
-.ohm-frequency-container.active {
-  opacity: 1 !important;
-  transform: scaleY(1.5);
-  filter: saturate(2) brightness(1.2);
-}
-
-.ohm-frequency-container.active .wave-path {
-  stroke-width: 3px;
-  opacity: 1;
-  filter: brightness(1.5) saturate(1.5);
-}
-
-.floating-toggle {
-  background: none;
-  border: none;
-  color: #1a1a1a;
-  cursor: pointer;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  transition: all 0.3s ease;
-  opacity: 0.6;
-  flex-shrink: 0;
-}
-
-.floating-toggle:hover {
-  opacity: 1;
-  transform: scale(1.1);
-}
+  will-change: stroke-d
 
 /* =========================
    9. Animations
