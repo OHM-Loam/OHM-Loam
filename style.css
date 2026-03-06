@@ -159,6 +159,7 @@ body.glightbox-is-active footer {
   margin: 0 auto;
   position: relative;
   z-index: 5;
+  isolation: auto;
 }
 
 .project-hub a {
@@ -350,7 +351,7 @@ body.glightbox-is-active footer {
   width: 100%;
   padding: 0 40px;
   mix-blend-mode: difference;
-  z-index: 100;
+  z-index: 10;
   pointer-events: none;
 }
 
