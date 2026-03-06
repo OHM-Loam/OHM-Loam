@@ -467,24 +467,30 @@ body.glightbox-is-active footer {
   animation: flow 18s linear infinite;  
   will-change: stroke-dashoffset;
   transition: all 0.8s ease;
+  position: relative;
+  z-index: -1;          /* Push behind */
+  pointer-events: none; /* Let clicks pass through */
 }
 
 .red-line { 
-  stroke: #b30000; /* Deep Red -> Results in a moody Teal */
+  stroke: #b30000;
   opacity: 0.8; 
-  animation-duration: 20s; 
+  animation-duration: 20s;
+  z-index: -1;          /* Ensure it's behind */
 }
 
 .green-line { 
-  stroke: #008000; /* Deep Green -> Results in a moody Purple */
+  stroke: #008000;
   opacity: 0.8; 
-  animation-duration: 15s; 
+  animation-duration: 15s;
+  z-index: -1;
 }
 
 .blue-line { 
-  stroke: #0000b3; /* Deep Blue -> Results in a moody Gold/Bronze */
+  stroke: #0000b3;
   opacity: 0.8; 
-  animation-duration: 8s; 
+  animation-duration: 8s;
+  z-index: -1;
 }
 
 @keyframes flow {
