@@ -337,8 +337,8 @@ body.glightbox-is-active footer {
   top: -1px; 
 }
 
-.site-title:hover {
-  color: #888;
+.site-title:hover .symbol-spinner {
+  color: #888; 
 }
 
 /* =========================
@@ -350,7 +350,7 @@ body.glightbox-is-active footer {
   width: 100%;
   padding: 0 40px;
   mix-blend-mode: difference;
-  z-index: 9999;
+  z-index: 100;
   pointer-events: none;
 }
 
@@ -451,8 +451,6 @@ body.glightbox-is-active footer {
   opacity: 0.6; /* Increased base opacity */
   filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.1)); /* Very subtle 'lift' */
   transition: all 0.5s ease;
-  position: relative;
-  z-index: 1;  /* Lower than your project images (which are z-index: 5-15) */
 }
 
 .ohm-triple-svg {
