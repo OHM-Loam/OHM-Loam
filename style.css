@@ -343,31 +343,31 @@ body.glightbox-is-active footer {
 }
 
 /* =========================
-   8. Footer & The Eye
+   8. Interactive Section (Bottom of Page)
    ========================= */
-.smart-footer {
-  position: fixed;
-  bottom: 40px; 
+.interactive-section {
+  position: relative;
+  z-index: 5;
   width: 100%;
-  padding: 0 40px;
-  mix-blend-mode: difference;
-  z-index: 1;
-  pointer-events: none;
+  padding: 8rem 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4rem;
+  max-width: 1600px;
+  margin: 0 auto;
 }
 
-.footer-content {
+.eye-container {
   display: flex;
-  flex-direction: row; /* Horizontal alignment */
-  align-items: center; /* Vertically centers icons and lines */
-  justify-content: space-between;
+  justify-content: center;
   width: 100%;
-  pointer-events: auto;
 }
 
 .eye {
   width: 28px;
   height: 16px;
-  background: white !important; /* The 'Sclera' (white of the eye) */
+  background: #1a1a1a;
   border-radius: 50%;
   position: relative;
   overflow: hidden; 
@@ -381,14 +381,13 @@ body.glightbox-is-active footer {
 .pupil {
   width: 10px;
   height: 10px;
-  background: radial-gradient(circle, #000 30%, #222 100%);
+  background: radial-gradient(circle, #fff 30%, #ddd 100%);
   border-radius: 50%;
   position: relative;
   transition: all 0.5s ease;
 }
 
 .overclocked .pupil {
-  /* Using a gradient so the 'iris-spin' has more texture to move */
   background: radial-gradient(circle, #ff0000 20%, #800000 100%) !important;
   animation: iris-spin 1.2s linear infinite, pupil-throb 0.1s linear infinite;
   filter: saturate(5) brightness(1);
@@ -396,7 +395,7 @@ body.glightbox-is-active footer {
 
 .overclocked .eye-lid {
   animation: none;
-  transform: scaleY(1.2); /* Wide-eyed shock */
+  transform: scaleY(1.2);
 }
 
 .pupil, .wave-path {
@@ -404,10 +403,11 @@ body.glightbox-is-active footer {
 }
 
 .eye.startled {
-  animation: rapid-blink 0.4s ease-in-out 2; /* Two quick blinks */
+  animation: rapid-blink 0.4s ease-in-out 2;
 }
+
 .eye.startled .pupil {
-  transform: scale(0.4) !important; /* Pupil dilates/shrinks in shock */
+  transform: scale(0.4) !important;
   transition: transform 0.1s ease;
 }
 
@@ -417,40 +417,22 @@ body.glightbox-is-active footer {
   left: 0;
   width: 100%;
   height: 100%;
-  background: inherit; /* Matches the white of the eye */
-  border-bottom: 1px solid rgba(0,0,0,0.1); /* Subtle definition */
-  transform: scaleY(0); /* Starts open */
+  background: inherit;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  transform: scaleY(0);
   transform-origin: top;
-  z-index: 2; /* Sits ON TOP of the pupil */
+  z-index: 2;
   animation: blink 6s infinite;
-}
-.floating-toggle {
-  background: none;
-  border: none;
-  color: white;
-  cursor: pointer;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  transition: all 0.3s ease;
-  opacity: 0.6;
-  flex-shrink: 0;
-}
-
-.floating-toggle:hover {
-  opacity: 1;
-  transform: scale(1.1);
-  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
 }
 
 .ohm-frequency-container {
-  flex: 1;
+  width: 100%;
   height: 80px;
-  margin: 0 30px;
   display: flex;
   align-items: center;
-  opacity: 0.6; /* Increased base opacity */
-  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.1)); /* Very subtle 'lift' */
+  justify-content: center;
+  opacity: 0.6;
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.1));
   transition: all 0.5s ease;
 }
 
@@ -467,30 +449,25 @@ body.glightbox-is-active footer {
   animation: flow 18s linear infinite;  
   will-change: stroke-dashoffset;
   transition: all 0.8s ease;
-  position: relative;
-  z-index: -1;          /* Push behind */
-  pointer-events: none; /* Let clicks pass through */
+  pointer-events: none;
 }
 
 .red-line { 
   stroke: #b30000;
   opacity: 0.8; 
   animation-duration: 20s;
-  z-index: -1;          /* Ensure it's behind */
 }
 
 .green-line { 
   stroke: #008000;
   opacity: 0.8; 
   animation-duration: 15s;
-  z-index: -1;
 }
 
 .blue-line { 
   stroke: #0000b3;
   opacity: 0.8; 
   animation-duration: 8s;
-  z-index: -1;
 }
 
 @keyframes flow {
@@ -498,8 +475,8 @@ body.glightbox-is-active footer {
   to { stroke-dashoffset: 0; }
 }
 
-.smart-footer:hover .ohm-frequency-container {
-  opacity: 0.7; /* Wakes up when you mouse over the footer area */
+.interactive-section:hover .ohm-frequency-container {
+  opacity: 0.8;
 }
 
 .ohm-frequency-container.active {
@@ -512,6 +489,24 @@ body.glightbox-is-active footer {
   stroke-width: 3px;
   opacity: 1;
   filter: brightness(1.5) saturate(1.5);
+}
+
+.floating-toggle {
+  background: none;
+  border: none;
+  color: #1a1a1a;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+
+.floating-toggle:hover {
+  opacity: 1;
+  transform: scale(1.1);
 }
 
 /* =========================
