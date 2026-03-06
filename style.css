@@ -172,7 +172,6 @@ body.glightbox-is-active footer {
   border-radius: 2px;
   pointer-events: auto !important;
   background-color: #f9f9f7;
-  /* Remove any global transitions here to prevent 'snapping' */
 }
 
 /* THE STAGGER: Only applied to even items, no hover change */
@@ -452,6 +451,8 @@ body.glightbox-is-active footer {
   opacity: 0.6; /* Increased base opacity */
   filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.1)); /* Very subtle 'lift' */
   transition: all 0.5s ease;
+  position: relative;
+  z-index: 1;  /* Lower than your project images (which are z-index: 5-15) */
 }
 
 .ohm-triple-svg {
