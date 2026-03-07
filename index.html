@@ -180,56 +180,69 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 3. UNIFIED LIGHTBOX LOGIC ---
-    if (typeof GLightbox !== 'undefined') {
-        const lightbox = GLightbox({
-            selector: '.glightbox',
-            loop: false,
-            zoomable: false,
-            draggable: false,
-            closeOnOutsideClick: false,
-            svg: {
-                close: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>'
-            }
-        });
+   // --- 3. UNIFIED LIGHTBOX LOGIC ---
+if (typeof GLightbox !== 'undefined') {
+    const lightbox = GLightbox({
+        selector: '.glightbox',
+        loop: false,
+        zoomable: false,
+        draggable: false,
+        closeOnOutsideClick: true, // SAFETY: Allows clicking background to close
+        svg: {
+            close: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>'
+        }
+    });
 
-        lightbox.on('open', () => {
-            document.body.classList.add('glightbox-is-active');
+    lightbox.on('open', () => {
+        document.body.classList.add('glightbox-is-active');
+        
+        // Find the newly created container
+        const container = document.querySelector('.glightbox-container');
+        
+        // 1. STACKING FIX: Ensure the Close Button is actually on top of everything
+        const closeBtn = document.querySelector('.gclose');
+        if (closeBtn) {
+            closeBtn.style.zIndex = '2000000000'; // Higher than any header logic
+        }
+
+        // 2. COUNTER LOGIC
+        const total = lightbox.elements.length;
+        if (total > 1 && container) {
+            // Remove old counter if it exists from a previous open
+            const oldCounter = container.querySelector('.custom-gcounter');
+            if (oldCounter) oldCounter.remove();
+
+            const counterDiv = document.createElement('div');
+            counterDiv.className = 'custom-gcounter';
             
-            // Adjust stacking order
-            const header = document.querySelector('header');
-            const footer = document.querySelector('footer');
-            if (header) header.style.zIndex = '1000000';
-            if (footer) footer.style.zIndex = '1000000';
-
-            // Counter Logic
-            const container = document.querySelector('.glightbox-container');
-            const total = lightbox.elements.length;
-            if (total > 1) {
-                const counterDiv = document.createElement('div');
-                counterDiv.className = 'custom-gcounter';
-                for (let i = 0; i < total; i++) {
-                    const num = document.createElement('span');
-                    num.className = 'gcount-num';
-                    num.innerText = (i + 1).toString().padStart(2, '0');
-                    if (i === 0) num.classList.add('active');
-                    num.onclick = (e) => { e.stopPropagation(); lightbox.goToSlide(i); };
-                    counterDiv.appendChild(num);
-                }
-                container.appendChild(counterDiv);
+            for (let i = 0; i < total; i++) {
+                const num = document.createElement('span');
+                num.className = 'gcount-num';
+                num.innerText = (i + 1).toString().padStart(2, '0');
+                if (i === 0) num.classList.add('active');
+                
+                num.onclick = (e) => { 
+                    e.stopPropagation(); 
+                    lightbox.goToSlide(i); 
+                };
+                counterDiv.appendChild(num);
             }
-        });
+            container.appendChild(counterDiv);
+        }
+    });
 
-        lightbox.on('slide_changed', ({ current }) => {
-            const nums = document.querySelectorAll('.gcount-num');
+    lightbox.on('slide_changed', ({ current }) => {
+        const nums = document.querySelectorAll('.gcount-num');
+        if (nums.length > 0) {
             nums.forEach(n => n.classList.remove('active'));
             if (nums[current.index]) nums[current.index].classList.add('active');
-        });
+        }
+    });
 
-        lightbox.on('close', () => {
-            document.body.classList.remove('glightbox-is-active');
-        });
-    }
+    lightbox.on('close', () => {
+        document.body.classList.remove('glightbox-is-active');
+    });
+}
 
     // --- 4. VIDEO & SYMBOL LOGIC ---
     document.querySelectorAll('video').forEach(vid => vid.play().catch(() => {}));
