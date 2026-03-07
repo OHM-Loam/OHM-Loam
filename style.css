@@ -244,10 +244,11 @@ h1, h2, h3, h4, h5, h6 {
    ========================= */
 
 .glightbox-container {
-    top: 0 !important;      /* Full screen */
-    bottom: 0 !important;   /* Full screen */
-    height: 100vh !important; /* Full screen */
+    position: fixed !important;
+    top: 0;
+    left: 0;
     z-index: 99999999 !important;
+    pointer-events: auto !important;
 }
 
 .gslide-inner-content {
@@ -259,6 +260,7 @@ h1, h2, h3, h4, h5, h6 {
   background: #f4f4f1 !important; 
   backdrop-filter: none !important; 
   opacity: 1 !important; 
+  z-index: 99999990 !important; 
 }
 
 /* 2. The Smart Cursor Navigation */
