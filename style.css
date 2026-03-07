@@ -243,12 +243,16 @@ h1, h2, h3, h4, h5, h6 {
    6. Glightbox: Jamieson Minimalist
    ========================= */
 
-/* 1. The Full Page Whiteout - Lowered z-index to stay under Header/Footer */
 .glightbox-container {
-    top: 80px !important;    /* Adjust this to your Header Height */
-    bottom: 60px !important; /* Adjust this to your Footer Height */
-    height: calc(100vh - 140px) !important;
+    top: 0 !important;      /* Full screen */
+    bottom: 0 !important;   /* Full screen */
+    height: 100vh !important; /* Full screen */
     z-index: 99999999 !important;
+}
+
+.gslide-inner-content {
+    margin-top: 80px;    /* Matches your Header height */
+    margin-bottom: 60px; /* Matches your Footer height */
 }
 
 .goverlay { 
