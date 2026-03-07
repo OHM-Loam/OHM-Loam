@@ -2,31 +2,39 @@
    1. Base Reset & Typography
    ========================= */
 :root {
-  /* Use 'Inter' or 'Space Grotesque' for a closer match to the screenshot */
-  --font-display: "Inter", "Space Grotesque", sans-serif;
+  /* High-end clean sans-serif */
+  --font-display: "Inter", "Helvetica Neue", Arial, sans-serif;
   --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   
-  --bg-color: #f4f4f1;
-  --text-main: #1a1a1a;
-  --text-muted: #999999;
+  /* STARK CONTRAST SETTINGS */
+  --bg-color: #ffffff;      /* Pure White Background */
+  --text-main: #000000;    /* Absolute Black Text */
+  --text-muted: #666666;
   --surface-light: #f9f9f7;
-  
-  /* The "Studio" Green from your image */
-  --accent-olive: #556b2f; 
 }
 
-/* Headings: Adjusted for the "Studio Kleiner" look */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-body);
+  background-color: var(--bg-color);
+  color: var(--text-main); /* This ensures paragraph text is black */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Headings: The "Studio" Look */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
-  font-weight: 400; /* Keep it light to medium */
-  text-transform: uppercase; /* The screenshot uses all caps */
-  line-height: 1.2;
+  font-weight: 500;         /* Slightly heavier for better "Black" impact */
+  text-transform: uppercase;
+  color: var(--text-main);   /* Forces headings to be Black */
   
-  /* CHANGED: From -0.15em to positive 0.25em for that airy feel */
-  letter-spacing: 0.25em; 
+  /* Tracking: Wide and airy like the screenshot */
+  letter-spacing: 0.3em; 
+  margin-right: -0.3em;      /* Offsets the last letter's spacing */
   
-  /* Optional: slightly nudge the margin-right to balance the last letter's spacing */
-  margin-right: -0.25em; 
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
 }
 /* =========================
    2. Landing Page (The Entry)
