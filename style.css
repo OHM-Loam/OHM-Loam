@@ -250,7 +250,7 @@ h1, h2, h3, h4, h5, h6 {
     top: 80px !important;    /* Adjust this to your Header Height */
     bottom: 60px !important; /* Adjust this to your Footer Height */
     height: calc(100vh - 140px) !important;
-    z-index: 500 !important;
+    z-index: 99999999 !important;
 }
 
 .goverlay { 
@@ -312,7 +312,7 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 50% !important;
     background: #f4f4f1 !important;
     cursor: pointer !important;
-    z-index: 20000 !important;
+    z-index: 999999999 !important;
 }
 
 .gclose svg {
