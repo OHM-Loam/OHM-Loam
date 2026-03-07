@@ -290,22 +290,35 @@ h1, h2, h3, h4, h5, h6 {
     z-index: 99999999 !important; /* Force to the very front */
 }
 
-/* 4. The Close Button Reset */
 .gclose {
-    all: unset !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     position: fixed !important;
-    top: 30px !important; /* Move it above the 80px line so it's visible */
-    right: 30px !important;
-    width: 32px !important;
-    height: 32px !important;
+    top: 40px !important;    /* Clean studio placement */
+    right: 40px !important;
+    width: 40px !important;
+    height: 40px !important;
     border: 1px solid #000 !important;
     border-radius: 50% !important;
     background: #f4f4f1 !important;
     cursor: pointer !important;
-    z-index: 100000000 !important;
+    z-index: 999999999 !important; /* The King of the Stack */
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.gclose svg {
+    width: 16px !important;
+    height: 16px !important;
+    pointer-events: none; /* Ensures the click goes THROUGH the SVG to the button */
+}
+
+body.glightbox-is-active .site-header {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
 }
 
 /* =========================
