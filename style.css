@@ -569,21 +569,40 @@ body.glightbox-is-active .site-header {
 .gclose { top: 30px !important; right: 30px !important; }
 .gclose svg { width: 25px !important; height: 32px !important; stroke-width: 1px !important; }
 
-/* Thin Arrows */
-.gnext svg, .gprev svg { width: 30px !important; stroke-width: 1px !important; }
-.gnext svg path, .gprev svg path { fill: none; stroke: #000; }
+.gnext, .gprev {
+    all: unset !important; /* Force browser to ignore default styles */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: fixed !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: 60px !important;
+    height: 100px !important;
+    cursor: pointer !important;
+    z-index: 9999 !important;
+    background: transparent !important; /* Kill the grey box */
+    border: none !important;
+}
 
-/* Vertical Counter Logic */
+.gprev { left: 20px !important; }
+.gnext { right: 120px !important; } /* Pushed further left to avoid the counter */
+
+/* 2. Style the Arrows */
+.gnext svg, .gprev svg { 
+    width: 30px !important; 
+    height: 30px !important;
+    stroke-width: 1px !important; 
+}
+
+.gnext svg path, .gprev svg path { 
+    fill: none !important; 
+    stroke: #000 !important; 
+}
+
+/* 3. Ensure the counter stays on top of navigation */
 .custom-gcounter {
-  position: fixed;
-  right: 50px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  z-index: 10000;
-  text-align: right;
+    z-index: 20000 !important; /* Higher than nav arrows */
 }
 
 .gcount-num {
