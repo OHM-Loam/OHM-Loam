@@ -149,48 +149,117 @@
   <a href="images/chip3.webp" class="glightbox" data-gallery="chip"></a>
 </div>
   
+<script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+
 <script>
 window.addEventListener('DOMContentLoaded', () => {
 
-  // --- 1. LANDING PAGE LOGIC ---
-  const landingPage = document.getElementById('landing-page');
-  if (landingPage) {
-    const enterSite = () => {
-      if (landingPage.style.display === 'none') return; 
-      landingPage.classList.add('fade-out'); // Animation Trigger
-      setTimeout(() => { landingPage.style.display = 'none'; }, 1000);
-    };
-    landingPage.addEventListener('click', enterSite);
-    setTimeout(enterSite, 4000); 
-  }
+    // --- 1. LANDING PAGE LOGIC ---
+    const landingPage = document.getElementById('landing-page');
+    if (landingPage) {
+        const enterSite = () => {
+            if (landingPage.style.display === 'none') return;
+            landingPage.classList.add('fade-out');
+            setTimeout(() => { landingPage.style.display = 'none'; }, 1000);
+        };
+        landingPage.addEventListener('click', enterSite);
+        setTimeout(enterSite, 4000);
+    }
 
-  // --- 2. LIGHTBOX & ANIMATION SYNC ---
-  if (typeof GLightbox !== 'undefined') {
-    const lightbox = GLightbox({
-      selector: '.glightbox',
-      // ... (your existing config)
-    });
+    // --- 2. ABOUT PANEL LOGIC ---
+    const aboutToggle = document.getElementById('about-toggle');
+    const aboutPanel = document.getElementById('about-panel');
+    if (aboutToggle && aboutPanel) {
+        const linkText = aboutToggle.querySelector('.link-text');
+        aboutToggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            const isOpen = aboutPanel.classList.toggle('open');
+            aboutToggle.classList.toggle('active');
+            aboutToggle.classList.toggle('dimmed');
+            if (linkText) linkText.textContent = isOpen ? 'Close' : 'About';
+        });
+    }
 
-    lightbox.on('open', () => {
-      document.body.classList.add('glightbox-is-active');
-      // Adding class to trigger your CSS animations/transitions
-      document.body.classList.add('animate-lightbox-open'); 
-    });
+    // --- 3. UNIFIED LIGHTBOX LOGIC ---
+    if (typeof GLightbox !== 'undefined') {
+        const lightbox = GLightbox({
+            selector: '.glightbox',
+            loop: false,
+            zoomable: false,
+            draggable: false,
+            closeOnOutsideClick: false,
+            svg: {
+                close: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>'
+            }
+        });
 
-    lightbox.on('close', () => {
-      document.body.classList.remove('glightbox-is-active', 'animate-lightbox-open');
-    });
-  }
+        lightbox.on('open', () => {
+            document.body.classList.add('glightbox-is-active');
+            
+            // Adjust stacking order
+            const header = document.querySelector('header');
+            const footer = document.querySelector('footer');
+            if (header) header.style.zIndex = '1000000';
+            if (footer) footer.style.zIndex = '1000000';
 
-  // --- 3. SYMBOL SPINNER LOGIC ---
-  // Re-integrated here so it shares the same DOM context as the landing page
-  (function() {
-    let symbolInterval;
-    let symbolIndex = 0;
-    const symbols = ['-', '+', 'Ω', '^', '×'];
-    // ... (rest of your spinner logic)
-  })();
+            // Counter Logic
+            const container = document.querySelector('.glightbox-container');
+            const total = lightbox.elements.length;
+            if (total > 1) {
+                const counterDiv = document.createElement('div');
+                counterDiv.className = 'custom-gcounter';
+                for (let i = 0; i < total; i++) {
+                    const num = document.createElement('span');
+                    num.className = 'gcount-num';
+                    num.innerText = (i + 1).toString().padStart(2, '0');
+                    if (i === 0) num.classList.add('active');
+                    num.onclick = (e) => { e.stopPropagation(); lightbox.goToSlide(i); };
+                    counterDiv.appendChild(num);
+                }
+                container.appendChild(counterDiv);
+            }
+        });
 
+        lightbox.on('slide_changed', ({ current }) => {
+            const nums = document.querySelectorAll('.gcount-num');
+            nums.forEach(n => n.classList.remove('active'));
+            if (nums[current.index]) nums[current.index].classList.add('active');
+        });
+
+        lightbox.on('close', () => {
+            document.body.classList.remove('glightbox-is-active');
+        });
+    }
+
+    // --- 4. VIDEO & SYMBOL LOGIC ---
+    document.querySelectorAll('video').forEach(vid => vid.play().catch(() => {}));
+
+    (function() {
+        let symbolInterval, symbolIndex = 0;
+        const symbols = ['-', '+', 'Ω', '^', '×'];
+        document.addEventListener('mouseover', (e) => {
+            const title = e.target.closest('.site-title');
+            const spinner = title ? title.querySelector('.symbol-spinner') : null;
+            if (spinner && !symbolInterval) {
+                symbolInterval = setInterval(() => {
+                    symbolIndex = (symbolIndex + 1) % symbols.length;
+                    spinner.textContent = symbols[symbolIndex];
+                }, 120);
+            }
+        });
+        document.addEventListener('mouseout', (e) => {
+            const title = e.target.closest('.site-title');
+            if (title && (!e.relatedTarget || !title.contains(e.relatedTarget))) {
+                const spinner = title.querySelector('.symbol-spinner');
+                if (spinner) {
+                    clearInterval(symbolInterval);
+                    symbolInterval = null;
+                    spinner.textContent = '-';
+                    symbolIndex = 0;
+                }
+            }
+        });
+    })();
 });
 </script>
 </div>
