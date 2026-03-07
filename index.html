@@ -236,7 +236,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     (function() {
         let symbolInterval, symbolIndex = 0;
-        const symbols = ['-', '+', 'Ω', '^', '×'];
+        const symbols = ['-', '+', '*', '^', '×', '<', '>'];
         document.addEventListener('mouseover', (e) => {
             const title = e.target.closest('.site-title');
             const spinner = title ? title.querySelector('.symbol-spinner') : null;
