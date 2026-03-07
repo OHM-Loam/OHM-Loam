@@ -600,22 +600,27 @@ body.glightbox-is-active .site-header {
     stroke: #000 !important; 
 }
 
-/* 3. Ensure the counter stays on top of navigation */
 .custom-gcounter {
-    z-index: 20000 !important; /* Higher than nav arrows */
+    position: fixed !important;
+    right: 50px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    z-index: 999999999 !important; /* Force to absolute top */
+    pointer-events: auto !important; /* Ensure they are clickable */
 }
 
 .gcount-num {
-  font-family: 'Helvetica', sans-serif;
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  color: #d1d1d1; /* Faded numbers like the screenshot */
-  cursor: pointer;
-  transition: color 0.3s ease;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+    color: #d1d1d1 !important; /* Reset to faded */
 }
 
 .gcount-num.active {
-  color: #000; /* Dark active number */
+    color: #000 !important; /* Reset to active black */
 }
 
 /* =========================
