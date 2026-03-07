@@ -252,6 +252,7 @@ h1, h2, h3, h4, h5, h6 {
     height: 100vh !important;
     z-index: 99999999 !important;
     pointer-events: auto !important;
+    transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1) !important;
 }
 
 /* 2. The Overlay - This is your 'Whiteout' */
