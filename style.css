@@ -243,94 +243,69 @@ h1, h2, h3, h4, h5, h6 {
    6. Glightbox: Jamieson Minimalist
    ========================= */
 
+/* 1. The Master Container - Must be full screen */
 .glightbox-container {
     position: fixed !important;
-    top: 0;
-    left: 0;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
     z-index: 99999999 !important;
     pointer-events: auto !important;
 }
 
-.gslide-inner-content {
-    margin-top: 80px;    /* Matches your Header height */
-    margin-bottom: 60px; /* Matches your Footer height */
-}
-
+/* 2. The Overlay - This is your 'Whiteout' */
 .goverlay { 
-  background: #f4f4f1 !important; 
-  backdrop-filter: none !important; 
-  opacity: 1 !important; 
-  z-index: 99999990 !important; 
+    background: #f4f4f1 !important; 
+    opacity: 1 !important; 
+    /* Ensure this is behind the images but above the site */
+    z-index: -1 !important; 
 }
 
-/* 2. The Smart Cursor Navigation */
-.gprev, .gnext {
-  display: flex !important;
-  width: 50vw !important;
-  height: 100vh !important;
-  top: 0 !important;
-  background: none !important;
-  z-index: 10001 !important;
-}
-
-.gprev { 
-  left: 0 !important; 
-  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>'), pointer !important;
-}
-
-.gnext { 
-  right: 0 !important; 
-  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>'), pointer !important;
-}
-
-.gnext svg, .gprev svg { display: none !important; }
-
-/* 3. The Slide - Forced Color & No Shadow */
-.gslide-image, .gslide-video {
-    background: transparent !important;
-    box-shadow: none !important;
-    padding: 0 !important;
+/* 3. The Slide - Forced Visibility */
+.gslide {
     display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 100vh !important;
+}
+
+.gslide-inner-content {
+    /* Use padding instead of margin to prevent container collapse */
+    padding-top: 80px;    
+    padding-bottom: 60px;
+    width: 100%;
+    height: 100%;
+    display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .gslide-image img {
-    filter: grayscale(0%) !important;
-    -webkit-filter: grayscale(0%) !important;
+    max-height: calc(100vh - 160px) !important; /* Prevents overlap with header/footer */
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain !important;
     opacity: 1 !important;
+    z-index: 99999999 !important; /* Force to the very front */
 }
 
-/* 4. THE CIRCULAR CLOSE BUTTON (Refined) */
+/* 4. The Close Button Reset */
 .gclose {
     all: unset !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     position: fixed !important;
-    top: 110px !important; 
-    right: 50px !important; /* Pushed in slightly more for better balance */
+    top: 30px !important; /* Move it above the 80px line so it's visible */
+    right: 30px !important;
     width: 32px !important;
     height: 32px !important;
     border: 1px solid #000 !important;
     border-radius: 50% !important;
     background: #f4f4f1 !important;
     cursor: pointer !important;
-    z-index: 999999999 !important;
-}
-
-.gclose svg {
-    width: 14px !important;
-    height: 14px !important;
-}
-
-.gclose svg path {
-  stroke: #000 !important;
-  stroke-width: 1.2px !important; /* Balanced thinness */
-}
-
-.glightbox {
-    cursor: cell !important; 
+    z-index: 100000000 !important;
 }
 
 /* =========================
