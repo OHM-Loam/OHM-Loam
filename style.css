@@ -625,7 +625,7 @@ body.glightbox-is-active .site-header {
 }
 
 /* =========================
-   13. Editorial Layout (Earls/Wool Style)
+   13. Editorial Layout (Modified)
    ========================= */
 
 .editorial-grid {
@@ -637,31 +637,42 @@ body.glightbox-is-active .site-header {
   margin: 12rem auto;
   padding: 0 4rem;
   
-  /* Create a new stacking context for the whole grid */
+  /* Pushed higher to clear any background overlays */
   position: relative;
-  z-index: 10; 
+  z-index: 50; 
 }
 
 .grid-item {
   flex: 1;
-  position: relative; /* Required for z-index to work */
-  z-index: 11;
+  position: relative;
+  z-index: 51;
+  min-width: 0; 
 }
 
 .grid-item.featured {
   flex: 1.4; 
-  max-width: 400px;
-  z-index: 12; /* Keep featured items even higher if they overlap */
+  /* Using clamp ensures the featured item doesn't shrink too much on smaller screens */
+  width: clamp(300px, 40vw, 450px); 
+  z-index: 52;
 }
 
-/* THE HOVER EFFECT */
+/* THE HOVER EFFECT REPAIRED */
 .grid-item img {
   width: 100%;
   height: auto;
   display: block;
   filter: grayscale(100%) contrast(1.1);
-  transition: filter 0.8s ease;
-  
-  /* Ensure the image itself feels solid and opaque */
-  background: #f9f9f7; /* Match your off-white background */
+  transition: filter 0.6s cubic-bezier(0.4, 0, 0.2, 1); /* Smoother "Studio" curve */
+  background: #f4f4f1; /* Your specific off-white matte color */
+}
+
+/* Specific Hover Trigger */
+.grid-item a:hover img {
+  filter: grayscale(0%) contrast(1.0);
+}
+
+/* Force the cursor to show it is a link */
+.grid-item a {
+  display: block;
+  cursor: pointer;
 }
