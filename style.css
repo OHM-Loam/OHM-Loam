@@ -630,37 +630,29 @@ body.glightbox-is-active .site-header {
 
 .editorial-grid {
   display: flex;
-  align-items: flex-end;
+  align-items: flex-end; /* Keeps them on the same 'shelf' */
   justify-content: center;
-  gap: 2.5rem; /* Tightened from 3rem to bring them closer physically */
-  max-width: 1400px;
+  gap: 4vw; /* Uses viewport width for gaps so they scale with the images */
+  max-width: 1600px;
   margin: 10rem auto;
-  position: relative;
-  z-index: 50; 
+  padding: 0 5vw;
 }
 
-.grid-item {
-  /* Brought closer to the featured size (1.15 vs 1.25) */
-  flex: 1.15; 
-  position: relative;
-  z-index: 51;
-  min-width: 0; 
+.grid-item.side {
+  width: 22%; /* Fixed relative width */
 }
 
 .grid-item.featured {
-  /* Reduced from 1.4 to 1.25 to make the center image less dominant */
-  flex: 1.25; 
-  max-width: 500px; /* Ensures the Vanagon doesn't overpower the Porsche */
-  z-index: 52;
+  width: 32%; /* Only slightly larger, for that subtle Studio hierarchy */
 }
 
-/* Ensure the mattes stay sharp */
 .grid-item img {
   width: 100%;
   height: auto;
   display: block;
-  /* Match the subtle shadow from your Affinity edit if not baked into the image */
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
+  /* This prevents height-jumping if images aren't perfectly cropped */
+  aspect-ratio: 4 / 5; 
+  object-fit: cover;
 }
 
 /* Specific Hover Trigger */
