@@ -185,6 +185,12 @@ h1, h2, h3, h4, h5, h6 {
   transform: translateY(6rem);
 }
 
+.break {
+  flex-basis: 100%; /* Spans the full width of the container */
+  height: 0;        /* Invisible */
+  margin: 0;        /* No extra spacing */
+}
+
 /* THE HOVER: We only change the Z-index, NOT the position */
 .project-hub a:hover {
   z-index: 15;
